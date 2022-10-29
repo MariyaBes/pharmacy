@@ -1,0 +1,2268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">  
+    <title>Eltaina — интернет-аптека</title>
+  </head>
+  <body class="light">
+
+    <div class="overlay" data-overlay></div>
+
+    <!--Уведомления о приеме (всплывашка)-->
+    <div class="notification-toast" data-toast>
+      <button class="toast-close-btn" data-toast-close>
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+
+      <div class="toast-banner">
+        <img src="./public/Collagen.jpg" alt="Heka and Rituals" width="88" height="70">
+      </div>
+
+      <div class="toast-detail">
+        <p class="toast-message">
+          Уведомление о приеме препара
+        </p>
+
+        <p class="toast-title">
+          Heka~Rituals - Collagen(350мг)
+        </p>
+
+        <p class="toast-meta">
+          <time datatime="PT2M">2 Минуты</time> назад
+        </p>
+      </div>
+    </div>
+
+    <!--Хедер-->
+    <header>
+      <div class="header-top">
+        <div class="container">
+
+          <ul class="header-top-list">
+            <div class="select-mate">
+              <a href="#" class="header-top-gps">
+                <i class="fi fi-rr-marker"></i>
+                  <select name="currency">
+                    <option value="Республика Крым">Республика Крым</option>
+                    <option value="Москва и область">Москва и область</option>
+                    <option value="Краснодар">Краснодар</option>
+                  </select>
+
+              </a>
+            </div>
+                
+
+
+            <li>
+              <a href="#" class="header-top-link">Как сделать заказ?</a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-link">Доставка и оплата</a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-link">Что с моим заказом?</a>
+            </li>
+          </ul>
+
+          <div class="header-alert-news">
+            <p>
+              <b>Служба поддержки</b>
+              8 (800) 800-80-80
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="header-main">
+
+        <div class="container">
+
+          <a href="#" class="header-logo">
+            <img src="./icon/ELtaina.png" alt="ELtaina's logo">
+          </a>
+
+          <div class="header-search-container">
+            <ion-icon name="search-outline"></ion-icon>
+            <input type="search" name="search" class="search-field" placeholder="Поиск по лекарству или болезни... ">
+
+            <button class="search-btn">
+              <span>Найти</span>
+            </button>
+
+          </div>
+
+          <div class="header-user-actions">
+
+            <button class="action-btn">
+              <ion-icon name="medkit-outline"></ion-icon>
+              <span class="count">4</span>
+            </button>
+
+            <button class="action-btn">
+              <ion-icon name="bag-handle-outline"></ion-icon>
+            </button>
+
+            <button class="action-btn">
+              <ion-icon name="clipboard-outline"></ion-icon>
+              <span class="count">2</span>
+            </button>
+
+            <button class="action-btn">
+              <ion-icon name="person-outline"></ion-icon>
+            </button>
+            
+          </div>
+        </div>
+      </div>
+
+      <nav class="desktop-navigation-menu">
+
+        <div class="container">
+  
+          <ul class="desktop-menu-category-list">
+  
+            <li class="menu-category">
+              <a href="#" class="menu-title">Акции</a>
+            </li>
+  
+            <li class="menu-category">
+              <a href="#" class="menu-title">Лекарства</a>
+  
+              <div class="dropdown-panel">
+  
+                <ul class="dropdown-panel-list">
+  
+                  <li class="menu-title">
+                    <a href="#">Категории</a>
+                  </li>
+  
+                  <li class="panel-list-item">
+                    <a href="#">Анестезия, реанимация</a>
+                  </li>
+  
+                  <li class="panel-list-item">
+                    <a href="#">Антибиотики</a>
+                  </li>
+  
+                  <li class="panel-list-item">
+                    <a href="#">Боль, температура</a>
+                  </li>
+  
+                  <li class="panel-list-item">
+                    <a href="#">Обеззараживающие средства</a>
+                  </li>
+  
+                  <li class="panel-list-item">
+                    <a href="#">Иммуная система</a>
+                  </li>
+  
+                  <li class="panel-list-item">
+                    <a href="#">
+                      <img src="./public/Tablet.jpg" alt="headphone collection" width="250"
+                        height="119">
+                    </a>
+                  </li>
+  
+                </ul>
+  
+                <ul class="dropdown-panel-list">
+  
+                  <li class="menu-title">
+                    <a href="#">Заболевания</a>
+                  </li>
+  
+                  <li class="panel-list-item">
+                    <a href="#">Аллергия</a>
+                  </li>
+  
+                  <li class="panel-list-item">
+                    <a href="#">Болезни суставов</a>
+                  </li>
+  
+                  <li class="panel-list-item">
+                    <a href="#">Изжога</a>
+                  </li>
+  
+                  <li class="panel-list-item">
+                    <a href="#">Диабет</a>
+                  </li>
+  
+                  <li class="panel-list-item">
+                    <a href="#">Зрение</a>
+                  </li>
+  
+                  <li class="panel-list-item">
+                    <a href="#">
+                      <img src="./public/Dropper.jpg" alt="headphone collection" width="250"
+                        height="119">
+                    </a>
+                  </li>
+                </ul>
+  
+              </div>
+            </li>
+  
+            <li class="menu-category">
+              <a href="#" class="menu-title">Витамины</a>
+  
+              <ul class="dropdown-list">
+  
+                <li class="dropdown-item">
+                  <a href="#">Аминокислоты</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Антиоксиданты</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Магне-В6</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Кальций</a>
+                </li>
+
+
+  
+              </ul>
+            </li>
+  
+            <li class="menu-category">
+              <a href="#" class="menu-title">Медтовары</a>
+  
+              <ul class="dropdown-list">
+  
+                <li class="dropdown-item">
+                  <a href="#">Аптечки</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Перевязочные материалы</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Диагностические тесты</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Пластыри</a>
+                </li>
+  
+              </ul>
+            </li>
+  
+            <li class="menu-category">
+              <a href="#" class="menu-title">Медтехника</a>
+  
+              <ul class="dropdown-list">
+  
+                <li class="dropdown-item">
+                  <a href="#">Ингаляторы</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Массажеры</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Тонометры</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Стетоскопы</a>
+                </li>
+  
+              </ul>
+            </li>
+  
+            <li class="menu-category">
+              <a href="#" class="menu-title">Косметика</a>
+  
+              <ul class="dropdown-list">
+  
+                <li class="dropdown-item">
+                  <a href="#">Ароматерапия</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Акне</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Депиляция и бритье</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Избыточный вес</a>
+                </li>
+  
+              </ul>
+            </li>
+  
+            <li class="menu-category">
+              <a href="#" class="menu-title">Здоровое питание</a>
+  
+              <ul class="dropdown-list">
+  
+                <li class="dropdown-item">
+                  <a href="#">Заменители сахара</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Диетическое питание</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Гематоген</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Батончики, мюсли</a>
+                </li>
+  
+              </ul>
+            </li>
+  
+            <li class="menu-category">
+              <a href="#" class="menu-title">Гигиена</a>
+  
+              <ul class="dropdown-list">
+  
+                <li class="dropdown-item">
+                  <a href="#">Антибактериальные средства</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Ватные и бумажные изделия</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Средства женской гигиены</a>
+                </li>
+  
+                <li class="dropdown-item">
+                  <a href="#">Уход за полостью рта</a>
+                </li>
+  
+              </ul>
+            </li>
+  
+          </ul>
+  
+        </div>
+  
+      </nav>
+
+      <div class="mobile-bottom-navigation">
+
+        <button class="action-btn" data-mobile-menu-open-btn>
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+
+        <button class="action-btn">
+          <ion-icon name="bag-handle-outline"></ion-icon>
+  
+          <span class="count">+9</span>
+        </button>
+  
+        <button class="action-btn">
+          <ion-icon name="clipboard-outline"></ion-icon>
+        </button>
+  
+        <button class="action-btn">
+          <ion-icon name="medkit-outline"></ion-icon>
+  
+          <span class="count">2</span>
+        </button>
+  
+        <button class="action-btn" data-mobile-menu-open-btn>
+          <ion-icon name="grid-outline"></ion-icon>
+        </button>
+  
+      </div>
+
+      <nav class="mobile-navigation-menu  has-scrollbar" data-mobile-menu>
+
+        <div class="menu-top">
+          <h2 class="menu-title">Меню</h2>
+
+          <button class="menu-close-btn" data-mobile-menu-close-btn>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        </div>
+
+        <ul class="mobile-menu-category-list">
+
+          <li class="menu-category">
+
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Лекарства</p>
+
+              <div>
+                <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Анестезия, реанимация</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Антибиотики</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Боль, температура</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Обеззараживающие средства</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Иммуная система</a>
+              </li>
+
+            </ul>
+
+          </li>
+
+          <li class="menu-category">
+
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Витамины</p>
+
+              <div>
+                <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Аминокислоты</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Антиоксиданты</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">L-карнитин</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Поливитамины</a>
+              </li>
+
+
+            </ul>
+
+          </li>
+
+          <li class="menu-category">
+
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Средства гигиены</p>
+
+              <div>
+                <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Антибактериальные средства гигиены</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Ватные и бумажные изделия</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Средства женской гигиены</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Уход за полостью рта</a>
+              </li>
+
+
+            </ul>
+
+          </li>
+
+          <li class="menu-category">
+
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Косметика</p>
+
+              <div>
+                <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Ароматерапия</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Акне</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Волосы</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Депиляция и бритье</a>
+              </li>
+
+
+            </ul>
+
+          </li>
+
+          <li class="menu-category">
+
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Медтовары</p>
+
+              <div>
+                <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Тесты на COVID-19</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Здоровое питание</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Компрессионное и корректирующее белье</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Перевязочные материалы</a>
+              </li>
+
+
+            </ul>
+
+          </li>
+
+          <li class="menu-category">
+
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Медтехника</p>
+
+              <div>
+                <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Тест-полоски</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Ингаляторы</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Тонометры и стетоскопы</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Электрические зубные щетки</a>
+              </li>
+
+
+            </ul>
+
+          </li>
+
+          <li class="menu-category">
+
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Мама и малыш</p>
+
+              <div>
+                <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Все для кормления ребенка</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Гигиена малыша</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Детское питание</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Подгузники</a>
+              </li>
+
+
+            </ul>
+
+          </li>
+
+          <li class="menu-category">
+
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Здоровье и спорт</p>
+
+              <div>
+                <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Антицеллюлитный уход</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Масла косметические и эфирные</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Средства для ног</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Средства для рук</a>
+              </li>
+
+
+            </ul>
+
+          </li>
+
+        </ul>
+
+        <div class="menu-bottom">
+          <ul class="menu-category-list">
+
+            <li class="menu-category">
+
+              <button class="accordion-menu" data-accordion-btn="">
+                <p class="menu-title">Местоположение</p>
+
+                <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+              </button>
+
+              <ul class="submenu-category-list" data-accordion>
+                <li class="submenu-category">
+                  <a href="#" class="submenu-title">Республика Крым</a>
+                </li>
+
+                <li class="submenu-category">
+                  <a href="#" class="submenu-title">Москва и область</a>
+                </li>
+
+                <li class="submenu-category">
+                  <a href="#" class="submenu-title">Краснодар</a>
+                </li>
+              </ul>
+
+            </li>
+          </ul>
+        </div>
+
+      </nav>
+
+    </header>
+
+
+    <!--БАНЕР-->
+    <main>
+
+      <div class="banner">
+
+        <div class="container">
+  
+          <div class="slider-container has-scrollbar">
+  
+            <div class="slider-item">
+  
+              <img src="./public/Cart-1.png" alt="women's latest fashion sale" class="banner-img">
+  
+              <div class="banner-content">
+                <p class="banner-subtitle">Предотвратить распространение COVID-19</p>
+
+                <h2 class="banner-title">Онлайн запись на вакцинацию</h2>
+
+                <p class="banner-text">Медцентр "Восток"</p>
+
+              </div>
+            </div>
+
+            <div class="slider-item">
+
+              <img src="./public/Cart-2.png" alt="modern sunglasses" class="banner-img">
+  
+              <div class="banner-content">
+                <p class="banner-subtitle">Симферополь</p>
+
+                <h2 class="banner-title">Вакцинация от COVID-19</h2>
+
+                <p class="banner-text">Пожалуйста, носите маску и соблюдайте социальную дистанцию</p>
+
+                
+              </div>
+            </div>
+
+            <div class="slider-item">
+
+              <img src="./public/Cart-3.png" alt="modern sunglasses" class="banner-img">
+  
+              <div class="banner-content">
+                  <p class="banner-subtitle">Здоровое питание</p>
+  
+                  <h2 class="banner-title">Как правильно питаться всей семьей?</h2>
+  
+                  <p class="banner-text">Расписанные рецепты на каждый день</p>
+  
+                  
+                </div>
+              </div>
+
+          </div>
+
+        </div>
+      </div>
+
+
+
+      
+
+      <div class="category">
+
+        <div class="container">
+
+          <h2 class="title">Актуальные категории</h2>
+
+          <div class="category-item-container has-scrollbar">
+  
+            <div class="category-item">
+  
+              <div class="category-img-box">
+                <img src="./public/healthy-1.png" alt="dress & frock" width="30">
+              </div>
+  
+              <div class="category-content-box">
+  
+                <div class="category-content-flex">
+                  <h3 class="category-item-title">Здоровье для всей семьи</h3>
+  
+                  <p class="category-item-amount long">(53)</p>
+
+                  <p class="showcase-shien angle pink">
+                    <img src="./public/procurement.png" alt="" width="30">
+                  </p>
+                </div>
+  
+                <a href="#" class="category-btn">Показать еще</a>
+  
+              </div>
+  
+            </div>
+  
+            <div class="category-item">
+  
+              <div class="category-img-box">
+                <img src="./public/vitamins.png" alt="winter wear" width="30">
+              </div>
+  
+              <div class="category-content-box">
+  
+                <div class="category-content-flex">
+                  <h3 class="category-item-title">Витамины и БАД</h3>
+  
+                  <p class="category-item-amount">(58)</p>
+
+                  <p class="showcase-shien angle pink">
+                    <img src="./public/procurement.png" alt="" width="30">
+                  </p>
+                </div>
+  
+                <a href="#" class="category-btn">Показать еще</a>
+  
+              </div>
+  
+            </div>
+  
+            <div class="category-item">
+  
+              <div class="category-img-box">
+                <img src="./public/drug.png" alt="glasses & lens" width="30">
+              </div>
+  
+              <div class="category-content-box">
+  
+                <div class="category-content-flex">
+                  <h3 class="category-item-title">Для детишек и мамочек</h3>
+  
+                  <p class="category-item-amount">(68)</p>
+
+                  <p class="showcase-shien angle pink">
+                    <img src="./public/procurement.png" alt="" width="30">
+                  </p>
+                </div>
+  
+                <a href="#" class="category-btn">Показать еще</a>
+  
+              </div>
+  
+            </div>
+  
+            <div class="category-item">
+  
+              <div class="category-img-box">
+                <img src="./public/moisturizer.png" alt="shorts & jeans" width="30">
+              </div>
+  
+              <div class="category-content-box">
+  
+                <div class="category-content-flex">
+                  <h3 class="category-item-title">Красота и гигиена</h3>
+  
+                  <p class="category-item-amount">(84)</p>
+
+                  <p class="showcase-shien angle pink">
+                    <img src="./public/procurement.png" alt="" width="30">
+                  </p>
+                </div>
+  
+                <a href="#" class="category-btn">Показать еще</a>
+  
+              </div>
+  
+            </div>
+  
+            <div class="category-item">
+  
+              <div class="category-img-box">
+                <img src="./public/medicine (1).png" alt="t-shirts" width="30">
+              </div>
+  
+              <div class="category-content-box">
+  
+                <div class="category-content-flex">
+                  <h3 class="category-item-title">Аптечка</h3>
+  
+                  <p class="category-item-amount">(35)</p>
+
+                  <p class="showcase-shien angle pink">
+                    <img src="./public/procurement.png" alt="" width="30">
+                  </p>
+                </div>
+  
+                <a href="#" class="category-btn">Показать еще</a>
+  
+              </div>
+  
+            </div>
+  
+  
+          </div>
+  
+        </div>
+  
+      </div>
+  
+
+      <div class="product-container">
+
+        <div class="container">
+  
+  
+          <!--
+            - SIDEBAR
+          -->
+  
+          <div class="sidebar  has-scrollbar" data-mobile-menu>
+  
+            <div class="sidebar-category">
+  
+              <div class="sidebar-top">
+                <h2 class="sidebar-title">Категории</h2>
+  
+                <button class="sidebar-close-btn" data-mobile-menu-close-btn>
+                  <ion-icon name="close-outline"></ion-icon>
+                </button>
+              </div>
+  
+              <ul class="sidebar-menu-category-list">
+  
+                <li class="sidebar-menu-category">
+  
+                  <button class="sidebar-accordion-menu" data-accordion-btn>
+  
+                    <div class="menu-title-flex">
+                      <img src="./public/healthy.png" alt="healthy" width="20" height="20"
+                        class="menu-title-img">
+  
+                      <p class="menu-title">Здоровье</p>
+                    </div>
+  
+                    <div>
+                      <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                      <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                    </div>
+  
+                  </button>
+  
+                  <ul class="sidebar-submenu-category-list" data-accordion>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Диабет</p>
+                        <data value="300" class="stock" title="Available Stock">300</data>
+                      </a>
+                    </li>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Избыточный вес</p>
+                        <data value="60" class="stock" title="Available Stock">60</data>
+                      </a>
+                    </li>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Аллергия</p>
+                        <data value="50" class="stock" title="Available Stock">50</data>
+                      </a>
+                    </li>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Болезни суставов</p>
+                        <data value="87" class="stock" title="Available Stock">87</data>
+                      </a>
+                    </li>
+  
+                  </ul>
+  
+                </li>
+  
+                <li class="sidebar-menu-category">
+  
+                  <button class="sidebar-accordion-menu" data-accordion-btn>
+  
+                    <div class="menu-title-flex">
+                      <img src="./public/vaccination.png" alt="buetifful" class="menu-title-img" width="20"
+                        height="20">
+  
+                      <p class="menu-title">Красота</p>
+                    </div>
+  
+                    <div>
+                      <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                      <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                    </div>
+  
+                  </button>
+  
+                  <ul class="sidebar-submenu-category-list" data-accordion>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Бальзамы и кондиционеры</p>
+                        <data value="45" class="stock" title="Available Stock">45</data>
+                      </a>
+                    </li>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Депиляция и бритье</p>
+                        <data value="75" class="stock" title="Available Stock">75</data>
+                      </a>
+                    </li>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Уход за телом</p>
+                        <data value="35" class="stock" title="Available Stock">35</data>
+                      </a>
+                    </li>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Патчи под глаза</p>
+                        <data value="26" class="stock" title="Available Stock">26</data>
+                      </a>
+                    </li>
+  
+                  </ul>
+  
+                </li>
+  
+                <li class="sidebar-menu-category">
+  
+                  <button class="sidebar-accordion-menu" data-accordion-btn>
+  
+                    <div class="menu-title-flex">
+                      <img src="./public/vaccination (1).png" alt="clothes" class="menu-title-img" width="20"
+                        height="20">
+  
+                      <p class="menu-title">Для детей</p>
+                    </div>
+  
+                    <div>
+                      <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                      <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                    </div>
+  
+                  </button>
+  
+                  <ul class="sidebar-submenu-category-list" data-accordion>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Подгузники</p>
+                        <data value="46" class="stock" title="Available Stock">46</data>
+                      </a>
+                    </li>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Гигиена малыша</p>
+                        <data value="73" class="stock" title="Available Stock">73</data>
+                      </a>
+                    </li>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Детское питание</p>
+                        <data value="61" class="stock" title="Available Stock">61</data>
+                      </a>
+                    </li>
+  
+                  </ul>
+  
+                </li>
+  
+                <li class="sidebar-menu-category">
+  
+                  <button class="sidebar-accordion-menu" data-accordion-btn>
+  
+                    <div class="menu-title-flex">
+                      <img src="./public/vaccination (2).png" alt="perfume" class="menu-title-img" width="20"
+                        height="20">
+  
+                      <p class="menu-title">Зоотовары</p>
+                    </div>
+  
+                    <div>
+                      <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                      <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                    </div>
+  
+                  </button>
+  
+                  <ul class="sidebar-submenu-category-list" data-accordion>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Ветаптека</p>
+                        <data value="12" class="stock" title="Available Stock">24</data>
+                      </a>
+                    </li>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Контроль поведения</p>
+                        <data value="60" class="stock" title="Available Stock">60</data>
+                      </a>
+                    </li>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Противопаразитарные средства</p>
+                        <data value="50" class="stock" title="Available Stock">49</data>
+                      </a>
+                    </li>
+  
+                  </ul>
+  
+                </li>
+  
+                <li class="sidebar-menu-category">
+  
+                  <button class="sidebar-accordion-menu" data-accordion-btn>
+  
+                    <div class="menu-title-flex">
+                      <img src="./public/certificate.png" alt="cosmetics" class="menu-title-img" width="20"
+                        height="20">
+  
+                      <p class="menu-title">С рецептом</p>
+                    </div>
+  
+                    <div>
+                      <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                      <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                    </div>
+  
+                  </button>
+  
+                  <ul class="sidebar-submenu-category-list" data-accordion>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Болезни крови</p>
+                        <data value="68" class="stock" title="Available Stock">68</data>
+                      </a>
+                    </li>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Антибиотики</p>
+                        <data value="46" class="stock" title="Available Stock">46</data>
+                      </a>
+                    </li>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Кожа</p>
+                        <data value="79" class="stock" title="Available Stock">79</data>
+                      </a>
+                    </li>
+  
+                    <li class="sidebar-submenu-category">
+                      <a href="#" class="sidebar-submenu-title">
+                        <p class="product-name">Онкология</p>
+                        <data value="23" class="stock" title="Available Stock">23</data>
+                      </a>
+                    </li>
+  
+                  </ul>
+  
+                </li>
+
+              </ul>
+  
+            </div>
+          </div>
+
+           <!--
+            - PRODUCT GRID
+          -->
+
+            
+          
+          <div class="product-main">
+            <h2 class="title">Товары Дня</h2>
+
+            <div class="product-grid">
+
+              <div class="showcase">
+
+                <div class="showcase-banner">
+
+                  <img src="./icon/azit.png" alt="azit" width="300" class="product-img default">
+                  <img src="./icon/azit-1.jpg" alt="azit" width="300" class="product-img hover">
+
+                  <p class="showcase-badge">По рецепту</p>
+
+                  <div class="showcase-actions">
+
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+
+                  </div>
+
+                </div>
+
+                <div class="showcase-content">
+
+                  <a href="#" class="showcase-category">В наличии</a>
+
+                  <a href="#">
+                    <h3 class="showcase-title">Азитромицин таблетки п/о плен. 125мг 6шт</h3>
+                  </a>
+
+                  <div class="showcase-rating">
+                    <p>Срок годности: 30.11.2023</p>
+                    
+
+                    <div class="delivery">
+                      <i class="fi fi-rr-home"></i>
+                      <p>Доставка сегодня</p>
+                    </div>
+        
+                  </div>
+
+                  <div class="price-box">
+                    <p class="price">174₽/шт.</p>
+                  </div>
+
+                  <button>
+                    Добавить в корзину
+                  </button>
+                </div>
+                
+
+              </div>
+
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="./icon/magne.png" alt="Pure Garment Dyed Cotton Shirt" class="product-img default"
+                    width="300">
+                  <img src="./icon/img.png" alt="Pure Garment Dyed Cotton Shirt" class="product-img hover"
+                    width="300">
+              
+                  <p class="showcase-badge angel black">
+                    <img src="./icon/frozen 1.svg" alt="">
+                  </p>
+              
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">В наличии</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">Магне-В6 таблетки п/о 60шт</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <p>Срок годности: 01.01.2024</p>
+                    
+                    <div class="delivery">
+                      <i class="fi fi-rr-home"></i>
+                      <p>Доставка сегодня</p>
+
+                  </div>
+              
+                  <div class="price-box">
+                    <p class="price">653₽</p>
+                    <del>731₽</del>
+                  </div>
+
+                  <button>
+                    Добавить в корзину
+                  </button>
+              
+                </div>
+              
+                </div>
+
+              </div>
+
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="./icon/volt.png" alt="MEN Yarn Fleece Full-Zip Jacket" class="product-img default"
+                    width="300">
+                  <img src="./icon/volt-1.jpg" alt="MEN Yarn Fleece Full-Zip Jacket" class="product-img hover"
+                    width="300">
+              
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">Нет в наличии</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">Вольтарен Эмульгель гель д/нар. прим. 2%</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <p>Срок годности: 30.09.2024</p>
+                    
+                    <div class="delivery">
+                      <i class="fi fi-rr-home"></i>
+                      <p>Самовывоз</p>
+
+                    </div>
+              
+                  <div class="price-box">
+                    <p class="price">669₽/шт.</p>
+                  </div>
+
+                  <button>
+                    Добавить в корзину
+                  </button>
+              
+                </div>
+              
+                </div>
+
+              </div>
+
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="./icon/20712343.png" alt="Black Floral Wrap Midi Skirt" class="product-img default"
+                    width="300">
+                  <img src="./icon/20712343-1.jpg" alt="Black Floral Wrap Midi Skirt" class="product-img hover"
+                    width="300">
+              
+                  <p class="showcase-badge angle black"><img src="./icon/frozen 1.svg" alt=""></p>
+              
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">В наличии</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">Herb Сироп раст. происхождения, 150 мл</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <p>Срок годности: 11.02.2025</p>
+                    
+                    <div class="delivery">
+                      <i class="fi fi-rr-home"></i>
+                      <p>Самовывоз</p>
+
+                    </div>
+              
+                  <div class="price-box">
+                    <p class="price">209₽/шт.</p>
+                    <del>299₽</del>
+                  </div>
+
+                  <button>
+                    Добавить в корзину
+                  </button>
+              
+                </div>
+              
+                </div>
+              
+              </div>
+
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="./icon/photo_es_93E34398-81F0-D8C3-1E05-3E40A030AAF1.jpg" alt="Casual Men's Brown shoes" class="product-img default"
+                    width="300">
+                  <img src="./icon/photo_es_93E34398-81F0-D8C3-1E05-3E40A030AAF1-1.jpg" alt="Casual Men's Brown shoes" class="product-img hover"
+                    width="300">
+
+                    <p class="showcase-badge angle pink">бонус</p>
+              
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">На складе</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">Таустин, капли глазные 4 % 10 мл 1 шт</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <p>Срок годности: 29.12.2022</p>
+                    
+                    <div class="delivery">
+                      <i class="fi fi-rr-home"></i>
+                      <p>Доставка завтра</p>
+
+                  </div>
+              
+                  <div class="price-box">
+                    <p class="price">100₽/шт.</p>
+
+                  </div>
+              
+                  <button>
+                    Добавить в корзину
+                  </button>
+                </div>
+              
+                </div>
+              
+              </div>
+
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="./icon/photo_es_E3555598-8FB5-B485-9E05-30100007FFFA.jpg" alt="Pocket Watch Leather Pouch" class="product-img default"
+                    width="300">
+                  <img src="./icon/photo_es_E3555598-8FB5-B485-9E05-30100007FFFA-1.jpg" alt="Pocket Watch Leather Pouch" class="product-img hover"
+                    width="300">
+              
+              
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">В наличии</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">Прометионин капсулы по 350 мг, 90 шт.</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <p>Срок годности: 25.11.2025</p>
+                    
+                    <div class="delivery">
+                      <i class="fi fi-rr-home"></i>
+                      <p>Самовывоз</p>
+                    </div>
+              
+                  <div class="price-box">
+                    <p class="price">766₽/шт.</p>
+                    <del>809₽</del>
+                  </div>
+                  <button>
+                    Добавить в корзину
+                  </button>
+              
+                  </div>
+                </div>
+              
+              </div>
+
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="./icon/1547102137683.jpg" alt="Smart watche Vital Plus" class="product-img default"
+                    width="300">
+                  <img src="./icon/Vesanod.png" alt="Smart watche Vital Plus" class="product-img hover" width="300">
+              
+                  <p class="showcase-badge">По рецепту</p>
+
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+              
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">Нет в наличии</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">Весаноид, капсулы 10 мг 100 шт</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <p>Срок годности: 13.03.2027</p>
+                    
+                    <div class="delivery">
+                      <i class="fi fi-rr-home"></i>
+                      <p>Забрать из аптеки</p>
+                    </div>
+              
+                  <div class="price-box">
+                    <p class="price">11 748₽/шт.</p>
+                  </div>
+                  <button>
+                    Добавить в корзину
+                  </button>
+              
+                  </div>
+                </div>
+              
+              </div>
+
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="./icon/no-shpa.jpg" alt="Womens Party Wear Shoes" class="product-img default"
+                    width="300">
+                  <img src="./icon/no-shpa-1.jpg" alt="Womens Party Wear Shoes" class="product-img hover"
+                    width="300">
+              
+                  <p class="showcase-badge angle pink">бонус</p>
+              
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">В наличии</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">Но-шпа, таблетки 40 мг 64 шт</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <p>Срок годности: 24.10.2027</p>
+                    
+                    <div class="delivery">
+                      <i class="fi fi-rr-home"></i>
+                      <p>Доставка завтра</p>
+                    </div>
+              
+                  <div class="price-box">
+                    <p class="price">207₽/шт.</p>
+                    <del>240₽</del>
+                  </div>
+                  <button>
+                    Добавить в корзину
+                  </button>
+              
+                  </div>
+                </div>
+              
+              </div>
+
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="./icon/terra.jpg" alt="Mens Winter Leathers Jackets" class="product-img default"
+                    width="300">
+                  <img src="./icon/terra-1.jpg" alt="Mens Winter Leathers Jackets" class="product-img hover"
+                    width="300">
+              
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+            
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">Ожидается</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">ТераФлю от гриппа и простуды, порошок д/приг раствора д/приема внутрь 14 шт</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <p>Срок годности: 17.02.2024</p>
+                    
+                    <div class="delivery">
+                      <i class="fi fi-rr-home"></i>
+                      <p>Доставка завтра</p>
+                    </div>
+              
+                  <div class="price-box">
+                    <p class="price">669₽/шт.</p>
+                    <del>704₽</del>
+                  </div>
+                  <button>
+                    Добавить в корзину
+                  </button>
+              
+                  </div>
+                </div>
+              
+              </div>
+
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="./icon/nuro.jpg" alt="Trekking & Running Shoes - black" class="product-img default"
+                    width="300">
+                  <img src="./icon/nuro-1.jpg" alt="Trekking & Running Shoes - black" class="product-img hover"
+                    width="300">
+              
+                  <p class="showcase-badge angle pink">бонус</p>
+              
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">В наличии</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">Нурофен, таблетки покрыт.об. 200 мг 20 шт</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <p>Срок годности: 09.07.2025</p>
+                    
+                    <div class="delivery">
+                      <i class="fi fi-rr-home"></i>
+                      <p>Самовывоз</p>
+                    </div>
+              
+                  <div class="price-box">
+                    <p class="price">156₽/шт.</p>
+                    <del>176₽</del>
+                  </div>
+                  <button>
+                    Добавить в корзину
+                  </button>
+              
+                  </div>
+                </div>
+              
+              </div>
+
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="./icon/fos.jpg" alt="Men's Leather Formal Wear shoes" class="product-img default"
+                    width="300">
+                  <img src="./icon/fos-1.jpg" alt="Men's Leather Formal Wear shoes" class="product-img hover"
+                    width="300">
+              
+                    <p class="showcase-badge angel black">
+                      <img src="./icon/frozen 1.svg" alt="">
+                    </p>
+
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">В наличии</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">Фосфалюгель, гель для приема внутрь саше 20 шт</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <p>Срок годности: 22.10.2022</p>
+                    
+                    <div class="delivery">
+                      <i class="fi fi-rr-home"></i>
+                      <p>Доставка завтра</p>
+                    </div>
+              
+                  <div class="price-box">
+                    <p class="price">514₽/шт.</p>
+                    <del>578₽</del>
+                  </div>
+                  <button>
+                    Добавить в корзину
+                  </button>
+              
+                  </div>
+                </div>
+              
+              </div>
+
+              <div class="showcase">
+              
+                <div class="showcase-banner">
+                  <img src="./icon/ess.png" alt="Better Basics French Terry Sweatshorts"
+                    class="product-img default" width="300">
+                  <img src="./icon/ess-1.jpg" alt="Better Basics French Terry Sweatshorts"
+                    class="product-img hover" width="300">
+              
+                  <p class="showcase-badge">С рецептом</p>
+              
+                  <div class="showcase-actions">
+                    <button class="btn-action">
+                      <ion-icon name="heart-outline"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">Ожидается</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">Эссенциале форте Н, капсулы 300 мг 90 шт</a>
+                  </h3>
+              
+                  <div class="showcase-rating">
+                    <p>Срок годности: 10.10.2025</p>
+                    
+                    <div class="delivery">
+                      <i class="fi fi-rr-home"></i>
+                      <p>Доставка сегодня</p>
+                    </div>
+              
+                  <div class="price-box">
+                    <p class="price">1676₽/шт.</p>
+                    <del>1874₽</del>
+                  </div>
+                  <button>
+                    Добавить в корзину
+                  </button>
+              
+                  </div>
+                </div>
+              
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+
+  
+
+          <!--Карточка продуктов-->
+<!--         <div class="product-container">
+            <h1>Товары дня</h1>
+            <div class="product-card">
+              <div class="badge">
+                <img src="./icon/frozen 1.svg" alt="">
+              </div>
+              <div class="product-tumb">
+                <img src="./icon/img.png" alt="">
+              </div>
+              <div class="product-details">
+                <span class="product-catagory">Производитель: Хиноин Завод Фармацевтических, Венгрия</span>
+                <h4><a href="">Магне-В6 таблетки п/о 60шт</a></h4>
+                <p>Срок годности 30.11.2023</p>
+                <i class="fi fi-rr-home"></i>
+                <p class="delivery">Доставка сегодня</p>
+                <div class="product-bottom-details">
+                  <div class="product-price">
+                    <small>731₽</small>653₽/шт</div>
+  
+                    <button>
+                      Добавить в корзину
+                    </button>
+                  <div class="product-links">
+                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="product-card">
+              <div class="badge">
+                <p>По реценту</p>
+              </div>
+              <div class="product-tumb">
+                <img src="./icon/azit.png" alt="">
+              </div>
+              <div class="product-details">
+                <span class="product-catagory">Оболенское ФП АО, Россия</span>
+                <h4><a href="">Азитромицин таблетки п/о плен. 125мг 6 шт</a></h4>
+                <p>Срок годности 01.01.2024</p>
+                <i class="fi fi-rr-home"></i>
+                <p class="delivery">Доставка сегодня</p>
+                <div class="product-bottom-details">
+                  <div class="product-price">
+                    174₽/шт.</div>
+  
+                    <button>
+                      Добавить в корзину
+                    </button>
+                  <div class="product-links">
+                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="product-card">
+              <div class="badge">
+                <img src="./icon/frozen 1.svg" alt="">
+              </div>
+              <div class="product-tumb">
+                <img src="./icon/volt.png" alt="">
+              </div>
+              <div class="product-details">
+                <span class="product-catagory"> Консьюмер Хелскер, Швейцария</span>
+                <h4><a href="">Вольтарен Эмульгель гель д/нар. прим. 2%</a></h4>
+                <p>Срок годности 30.09.2024</p>
+                <i class="fi fi-rr-home"></i>
+                <p class="delivery">Самовывоз через час</p>
+                <div class="product-bottom-details">
+                  <div class="product-price">
+                    669₽/шт.</div>
+  
+                    <button>
+                      Добавить в корзину
+                    </button>
+                  <div class="product-links">
+                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="product-card">
+              <div class="product-tumb">
+                <img src="./icon/solgar-l-arginin-1000-mg-90-tabletok.jpg" alt="">
+              </div>
+              <div class="product-details">
+                <span class="product-catagory">Solgar Vitamin and Herb, США</span>
+                <h4><a href="">Солгар L-Аргинина, 1000 мг таблетки 90 шт.</a></h4>
+                <p>Срок годности 09.04.2023</p>
+                <i class="fi fi-rr-home"></i>
+                <p class="delivery">Самовывоз через час</p>
+                <div class="product-bottom-details">
+                  <div class="product-price">
+                    <small>2 428₽</small>2 128₽/шт.</div>
+  
+                    <button>
+                      Добавить в корзину
+                    </button>
+                  <div class="product-links">
+                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="product-card">
+              <div class="badge">
+                <img src="./icon/frozen 1.svg" alt="">
+              </div>
+              <div class="product-tumb">
+                <img src="./icon/20712343.jpg" alt="">
+              </div>
+              <div class="product-details">
+                <span class="product-catagory">Кок Рош Фарм ООО, Россия</span>
+                <h4><a href="">Herb Сироп первоцвета средство раст. происхождения, 150 мл</a></h4>
+                <p>Срок годности Длинный срок</p>
+                <i class="fi fi-rr-home"></i>
+                <p class="delivery">Самовывоз через час</p>
+                <div class="product-bottom-details">
+                  <div class="product-price">
+                    <small>299₽</small>209₽/шт.</div>
+  
+                    <button>
+                      Добавить в корзину
+                    </button>
+                  <div class="product-links">
+                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="product-card">
+              <div class="product-tumb">
+                <img src="./icon/photo_es_93E34398-81F0-D8C3-1E05-3E40A030AAF1.jpg" alt="">
+              </div>
+              <div class="product-details">
+                <span class="product-catagory">Гротекс ООО, Россия</span>
+                <h4><a href="">Таустин, капли глазные 4 % 10 мл 1 шт</a></h4>
+                <p>Срок годности 29.12.2022</p>
+                <i class="fi fi-rr-home"></i>
+                <p class="delivery">Доставка завтра</p>
+                <div class="product-bottom-details">
+                  <div class="product-price">
+                    100₽/шт.</div>
+  
+                    <button>
+                      Добавить в корзину
+                    </button>
+                  <div class="product-links">
+                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="product-card">
+              <div class="product-tumb">
+                <img src="./icon/photo_es_E3555598-8FB5-B485-9E05-30100007FFFA.jpg" alt="">
+              </div>
+              <div class="product-details">
+                <span class="product-catagory">Глобал Хэлфкеар ООО, Россия</span>
+                <h4><a href="">Прометионин капсулы по 350 мг, 90 шт.</a></h4>
+                <p>Срок годности 25.11.2025</p>
+                <i class="fi fi-rr-home"></i>
+                <p class="delivery">Самовывоз через час</p>
+                <div class="product-bottom-details">
+                  <div class="product-price">
+                    766₽/шт.</div>
+  
+                    <button>
+                      Добавить в корзину
+                    </button>
+                  <div class="product-links">
+                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="product-card">
+              <div class="badge">
+                <p>По реценту</p>
+              </div>
+              <div class="product-tumb">
+                <img src="./icon/1547102137683.jpg" alt="">
+              </div>
+              <div class="product-details">
+                <span class="product-catagory">Каталент Германи Шорндорф ГмбХ, Германия</span>
+                <h4><a href="">Весаноид, капсулы 10 мг 100 шт</a></h4>
+                <p>Срок годности 13.03.2027</p>
+                <i class="fi fi-rr-home"></i>
+                <p class="delivery">Забрать из аптеки сегодня</p>
+                <div class="product-bottom-details">
+                  <div class="product-price">
+                    11 748₽/шт.</div>
+  
+                    <button>
+                      Добавить в корзину
+                    </button>
+                  <div class="product-links">
+                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  -->         
+
+
+
+
+  <!--КАК ЭТО РАБОТАЕТ-->
+
+  <section class="sc-8630a74b-0 fDZCZg">
+    <div class="Container_container__sv-E5X">
+      <h2 class="Title_title__dY6uS Title_title-h1__fcJSQ" style="text-align: center;">Как это работает?</h2>
+      <div class="Grid_grid__Sevru Grid_grid-container__LSKSA Grid_grid-spacing-sm-10__rc1K6" style="flex-direction:row;justify-content:flex-start;align-content:stretch;align-items:stretch">
+      
+        <div class="Grid_grid__Sevru Grid_grid-item__lEWSL Grid_grid-sm-12__zp17C Grid_grid-md-4__mx85Y" style="flex-direction:row;justify-content:flex-start;align-content:stretch;align-items:stretch">
+        
+        <div class="sc-675abe39-0 gxEmnm">
+          <div class="sc-675abe39-1 h0aUjd">
+
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <img src="./icon/Group 5.png" alt="">
+            </svg>
+          </div>
+
+          <p class="sc-675abe39-2 gXeTwB">
+            Воспользуйтесь<a href="#"> поиском</a>, чтобы найти необходимый товар
+          </p>
+
+          <div class="sc-675abe39-3 bFWXAT">
+
+            <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+              <path d="M13 1L7 7L1 1" stroke="white" stroke-width="2" stroke-linecap="round"></path>
+              <path d="M13 1L7 7L1 1" stroke="url(#paint0_linear)" stroke-width="2" stroke-linecap="round"></path>
+
+              <defs>
+                <linearGradient id="paint0_linear" x1="13" y1="4" x2="1" y2="4" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="white"></stop>
+                  <stop offset="1" stop-color="white" stop-opacity="0"></stop>
+                </linearGradient>
+              </defs>
+
+            </svg>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="Grid_grid__Sevru Grid_grid-item__lEWSL Grid_grid-sm-12__zp17C Grid_grid-md-4__mx85Y" style="flex-direction:row;justify-content:flex-start;align-content:stretch;align-items:stretch">
+      
+        <div class="sc-675abe39-0 gxEmnm">
+          <div class="sc-675abe39-1 h0aUjd">
+
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <img src="./icon/Group 6.png" alt="">
+          </svg>
+        </div>    
+        
+        <p class="sc-675abe39-2 gXeTwB">
+          Выберите удобный для вас <a href="#"> способ доставки</a>
+        </p>
+
+        <div class="sc-675abe39-3 bFWXAT">
+
+          <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+            <path d="M13 1L7 7L1 1" stroke="white" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M13 1L7 7L1 1" stroke="url(#paint0_linear)" stroke-width="2" stroke-linecap="round"></path>
+
+            <defs>
+              <linearGradient id="paint0_linear" x1="13" y1="4" x2="1" y2="4" gradientUnits="userSpaceOnUse">
+                <stop stop-color="white"></stop>
+                <stop offset="1" stop-color="white" stop-opacity="0"></stop>
+              </linearGradient>
+            </defs>
+
+          </svg>
+        </div>
+
+        </div>
+      </div>
+
+      <div class="Grid_grid__Sevru Grid_grid-item__lEWSL Grid_grid-sm-12__zp17C Grid_grid-md-4__mx85Y" style="flex-direction:row;justify-content:flex-start;align-content:stretch;align-items:stretch">
+      
+        <div class="sc-675abe39-0 gxEmnm">
+          <div class="sc-675abe39-1 h0aUjd">
+
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <img src="./icon/Group 7.png" alt="">
+          </svg>
+        </div>    
+        
+        <p class="sc-675abe39-2 gXeTwB">
+          <a href="#">Заберите</a> заказ в ближайшей к вам аптеке или дождитесь <a href="#"> курьера</a>
+        </p>
+
+        </div>
+      </div>
+      
+      </div>
+
+      <div class="sc-8630a74b-1 iNUteR">
+        <img src="./icon/medicine 1.svg" alt="">
+      </div>
+
+      </div>
+    </div>
+  </section>
+
+          
+    </main>
+
+
+
+
+    <footer>
+
+      <div class="footer-category">
+  
+        <div class="container">
+  
+          <h2 class="footer-category-title">Каталог брендов</h2>
+  
+          <div class="footer-category-box">
+  
+            <h3 class="category-box-title">Здоровье :</h3>
+  
+            <a href="#" class="footer-category-link">Диабет</a>
+            <a href="#" class="footer-category-link">Избыточный вес</a>
+            <a href="#" class="footer-category-link">Аллергия</a>
+            <a href="#" class="footer-category-link">Аптеки</a>
+            <a href="#" class="footer-category-link">Болезни суставов</a>
+            <a href="#" class="footer-category-link">Цистит</a>
+            <a href="#" class="footer-category-link">Гайморит</a>
+  
+          </div>
+  
+          <div class="footer-category-box">
+            <h3 class="category-box-title">Красота :</h3>
+          
+            <a href="#" class="footer-category-link">Бальзамы и кондиционеры</a>
+            <a href="#" class="footer-category-link">Депиляция и бритье</a>
+            <a href="#" class="footer-category-link">Средства после загара</a>
+            <a href="#" class="footer-category-link">Шампуни</a>
+            <a href="#" class="footer-category-link">Уход за телом</a>
+            <a href="#" class="footer-category-link">Уход за лицом</a>
+            <a href="#" class="footer-category-link">Антицеллюлитный уход</a>
+          </div>
+  
+          <div class="footer-category-box">
+            <h3 class="category-box-title">Витамины :</h3>
+          
+            <a href="#" class="footer-category-link">Биологически активные добавки</a>
+            <a href="#" class="footer-category-link">Аминокислоты</a>
+            <a href="#" class="footer-category-link">Антиоксиданты</a>
+            <a href="#" class="footer-category-link">Кальций и магний</a>
+            <a href="#" class="footer-category-link">Железо</a>
+            <a href="#" class="footer-category-link">БАДы</a>
+            <a href="#" class="footer-category-link">Лечебное питание</a>
+          </div>
+  
+          <div class="footer-category-box">
+            <h3 class="category-box-title">Медтовары :</h3>
+          
+            <a href="#" class="footer-category-link">Диагностические тесты</a>
+            <a href="#" class="footer-category-link">Здоровое питание</a>
+            <a href="#" class="footer-category-link">Кислородные балоны</a>
+            <a href="#" class="footer-category-link">Компрессионное и корректирующее белье</a>
+            <a href="#" class="footer-category-link">Ортопедия</a>
+            <a href="#" class="footer-category-link">Пластыри</a>
+            <a href="#" class="footer-category-link">Солевые лампы, грелки</a>
+          </div>
+  
+        </div>
+  
+      </div>
+  
+      <div class="footer-nav">
+  
+        <div class="container">
+  
+          <ul class="footer-nav-list">
+          
+            <li class="footer-nav-item">
+              <h2 class="nav-title">Продукты</h2>
+            </li>
+          
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Акции</a>
+            </li>
+          
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Самовывоз из аптек</a>
+            </li>
+          
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Скидки</a>
+            </li>
+          
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Обратная связь</a>
+            </li>
+          
+          </ul>
+  
+          <ul class="footer-nav-list">
+          
+            <li class="footer-nav-item">
+              <h2 class="nav-title">О компании</h2>
+            </li>
+          
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Доставка</a>
+            </li>
+          
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Сертификат</a>
+            </li>
+          
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">О нас</a>
+            </li>
+          
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Системы оплаты</a>
+            </li>
+          
+          </ul>
+  
+  
+          <ul class="footer-nav-list">
+  
+            <li class="footer-nav-item">
+              <h2 class="nav-title">Контакты</h2>
+            </li>
+  
+            <li class="footer-nav-item flex">
+              <div class="icon-box">
+                <ion-icon name="location-outline"></ion-icon>
+              </div>
+  
+              <address class="content">
+                Республика Крым, Симферополь, Киевская ул., 77/4
+              </address>
+            </li>
+  
+            <li class="footer-nav-item flex">
+              <div class="icon-box">
+                <ion-icon name="call-outline"></ion-icon>
+              </div>
+  
+              <a href="tel:+607936-8058" class="footer-nav-link">(800) 888-8888</a>
+            </li>
+  
+            <li class="footer-nav-item flex">
+              <div class="icon-box">
+                <ion-icon name="mail-outline"></ion-icon>
+              </div>
+  
+              <a href="mailto:example@gmail.com" class="footer-nav-link">bessarabenko.m.i20@gmail.com</a>
+            </li>
+  
+          </ul>
+  
+        </div>
+  
+      </div>
+  
+      <div class="footer-bottom">
+  
+        <div class="container">
+  
+          <img src="./icon/payment.png" alt="payment method" class="payment-img">
+  
+          <p class="copyright">
+            Copyright &copy; <a href="#">ELtaina</a> all rights reserved.
+          </p>
+  
+        </div>
+  
+      </div>
+  
+    </footer>
+
+      
+
+    <script type="module" src="./script.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+  </body>
+</html>
