@@ -1,7 +1,7 @@
 <h1 align="center">Проектирование Информационная система онлайн-аптеки
-<img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="50"/>
+<img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif"/>
 </h1>
 
-<h2>Базу данных информационной системы в соответствии с разработанной нотацией BPMN<h2>
+<h2 align="center">База данных ИС в соответствии с разработанной BPMN<h2>
 <img src="./public/MySQLWorkbench_r3IuwESwHQ.png"/>
 
