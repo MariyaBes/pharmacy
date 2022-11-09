@@ -171,3 +171,25 @@ body{
     margin-top: 30px;
     text-align: center;
 }
+
+
+.alert {
+    position: absolute;
+    border-radius: 12px;
+    padding: 20px;
+    transform: translateY(-550%);
+}
+
+.alert-danger{
+    background-color: #E97777;
+}
+
+.alert button {
+    align-items: center;
+    font-size: 22px;
+    border: none;
+}
+
+.alert-success {
+    background-color: #8EC3B0;
+}
