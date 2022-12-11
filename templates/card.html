@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block title %}{% for medication in card_product %}{{ medication.Name }}{% endfor %} {% endblock %}
+
+{% block body %}
+
+<div class="small-container single-product">
+        <div class="row-cart-product">
+            
+            {% for medication in card_product %}
+
+            <div class="col-2">
+                <div class="img-container">
+                    <img src="{{ medication.image_1 }}" width="100%" id="ProductImg" alt="">
+                </div>
+                
+                <div class="small-img-row">
+
+                    <div class="small-img-col">
+                        <img src="{{ medication.image_2 }}" width="170" height="122" class="small-img">
+                    </div>
+
+                    <div class="small-img-col">
+                        <img src="{{ medication.image_3 }}" width="170" height="122" class="small-img">
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% for medication in card_product %}
+
+            <div class="col-2">
+                <h1>{{ medication.Name }}</h1>
+
+
+                <div class="sc-2ecaf6cb-3 idFeCf">
+                    <div class="sc-a6cd743c-12 jqXcdE">
+                        <div class="sc-a6cd743c-5 biczTS">
+                            <div class="sc-a6cd743c-9 ipLSQk Price_common-price__8fNbt">
+                                <div class="Price_price__qHqZv Price_common-price-currency__SwH6u">
+                                    {{ medication.Price }}
+                                        ₽
+                                </div>
+                            </div>
+
+                            <div class="sc-a6cd743c-8 ecZORx">
+                                <div class="sc-a6cd743c-10 dvlSbs">
+                                    <button class="Button_button__4em_S Button_button--orange__lc846" aria-label>
+                                        <span>Добавть в корзину</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% for provider in card_product %}
+                <div class="sc-2ecaf6cb-4 epUzFS">
+                    <ul class="sc-c4356401-1 cfNZJZ">
+                        <li class="sc-c4356401-4 gPAxcV">
+                            <span class="sc-c4356401-2 iutoXM">Производитель</span>
+                            <span class="sc-c4356401-3 kThREV">
+                                <span class="sc-c4356401-3 kThREV">{{ provider.Title }}</span>
+                            </span>
+                        </li>
+                        <li class="sc-c4356401-4 gPAxcV">
+                            <span class="sc-c4356401-2 iutoXM">Страна производства</span>
+                            <span class="sc-c4356401-3 kThREV">
+                                <span class="sc-c4356401-3 kThREV">{{ provider.Country }}</span>
+                            </span>
+                        </li>
+                        <li class="sc-c4356401-4 gPAxcV">
+                            <span class="sc-c4356401-2 iutoXM">Адресс</span>
+                            <span class="sc-c4356401-3 kThREV">
+                                <span class="sc-c4356401-3 kThREV">{{ provider.Address }}</span>
+                            </span>
+                        </li>
+
+                        {% for marking in card_product %}
+                        <li class="sc-c4356401-4 gPAxcV">
+                            <span class="sc-c4356401-2 iutoXM">Категория</span>
+                            <span class="sc-c4356401-3 kThREV">
+                                <span class="sc-c4356401-3 kThREV">{{ marking.Category }}</span>
+                            </span>
+                        </li>
+                        {% endfor %}
+                        {% for medication in card_product %}
+                        <li class="sc-c4356401-4 gPAxcV">
+                            <span class="sc-c4356401-2 iutoXM">Рецептурный отпуск</span>
+                            <span class="sc-c4356401-3 kThREV">
+                                <span class="sc-c4356401-3 kThREV">{{ medication.Billet }}</span>
+                            </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                
+            </div>
+
+            {% endfor %}
+        </div>
+</div>
+    {% for medication in card_product %}
+<div class="Container_container__svE5X">
+        <div class="sc-a7e1354a-0 gAGuNZ">
+            <h2 class="sc-a7e1354a-2 jNDOfH">Инстуркция по применению: {{ medication.Name }}</h2>
+            <div class="sc-a7e1354a-3 dBSSXs">
+                <!-- Краткое описание -->
+                <div class="Collapse_border__7JMMe ProductInstructions_collapse__c_ctK">
+                    <h3 class="Collapse_title-position__UrbHL Collapse_title-hover__z_9eO Collapse_title__f9Qpb ProductInstructions_collapse-title__WKzA3">
+                        Краткое описание
+                    </h3>
+                    <div class="sc-4cb4a553-0 hCfcHx" style="max-height: 136px;">
+                        <div class="sc-a7e1354a-1 cRkKFL">{{ medication.Description }}</div>
+                    </div>
+                </div>
+                <!-- Показания -->
+                {% for marking in card_product %}
+                <div class="Collapse_border__7JMMe ProductInstructions_collapse__c_ctK">
+                    <h3 class="Collapse_title-position__UrbHL Collapse_title-hover__z_9eO Collapse_title__f9Qpb ProductInstructions_collapse-title__WKzA3">
+                        Показания
+                    </h3>
+                    <div class="sc-4cb4a553-0 hCfcHx" style="max-height: 136px;">
+                        <div class="sc-a7e1354a-1 cRkKFL">{{ marking.Apllication }}</div>
+                    </div>
+                </div>
+                <!-- Отпуск из аптеки -->
+                <div class="Collapse_border__7JMMe ProductInstructions_collapse__c_ctK">
+                    <h3 class="Collapse_title-position__UrbHL Collapse_title-hover__z_9eO Collapse_title__f9Qpb ProductInstructions_collapse-title__WKzA3">
+                        Отпуск из аптеки
+                    </h3>
+                    <div class="sc-4cb4a553-0 hCfcHx" style="max-height: 136px;">
+                        <div class="sc-a7e1354a-1 cRkKFL">{{ marking.Release_Conditions }}</div>
+                    </div>
+                </div>
+                <!-- Противопоказания -->
+                <div class="Collapse_border__7JMMe ProductInstructions_collapse__c_ctK">
+                    <h3 class="Collapse_title-position__UrbHL Collapse_title-hover__z_9eO Collapse_title__f9Qpb ProductInstructions_collapse-title__WKzA3">
+                        Противопоказания
+                    </h3>
+                    <div class="sc-4cb4a553-0 hCfcHx" style="max-height: 136px;">
+                        <div class="sc-a7e1354a-1 cRkKFL">{{ marking.Contraindications }}</div>
+                    </div>
+                </div>
+                <!-- Побочные действия -->
+                <div class="Collapse_border__7JMMe ProductInstructions_collapse__c_ctK">
+                    <h3 class="Collapse_title-position__UrbHL Collapse_title-hover__z_9eO Collapse_title__f9Qpb ProductInstructions_collapse-title__WKzA3">
+                        Побочные действия
+                    </h3>
+                    <div class="sc-4cb4a553-0 hCfcHx" style="max-height: 136px;">
+                        <div class="sc-a7e1354a-1 cRkKFL">{{ marking.Side_Effects }}</div>
+                    </div>
+                </div>
+                <!-- Доза -->
+                <div class="Collapse_border__7JMMe ProductInstructions_collapse__c_ctK">
+                    <h3 class="Collapse_title-position__UrbHL Collapse_title-hover__z_9eO Collapse_title__f9Qpb ProductInstructions_collapse-title__WKzA3">
+                        Доза
+                    </h3>
+                    <div class="sc-4cb4a553-0 hCfcHx" style="max-height: 136px;">
+                        <div class="sc-a7e1354a-1 cRkKFL">{{ marking.Dose }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="sc-a7e1354a-3 dBSSXs"></div>
+            <div class="sc-a7e1354a-4 eFnrud"></div>
+        </div>
+</div>
+    {% endfor %}
+
+<script src="../static/card.js"></script>
+{% endblock %}
+
+

@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block title %}Корзина{% endblock %}
+
+{% block body %}
+
+
+<main class="cart-page cart-page--step1 cart-page--no-footer container_cart js-cart-page">
+    {%if session.logged_in == true %}
+
+    <div id="js-cart-content" class="cart-page-content">
+
+        <div class="cart-content-left">
+            <div class="card-page-orders">
+                <div class="cart-order cart-order--main cart-page-order cart-order--main">
+                    <div class="cart-order-body cart-order-body--white">
+                        <div class="cart-order__controls">
+
+                            <div class="cart-order__body-title cart-order__body-title--tablet">
+                                Выберите способ доставки
+                            </div>
+
+                            <div class="cart-order__delivery">
+                                <div class="cart-order__radio">
+
+                                    <input type="radio" id="order-courier" class="js-receive-type" name="order-type" value="courier" autocomplete="off" checked>
+                                    <label for="order-courier" class="cart-order__radio-label">
+
+                                        <div class="cart-order__radio-text">
+
+                                            <div class="cart-order__radio-title">
+                                                Доставка курьером
+                                                <span class="cart-order__radio-description">
+                                                    завтра
+                                                </span>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="cart-order__radio-info">
+
+                                            <div class="cart-order__radio-price">+149₽</div>
+
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="cart-order__radio">
+                                    <input type="radio" id="order-pickup" class="js-receive-type" name="order-type" value="pickup" autocomplete="off">
+
+                                    <label class="cart-order__radio-label" for="order-pickup">
+
+                                        <div class="cart-order__radio-text">
+                                            <div class="cart-order__radio-title">
+                                                Самовывоз завтра
+                                            </div>
+                                        </div>
+                                        <div class="cart-order__radio-info">
+                                            <div class="cart-order__radio-price">
+                                                0 ₽
+                                            </div>
+                                        </div>
+
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="cart-order__actions">
+
+                                <button class="cart-page__btn-gray cart-page__head-btn desktop js-open-modal" type="button" data-modal="modal-confirmation-cart">
+                                    Очистить корзину
+                                    <ion-icon name="close-outline"></ion-icon>
+                                </button>
+                                </div>
+                            </div>
+
+                            {% for medication in basket %}
+
+                            <div class="cart-order__list" data-product-list data-list-name="Корзина">
+                                <div class="cart-order__goods-wrapper product-item js-product-item">
+
+                                    <div class="goods--cart cart-order__goods goods">
+                                        <div class="goods__info-wrapper">
+
+                                            <div class="catalog-point cart-order__actions-check cart-order__goods-check">
+
+                                                <input class="catalog-point__check-box js-product-item-check" type="checkbox" id="point"> 
+ 
+                                            </div>
+
+                                            <div class="image_cart">
+                                                <img src="{{ medication.image_1 }}" alt="Азитромицин Таблетки Плен. 125мг 6шт"/>
+                                            </div>
+
+                                            <div class="goods__info">
+                                                <div class="goods__box-title">
+                                                    <a href="/card/{{medication.ID_Medication}}" class="goods__title">
+                                                        {{ medication.Name }}
+                                                    </a>
+                                                </div>
+
+                                                <div class="goods__box-info">
+
+                                                    <div class="goods__box-count">
+
+                                                        <div class="count count--cart">
+                                                            <div class="count__box">
+
+                                                                <button class="count__btn" type="button" data-minus>
+                                                                    <ion-icon name="remove-outline"></ion-icon>
+                                                                </button>
+
+                                                                <input type="number" min="1" max="9" class="count__input js-count-input js-product-item-count" value="1" autocomplete="off">
+                                                                <span class="count__unit">1 шт.</span>
+
+                                                                <button class="count__btn" type="button" data-plus>
+                                                                    <ion-icon name="add-outline"></ion-icon>
+                                                                </button>
+                                                            </div>
+
+                                                            <div class="count__text">
+                                                                {{medication.Price}}₽/шт.
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="goods__box-price">
+                                                        <div class="goods__price">
+                                                            <div class="price-v2 price-v2--cart">
+                                                                <div class="price-v2__new">{{medication.Price}}₽</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart-content-right js-cart-info" style="position: sticky;">
+
+            {% for medication in basket %}
+
+            <div class="cart-aside cart-page__aside cart-aside--summary">
+                <input type="hidden" name="enableNextStepBtn" value="1">
+                <input type="hidden" value="Оформить" name="nextStepBtnText">
+
+                <div class="cart-aside__body">
+
+                    <div class="cart-aside__head">
+                        <div class="cart-aside__title">Ваш заказ</div>
+                        <div class="cart-aside__title-info">1 товар</div>
+                    </div>
+
+                    <div class="cart-aside__list">
+                        <div class="cart-aside__item">
+                            <div class="cart-aside__item-title">Товары</div>
+                            <div class="cart-aside__item-price">{{medication.Price}} ₽</div>
+                        </div>
+                        <div class="cart-aside__item">
+                            <div class="cart-aside__item-title">Доставка</div>
+                            <div class="cart-aside__item-price">+149 ₽</div>
+                        </div>
+                    </div>
+
+                    <div class="cart-aside__summary cart-aside__item js-fixed-target">
+                        <div class="cart-aside__title">Итого</div>
+                        <div class="cart-aside__price">323 ₽</div>
+                    </div>
+
+                    <div class="cart-aside__btn-wrapper js-fixed-element">
+                        <button class="btn cart-aside__btn-submit btn--big js-next-step" data-url="/chek" data-step="cart" type="button">
+                            <span>Оформить</span>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="cart-page__btn-gray cart-page__bottom-btn mobile js-open-modal"></button>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    {% else %}
+    <div class="login-not">
+        <h3>Войдите, чтобы добавить товар в корзину</h3>
+    </div>
+    {% endif %}
+</main>
+
+
+{% endblock %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="module" src="../static/card.js"></script>
