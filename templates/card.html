@@ -11,17 +11,21 @@
 
             <div class="col-2">
                 <div class="img-container">
-                    <img src="{{ medication.image_1 }}" width="100%" id="ProductImg" alt="">
+                    <img src="{{ medication.image_1 }}" width="100%" height="300" id="ProductImg" alt="">
                 </div>
                 
                 <div class="small-img-row">
 
                     <div class="small-img-col">
-                        <img src="{{ medication.image_2 }}" width="170" height="122" class="small-img">
+                        <img src="{{ medication.image_1 }}" width="170" height="122" class="small-img active" id="first">
                     </div>
 
                     <div class="small-img-col">
-                        <img src="{{ medication.image_3 }}" width="170" height="122" class="small-img">
+                        <img src="{{ medication.image_2 }}" width="170" height="122" class="small-img" id="second">
+                    </div>
+
+                    <div class="small-img-col">
+                        <img src="{{ medication.image_3 }}" width="170" height="122" class="small-img" id="third">
                     </div>
 
                 </div>
@@ -48,8 +52,17 @@
 
                             <div class="sc-a6cd743c-8 ecZORx">
                                 <div class="sc-a6cd743c-10 dvlSbs">
+                                    <a href="/basket">
+                                        <button class="Button_button__4em_S Button_button--orange__lc846" aria-label>
+                                            <span>Добавть в корзину</span>
+                                        </button>
+                                    </a>
+                                    
+                                </div>
+
+                                <div class="sc-a6cd743c-10 dvlSbs">
                                     <button class="Button_button__4em_S Button_button--orange__lc846" aria-label>
-                                        <span>Добавть в корзину</span>
+                                        <span>Добавть в аптечку</span>
                                     </button>
                                 </div>
                             </div>

@@ -104,14 +104,14 @@
                                                         <div class="count count--cart">
                                                             <div class="count__box">
 
-                                                                <button class="count__btn" type="button" data-minus>
+                                                                <button class="count__btn" type="button" data-minus="minus">
                                                                     <ion-icon name="remove-outline"></ion-icon>
                                                                 </button>
 
-                                                                <input type="number" min="1" max="9" class="count__input js-count-input js-product-item-count" value="1" autocomplete="off">
+                                                                <input type="number" min="1" max="9" data-counter class="count__input js-count-input js-product-item-count" value="1" autocomplete="off">
                                                                 <span class="count__unit">1 шт.</span>
 
-                                                                <button class="count__btn" type="button" data-plus>
+                                                                <button class="count__btn" type="button" data-plus="plus">
                                                                     <ion-icon name="add-outline"></ion-icon>
                                                                 </button>
                                                             </div>
@@ -198,7 +198,6 @@
     {% endif %}
 </main>
 
-
-{% endblock %}
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="module" src="../static/card.js"></script>
+<script src="../static/basket.js"></script>
+{% endblock %}

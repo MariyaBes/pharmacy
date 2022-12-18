@@ -70,5 +70,36 @@ for (let i = 0; i < accordionBtn.length; i++) {
 
 
 
+// Доб в корзину
+const productsBtn = document.querySelectorAll('.product__btn');
+
+console.log(productsBtn)
+
+const randomId = () => {
+	return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+};
 
 
+productsBtn.forEach(el => {
+
+
+	el.addEventListener('click', (e) => {
+		let self = e.currentTarget;
+		let parent = self.closest('.product');
+		let id = parent.dataset.id;
+		let img = parent.querySelector('.image-switch__img img').getAttribute('src');
+		let title = parent.querySelector('.product__title').textContent;
+		let priceString = priceWithoutSpaces(parent.querySelector('.product-price__current').textContent);
+		let priceNumber = parseInt(priceWithoutSpaces(parent.querySelector('.product-price__current').textContent));
+
+		plusFullPrice(priceNumber);
+
+		printFullPrice();
+
+		cartProductsList.querySelector('.simplebar-content').insertAdjacentHTML('afterbegin', generateCartProduct(img, title, priceString, id));
+		printQuantity();
+
+		
+		self.disabled = true;
+	});
+});

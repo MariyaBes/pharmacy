@@ -3116,6 +3116,11 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
 }
 
+.small-img-col .active {
+  border-radius: 15px;
+  border: 2px solid #0000ff;
+}
+
 .single-product .col-2 img {  padding: 0;  }
 
 .single-product .col-2 {padding: 40px;}

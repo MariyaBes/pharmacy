@@ -3,19 +3,20 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_mysqldb import MySQL, MySQLdb
 from flask_login import LoginManager
 import re
-# from datetime import datetime, timedelta
+import datetime
 import MySQLdb.cursors
 from passlib.hash import sha256_crypt
 from models import execute_read_query, execute_query
 import base64
 from PIL import Image
-import io
+
 
 pattern = r"^[-\w\.]+@([-\w]+\.)+[-\w]{2,4}$"
 
 app = Flask(__name__)
 
 app.secret_key = 'YV_JNFVJW&*+96+_ETRBO_HOIQ+!FS'
+app.permanent_session_lifetime = datetime.timedelta(seconds=300)
 
 # app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=10)
 # global COOKIE_TIME_OUT
@@ -144,17 +145,29 @@ def cart(ID_Medication):
     card_product = execute_read_query(connect_db, cart_sql)
     return render_template('card.html', card_product = card_product)
 
-@app.route('/basket/<int:ID_Medication>', methods=['GET', 'POST'])
-def basket(ID_Medication):
-    backet_sql = f'''SELECT ID_Medication, Name, Price, image_1
-    from medication, image
-    where ID_Medication = "{ID_Medication}"
-    and medication.ID_Medication = image.id_image
-    and ID_Medication = Image_id_image
-    '''
-    basket_product = execute_read_query(connect_db, backet_sql)
-    
+@app.route('/basket', methods=['GET', 'POST'])
+def basket ():
+    cursor = None
+    if request.method == "POST":
+        id = request.form['product_id']
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT ID_Medication FROM medication WHERE ID_Medication=%s", id)
+        row = cursor.fetchone()
+        # id_sql = (f'''SELECT ID_Medication from medication where ID_Medication=%s''', id)
+        # id_product = execute_read_query(connect_db, id_sql)
+        print(row)
+        print(id)
+        backet_sql = f'''SELECT ID_Medication, Name, Price, image_1
+        from medication, image
+        where medication.ID_Medication = image.id_image
+        and ID_Medication = Image_id_image
+        and ID_Medication = {id}
+        '''
+        basket_product = execute_read_query(connect_db, backet_sql)
+
     return render_template('basket.html', basket=basket_product)
+
+
 
 
 if __name__ == '__main__':

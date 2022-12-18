@@ -109,7 +109,7 @@
               <span class="count">4</span>
             </button>
 
-            <a href="/basket">
+            <a href="/basket/">
               <button class="action-btn">
                 <ion-icon name="bag-handle-outline"></ion-icon>
               </button>
@@ -1073,75 +1073,79 @@
             <h2 class="title">Товары Дня</h2>
 
             <div class="product-grid">
+              <article class="product">
 
-              {% for medication in card_drug %} 
+                {% for medication in card_drug %} 
 
-              <div class="showcase">
+                <div class="showcase">
 
-                <div class="showcase-banner">
+                  <div class="showcase-banner">
 
-                  <img src="{{ medication.image_1 }}" alt="azit" width="300" class="product-img default">
-                  <img src="{{ medication.image_2 }}" alt="azit-1" width="300" class="product-img hover">
+                    <img src="{{ medication.image_1 }}" alt="azit" width="300" class="product-img default">
+                    <img src="{{ medication.image_2 }}" alt="azit-1" width="300" class="product-img hover">
 
-                  
-                  {% if medication.Billet == 'Бонус' %}
-                  <p class="showcase-badge angle pink">Бонус</p>
-                  {% elif  medication.Billet == 'Хранить в холоде' %}
-                  <p class="showcase-badge angel black">
-                    <img src="../static/icon/frozen 1.svg" alt="">
-                  </p>
-                  {% else %}
-                  <p class="showcase-badge">{{ medication.Billet }}</p>
-                  {% endif %}
-
-
-                  <div class="showcase-actions">
-
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-
-                  </div>
-
-                </div>
-
-                <div class="showcase-content">
-
-                  <a href="#" class="showcase-category">{{ medication.Status }}</a>
-
-                  <a href="/cart/{{medication.ID_Medication}}">
-
-                    <h3 class="showcase-title">{{medication.Name}}</h3>
-                  </a>
-                  
-                  <div class="showcase-rating">
-                    <p>Срок годности: {{medication.Date_of_storage}}</p>
                     
-
-                    <div class="delivery">
-                      <i class="fi fi-rr-home"></i>
-                      <p>Доставка сегодня</p>
-                    </div>
-        
-                  </div>
-
-                  <div class="price-box">
-                    <p class="price">{{medication.Price}}₽/шт.</p>
-                    {% if medication.Del_Price > 0 %}
-                    <del>{{medication.Del_Price}}₽/шт.
-</del>
+                    {% if medication.Billet == 'Бонус' %}
+                    <p class="showcase-badge angle pink">Бонус</p>
+                    {% elif  medication.Billet == 'Хранить в холоде' %}
+                    <p class="showcase-badge angel black">
+                      <img src="../static/icon/frozen 1.svg" alt="">
+                    </p>
+                    {% else %}
+                    <p class="showcase-badge">{{ medication.Billet }}</p>
                     {% endif %}
+
+
+                    <div class="showcase-actions">
+
+                      <button class="btn-action">
+                        <ion-icon name="heart-outline"></ion-icon>
+                      </button>
+
+                    </div>
+
                   </div>
 
-                  <a href="/basket/{{medication.ID_Medication}}">
-                    <button>
-                      Добавить в корзину
-                    </button>
-                  </a>
+                  <div class="showcase-content">
+
+                    <a href="#" class="showcase-category">{{ medication.Status }}</a>
+
+                    <a href="/cart/{{medication.ID_Medication}}">
+
+                      <h3 class="showcase-title">{{medication.Name}}</h3>
+                    </a>
+                    
+                    <div class="showcase-rating">
+                      <p>Срок годности: {{medication.Date_of_storage}}</p>
+                      
+
+                      <div class="delivery">
+                        <i class="fi fi-rr-home"></i>
+                        <p>Доставка сегодня</p>
+                      </div>
+          
+                    </div>
+
+                    <div class="price-box">
+                      <p class="price">{{medication.Price}}₽/шт.</p>
+                      {% if medication.Del_Price > 0 %}
+                      <del>{{medication.Del_Price}}₽/шт.</del>
+                      {% endif %}
+                    </div>
+
+                    <form action="/basket" method="post">
+                      <input type="hidden" name="product_id" value="{{ medication.ID_Medication }}">
+
+                      <button class="product__btn btn">
+                        Добавить в корзину
+                      </button>
+                    </form>
+                  </div>
 
                 </div>
 
-              </div>
+              </article>
+              
               {% endfor %}
 
               <!-- {% for medication in card_drug %} 
