@@ -143,16 +143,21 @@ def cart(ID_Medication):
     and medication.ID_Medication = provider.ID_Provider
     '''
     card_product = execute_read_query(connect_db, cart_sql)
+
+
     return render_template('card.html', card_product = card_product)
 
 @app.route('/basket', methods=['GET', 'POST'])
 def basket ():
     cursor = None
     if request.method == "POST":
+        
         id = request.form['product_id']
         cursor = mysql.connection.cursor()
         cursor.execute("SELECT ID_Medication FROM medication WHERE ID_Medication=%s", id)
         row = cursor.fetchone()
+
+
         # id_sql = (f'''SELECT ID_Medication from medication where ID_Medication=%s''', id)
         # id_product = execute_read_query(connect_db, id_sql)
         print(row)
@@ -165,10 +170,27 @@ def basket ():
         '''
         basket_product = execute_read_query(connect_db, backet_sql)
 
-    return render_template('basket.html', basket=basket_product)
+        delivery_sql = f'''SELECT Cost
+        from delivery
+        where ID_Delivery = Order_ID_Order'''
+        delivery = execute_read_query(connect_db, delivery_sql)
+
+        cost_sql = f'''SELECT Price
+        from medication'''
+        cost = execute_read_query(connect_db, cost_sql)
 
 
+        if basket_product == tuple():
+            flash('Корзина пуста', category='error')
 
+    return render_template('basket.html', basket=basket_product, dv=delivery)
+
+
+@app.route('/basket_clear')
+def basket_clear():
+    pass
+    flash('Добавьте товары в корзину', category='error')
+    return render_template('basket.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

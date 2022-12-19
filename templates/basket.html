@@ -26,6 +26,7 @@
                                     <input type="radio" id="order-courier" class="js-receive-type" name="order-type" value="courier" autocomplete="off" checked>
                                     <label for="order-courier" class="cart-order__radio-label">
 
+                                        {% for delivery in dv %}
                                         <div class="cart-order__radio-text">
 
                                             <div class="cart-order__radio-title">
@@ -38,8 +39,8 @@
                                         </div>
                                         <div class="cart-order__radio-info">
 
-                                            <div class="cart-order__radio-price">+149₽</div>
-
+                                            <div class="cart-order__radio-price">+ {{delivery.Cost}} ₽</div>
+                                        {% endfor %}
                                         </div>
                                     </label>
                                 </div>
@@ -67,10 +68,24 @@
 
                                 <button class="cart-page__btn-gray cart-page__head-btn desktop js-open-modal" type="button" data-modal="modal-confirmation-cart">
                                     Очистить корзину
-                                    <ion-icon name="close-outline"></ion-icon>
+                                    <a href="/basket_clear">
+                                        <ion-icon name="close-outline"></ion-icon>
+                                    </a>
                                 </button>
                                 </div>
                             </div>
+
+                            {% with messages = get_flashed_messages(with_categories=true) %} {% if
+                                messages %} {% for category, message in messages %} {% if category ==
+                                'error' %}
+                                <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                                  {{ message }}
+                                </div>
+                                {% else %}
+                                <div class="alert alert-success alter-dismissable fade show" role="alert">
+                                  {{ message }}
+                                </div>
+                                {% endif %} {% endfor %} {% endif %} {% endwith %}
 
                             {% for medication in basket %}
 
@@ -165,16 +180,19 @@
                             <div class="cart-aside__item-price">{{medication.Price}} ₽</div>
                         </div>
                         <div class="cart-aside__item">
+                            {% for delivery in dv %}
                             <div class="cart-aside__item-title">Доставка</div>
-                            <div class="cart-aside__item-price">+149 ₽</div>
+                            <div class="cart-aside__item-price">+{{delivery.Cost}} ₽</div>
+                            
                         </div>
                     </div>
 
+                    
                     <div class="cart-aside__summary cart-aside__item js-fixed-target">
                         <div class="cart-aside__title">Итого</div>
-                        <div class="cart-aside__price">323 ₽</div>
+                        <div class="cart-aside__price"> ₽</div>
                     </div>
-
+                            {% endfor %}
                     <div class="cart-aside__btn-wrapper js-fixed-element">
                         <button class="btn cart-aside__btn-submit btn--big js-next-step" data-url="/chek" data-step="cart" type="button">
                             <span>Оформить</span>
@@ -199,5 +217,5 @@
 </main>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="../static/basket.js"></script>
+
 {% endblock %}

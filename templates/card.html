@@ -52,11 +52,12 @@
 
                             <div class="sc-a6cd743c-8 ecZORx">
                                 <div class="sc-a6cd743c-10 dvlSbs">
-                                    <a href="/basket">
+                                    <form action="/basket" method="post">
+                                        <input type="hidden" name="product_id" value="{{ medication.ID_Medication }}">
                                         <button class="Button_button__4em_S Button_button--orange__lc846" aria-label>
                                             <span>Добавть в корзину</span>
                                         </button>
-                                    </a>
+                                    </form>
                                     
                                 </div>
 

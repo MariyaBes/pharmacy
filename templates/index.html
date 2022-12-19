@@ -109,11 +109,42 @@
               <span class="count">4</span>
             </button>
 
-            <a href="/basket/">
-              <button class="action-btn">
-                <ion-icon name="bag-handle-outline"></ion-icon>
-              </button>
-            </a>
+            <div class="header__cart cart" tabindex="0">
+              <div class="cart__text">
+                <button class="action-btn">
+                  <ion-icon name="bag-handle-outline"></ion-icon>
+                  <span class="count">0</span>
+                </button>
+
+
+                <div class="cart-content">
+                  <ul class="cart-content__list" data-simplebar>
+                    <!-- <li class="cart-content__item">
+                      <article class="cart-content__product cart-product">
+                        <img src="..//static/icon/azit.png" alt="" class="cart-product__img">
+                        <div class="cart-product__text">
+                          <h3 class="cart-product__title">Азитромицин Таблетки Плен. 125мг 6шт</h3>
+                          <span class="cart-product__price">177 ₽</span>
+                        </div>
+                        <button class="cart-product__delete" aria-label="Удалить товар">
+                          
+                        </button>
+                      </article>
+
+                    </li> -->
+                    
+                  </ul>
+                  <div class="cart-content__bottom">
+                    <div class="cart-content__fullprice">
+                      <span>Итого:</span>
+                      <span class="fullprice">568 789 ₽</span>
+                    </div>
+                    <div class="cart-content__btn baton">Оформить</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
  
 
             <button class="action-btn">
@@ -1073,17 +1104,17 @@
             <h2 class="title">Товары Дня</h2>
 
             <div class="product-grid">
-              <article class="product">
-
-                {% for medication in card_drug %} 
-
+              {% for medication in card_drug %} 
+              <article class="product" data-id="{{medication.ID_Medication}}">
                 <div class="showcase">
 
                   <div class="showcase-banner">
-
-                    <img src="{{ medication.image_1 }}" alt="azit" width="300" class="product-img default">
-                    <img src="{{ medication.image_2 }}" alt="azit-1" width="300" class="product-img hover">
-
+                    <div class="image-switch__img">
+                      <img src="{{ medication.image_1 }}" alt="azit" width="300" class="product-img default">
+                      <img src="{{ medication.image_2 }}" alt="azit-1" width="300" class="product-img hover">
+  
+                    </div>
+                    
                     
                     {% if medication.Billet == 'Бонус' %}
                     <p class="showcase-badge angle pink">Бонус</p>
@@ -1128,18 +1159,19 @@
 
                     <div class="price-box">
                       <p class="price">{{medication.Price}}₽/шт.</p>
+                      <!-- <p class="price_string">₽/шт.</p> -->
                       {% if medication.Del_Price > 0 %}
                       <del>{{medication.Del_Price}}₽/шт.</del>
                       {% endif %}
                     </div>
 
-                    <form action="/basket" method="post">
-                      <input type="hidden" name="product_id" value="{{ medication.ID_Medication }}">
+                    <!-- <form action="/basket" method="post">
+                      <input type="hidden" name="product_id" value="{{ medication.ID_Medication }}"> -->
 
                       <button class="product__btn btn">
                         Добавить в корзину
                       </button>
-                    </form>
+                    <!-- </form> -->
                   </div>
 
                 </div>
@@ -2170,7 +2202,8 @@
       type="text/javascript"
       src="{{url_for('static', filename='script.js') }}"
     ></script>
-
+    <script src="../static/simplebar.js"></script>
+    <script src="../static/basket.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     
