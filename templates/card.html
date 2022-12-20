@@ -5,9 +5,8 @@
 {% block body %}
 
 <div class="small-container single-product">
-        <div class="row-cart-product">
-            
-            {% for medication in card_product %}
+    {% for medication in card_product %}
+        <div class="row-cart-product" data-id="{{medication.ID_Medication}}">
 
             <div class="col-2">
                 <div class="img-container">
@@ -30,7 +29,7 @@
 
                 </div>
 
-                {% endfor %}
+    {% endfor %}
 
             </div>
 
@@ -52,13 +51,9 @@
 
                             <div class="sc-a6cd743c-8 ecZORx">
                                 <div class="sc-a6cd743c-10 dvlSbs">
-                                    <form action="/basket" method="post">
-                                        <input type="hidden" name="product_id" value="{{ medication.ID_Medication }}">
-                                        <button class="Button_button__4em_S Button_button--orange__lc846" aria-label>
+                                        <button class="Button_button__4em_S cart__btn Button_button--orange__lc846" aria-label>
                                             <span>Добавть в корзину</span>
                                         </button>
-                                    </form>
-                                    
                                 </div>
 
                                 <div class="sc-a6cd743c-10 dvlSbs">
@@ -185,8 +180,8 @@
         </div>
 </div>
     {% endfor %}
-
-<script src="../static/card.js"></script>
+    <script src="../static/simplebar.js"></script>
+    <script src="../static/card.js"></script>
 {% endblock %}
 
 

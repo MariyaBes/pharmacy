@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="../libs/modal.css">
     <title>{% block title %} Eltaina — интернет-аптека {% endblock %}</title>
     {% endblock %}
   </head>
@@ -116,8 +117,9 @@
                   <span class="count">0</span>
                 </button>
 
-
+                
                 <div class="cart-content">
+                  
                   <ul class="cart-content__list" data-simplebar>
                     <!-- <li class="cart-content__item">
                       <article class="cart-content__product cart-product">
@@ -142,6 +144,7 @@
                     <div class="cart-content__btn baton">Оформить</div>
                   </div>
                 </div>
+
               </div>
 
             </div>
@@ -149,7 +152,6 @@
 
             <button class="action-btn">
               <ion-icon name="clipboard-outline"></ion-icon>
-              <span class="count">2</span>
             </button>
 
             {% if not session.logged_in %}
@@ -1167,11 +1169,18 @@
 
                     <!-- <form action="/basket" method="post">
                       <input type="hidden" name="product_id" value="{{ medication.ID_Medication }}"> -->
-
+                    <!-- {%if session.logged_in == true %} -->
                       <button class="product__btn btn">
                         Добавить в корзину
                       </button>
                     <!-- </form> -->
+                    <!-- {% else %}
+                    <div class="login-not">
+                        <h3>
+                          <a href="/login">Войдите</a>, чтобы добавить товар в корзину
+                        </h3>
+                    </div>
+                    {% endif %} -->
                   </div>
 
                 </div>
@@ -2204,6 +2213,7 @@
     ></script>
     <script src="../static/simplebar.js"></script>
     <script src="../static/basket.js"></script>
+    <script src="../libs/modal.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     

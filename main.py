@@ -186,11 +186,11 @@ def basket ():
     return render_template('basket.html', basket=basket_product, dv=delivery)
 
 
-@app.route('/basket_clear')
-def basket_clear():
-    pass
-    flash('Добавьте товары в корзину', category='error')
-    return render_template('basket.html')
+# @app.route('/basket_clear')
+# def basket_clear():
+#     pass
+#     flash('Добавьте товары в корзину', category='error')
+#     return render_template('basket.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
