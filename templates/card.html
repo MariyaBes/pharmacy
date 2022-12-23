@@ -32,85 +32,100 @@
     {% endfor %}
 
             </div>
+                <form action="/basket" method="POST">
+                {% for medication in card_product %}
 
-            {% for medication in card_product %}
+                    <div class="col-2">
+                        <h1 class="showcase-title">{{ medication.Name }}</h1>
 
-            <div class="col-2">
-                <h1>{{ medication.Name }}</h1>
+                        
+                            <div class="sc-2ecaf6cb-3 idFeCf">
+                                <div class="sc-a6cd743c-12 jqXcdE">
+                                    <div class="sc-a6cd743c-5 biczTS">
+                                        <div class="sc-a6cd743c-9 ipLSQk Price_common-price__8fNbt">
+                                            <div class="Price_price__qHqZv Price_common-price-currency__SwH6u">
+                                                {{ medication.Price }}
+                                                    ₽
+                                            </div>
+                                        </div>
 
+                                        <div class="items_coun counter-wrapper count_btn_change" id="count_wrapper">
+                                            <div class="items_control" data-action="minus">-</div>
+                                            <div class="items_current" data-counter>1</div>
+                                            <div class="items_control" data-action="plus">+</div>
+                                          </div>
 
-                <div class="sc-2ecaf6cb-3 idFeCf">
-                    <div class="sc-a6cd743c-12 jqXcdE">
-                        <div class="sc-a6cd743c-5 biczTS">
-                            <div class="sc-a6cd743c-9 ipLSQk Price_common-price__8fNbt">
-                                <div class="Price_price__qHqZv Price_common-price-currency__SwH6u">
-                                    {{ medication.Price }}
-                                        ₽
+                                        <div class="sc-a6cd743c-8 ecZORx">
+                                            <div class="sc-a6cd743c-10 dvlSbs">
+                                                    <button class="Button_button__4em_S cart__btn Button_button--orange__lc846" aria-label onclick="alerted();">
+                                                        <span>Добавть в корзину</span>
+                                                    </button>
+                                            </div>
+
+                                            <div class="sc-a6cd743c-10 dvlSbs">
+                                                <button class="Button_button__4em_S Button_button--orange__lc846" aria-label>
+                                                    <span>Добавть в аптечку</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <script>
+                                            function alerted() {
+                                            alert('Вы добавили товар в корзину!');
+                                            }
+                                        </script>
+                                            
+                                    </div>
                                 </div>
                             </div>
+                        
+                        {% endfor %}
+                        {% for provider in card_product %}
+                        <div class="sc-2ecaf6cb-4 epUzFS">
+                            <ul class="sc-c4356401-1 cfNZJZ">
+                                <li class="sc-c4356401-4 gPAxcV">
+                                    <span class="sc-c4356401-2 iutoXM">Производитель</span>
+                                    <span class="sc-c4356401-3 kThREV">
+                                        <span class="sc-c4356401-3 kThREV">{{ provider.Title }}</span>
+                                    </span>
+                                </li>
+                                <li class="sc-c4356401-4 gPAxcV">
+                                    <span class="sc-c4356401-2 iutoXM">Страна производства</span>
+                                    <span class="sc-c4356401-3 kThREV">
+                                        <span class="sc-c4356401-3 kThREV">{{ provider.Country }}</span>
+                                    </span>
+                                </li>
+                                <li class="sc-c4356401-4 gPAxcV">
+                                    <span class="sc-c4356401-2 iutoXM">Адресс</span>
+                                    <span class="sc-c4356401-3 kThREV">
+                                        <span class="sc-c4356401-3 kThREV">{{ provider.Address }}</span>
+                                    </span>
+                                </li>
 
-                            <div class="sc-a6cd743c-8 ecZORx">
-                                <div class="sc-a6cd743c-10 dvlSbs">
-                                        <button class="Button_button__4em_S cart__btn Button_button--orange__lc846" aria-label>
-                                            <span>Добавть в корзину</span>
-                                        </button>
-                                </div>
-
-                                <div class="sc-a6cd743c-10 dvlSbs">
-                                    <button class="Button_button__4em_S Button_button--orange__lc846" aria-label>
-                                        <span>Добавть в аптечку</span>
-                                    </button>
-                                </div>
-                            </div>
+                                {% for marking in card_product %}
+                                <li class="sc-c4356401-4 gPAxcV">
+                                    <span class="sc-c4356401-2 iutoXM">Категория</span>
+                                    <span class="sc-c4356401-3 kThREV">
+                                        <span class="sc-c4356401-3 kThREV">{{ marking.Category }}</span>
+                                    </span>
+                                </li>
+                                {% endfor %}
+                                {% for medication in card_product %}
+                                <li class="sc-c4356401-4 gPAxcV">
+                                    <span class="sc-c4356401-2 iutoXM">Рецептурный отпуск</span>
+                                    <span class="sc-c4356401-3 kThREV">
+                                        <span class="sc-c4356401-3 kThREV">{{ medication.Billet }}</span>
+                                    </span>
+                                </li>
+                                {% endfor %}
+                            </ul>
                         </div>
+
+                        
                     </div>
-                </div>
-                {% endfor %}
-                {% for provider in card_product %}
-                <div class="sc-2ecaf6cb-4 epUzFS">
-                    <ul class="sc-c4356401-1 cfNZJZ">
-                        <li class="sc-c4356401-4 gPAxcV">
-                            <span class="sc-c4356401-2 iutoXM">Производитель</span>
-                            <span class="sc-c4356401-3 kThREV">
-                                <span class="sc-c4356401-3 kThREV">{{ provider.Title }}</span>
-                            </span>
-                        </li>
-                        <li class="sc-c4356401-4 gPAxcV">
-                            <span class="sc-c4356401-2 iutoXM">Страна производства</span>
-                            <span class="sc-c4356401-3 kThREV">
-                                <span class="sc-c4356401-3 kThREV">{{ provider.Country }}</span>
-                            </span>
-                        </li>
-                        <li class="sc-c4356401-4 gPAxcV">
-                            <span class="sc-c4356401-2 iutoXM">Адресс</span>
-                            <span class="sc-c4356401-3 kThREV">
-                                <span class="sc-c4356401-3 kThREV">{{ provider.Address }}</span>
-                            </span>
-                        </li>
 
-                        {% for marking in card_product %}
-                        <li class="sc-c4356401-4 gPAxcV">
-                            <span class="sc-c4356401-2 iutoXM">Категория</span>
-                            <span class="sc-c4356401-3 kThREV">
-                                <span class="sc-c4356401-3 kThREV">{{ marking.Category }}</span>
-                            </span>
-                        </li>
-                        {% endfor %}
-                        {% for medication in card_product %}
-                        <li class="sc-c4356401-4 gPAxcV">
-                            <span class="sc-c4356401-2 iutoXM">Рецептурный отпуск</span>
-                            <span class="sc-c4356401-3 kThREV">
-                                <span class="sc-c4356401-3 kThREV">{{ medication.Billet }}</span>
-                            </span>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-                
-            </div>
-
-            {% endfor %}
+                    {% endfor %}
+            </form>
         </div>
 </div>
     {% for medication in card_product %}

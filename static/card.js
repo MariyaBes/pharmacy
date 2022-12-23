@@ -91,7 +91,7 @@ productsBtn.forEach(el => {
 		console.log(id);
 		let img = parent.querySelector('.img-container img').getAttribute('src');
 		console.log(img);
-		let title = parent.querySelector('.col-2').textContent;
+		let title = parent.querySelector('.title_cart').textContent;
 		console.log(title);
 		
 		let priceString = priceWithoutSpaces(parent.querySelector('.Price_price__qHqZv').textContent);
@@ -108,6 +108,25 @@ productsBtn.forEach(el => {
 
 		
 		self.disabled = true;
+
+		$.ajax({
+			url: '/basket',
+			method: 'post',
+			dataType: 'json',
+			data: {
+				id: id,
+				img: img,
+				title: title,
+				price: priceNumber,
+				count: counter
+			},
+			success: function (response) {
+				console.log(response);
+			},
+			error: function (error) {
+				console.log(error);
+			}
+		});
 	});
 });
 

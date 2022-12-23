@@ -4,8 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	const cart = document.querySelector('.cart');
 	const cartQuantity = cart.querySelector('.count');
 	const fullPrice = document.querySelector('.fullprice');
-	const idProduct = document.querySelector('[data-id]');
+	let idProduct = document.getElementById(['data-id']);
+	
+	const count = document.querySelector('.items_current');
 	let price = 0;
+	let id_item = document.querySelector('.del_id_item').getAttribute('id');
+	console.log(id_item);
 
 	const priceWithoutSpaces = (str) => {
 		return str.replace(/\s/g, '');
@@ -15,55 +19,43 @@ document.addEventListener('DOMContentLoaded', () => {
 		return String(str).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
 	};
 
-	const plusFullPrice = (currentPrice) => {
-		return price += currentPrice;
+	const plusFullPrice = (totalCount) => {
+		return price += totalCount;
 	};
+
+	const totalPriceCount = (counter, currentPrice) => {
+		totalCount = counter * currentPrice;
+		return plusFullPrice (totalCount);
+	}
 
 	const minusFullPrice = (currentPrice) => {
 		return price -= currentPrice;
 	};
 
-	const printQuantity = () => {
-		let productsListLength = cartProductsList.querySelector('.simplebar-content').children.length;
-		cartQuantity.textContent = productsListLength;
-		productsListLength > 0 ? cart.classList.add('active') : cart.classList.remove('active');
-	};
+	const totalPriceMinusCount = (counter, currentPrice) => {
+		totalCount = counter / currentPrice;
+		return minusFullPrice (totalCount);
+	}
+
 
 	const printFullPrice = () => {
 		fullPrice.textContent = `${normalPrice(price)} ₽`;
 	};
 
-	const generateCartProduct = (img, title, price, id) => {
-		return `
-			<li class="cart-content__item">
-				<article class="cart-content__product cart-product" data-id="${id}">
-					<img src="${img}" alt="" class="cart-product__img">
-					<div class="cart-product__text">
-					<a href="/cart/${id}">
-						<h3 class="cart-product__title">${title}</h3>
-					</a>
-						<span class="cart-product__price">${normalPrice(price)}</span>
-					</div>
-					<button class="cart-product__delete" aria-label="Удалить товар"></button>
-				</article>
-			</li>
-		`;
-	};
-
-	const deleteProducts = (productParent) => {
-		let id = productParent.querySelector('.cart-product').dataset.id;
-		document.querySelector(`.product[data-id="${id}"]`).querySelector('.product__btn').disabled = false;
+	// const deleteProducts = (productParent) => {
+	// 	let id = productParent.querySelector('.cart-product').dataset.id;
+	// 	document.querySelector(`.product[data-id="${id}"]`).querySelector('.product__btn').disabled = false;
 		
-		let currentPrice = parseInt(productParent.querySelector('.cart-product__price').textContent);
-		console.log(currentPrice)
-		minusFullPrice(currentPrice);
-		printFullPrice();
-		productParent.remove();
+	// 	let currentPrice = parseInt(productParent.querySelector('.cart-product__price').textContent);
+	// 	console.log(currentPrice)
+	// 	minusFullPrice(currentPrice);
+	// 	printFullPrice();
+	// 	productParent.remove();
 
-		printQuantity();
+	// 	printQuantity();
 
-		updateStorage();
-	};
+	// 	// updateStorage();
+	// };
 
 	productsBtn.forEach(el => {
 
@@ -72,72 +64,85 @@ document.addEventListener('DOMContentLoaded', () => {
 			let parent = self.closest('.product');
 			let id = parent.dataset.id;
 			console.log(id);
+
 			let img = parent.querySelector('.image-switch__img img').getAttribute('src');
 			console.log(img);
 			let title = parent.querySelector('.showcase-title').textContent;
 			console.log(title);
+			let counter = parent.querySelector('[data-counter]').textContent;
+			console.log(counter);
 			
 			let priceString = priceWithoutSpaces(parent.querySelector('.price-box .price').textContent);
 			console.log(priceString);
 			let priceNumber = parseInt(priceWithoutSpaces(parent.querySelector('.price-box .price').textContent));
 			console.log(priceNumber);
 
-			
-			plusFullPrice(priceNumber);
+			totalPriceCount(counter, priceNumber);
+			// plusFullPrice(priceNumber);
 			printFullPrice();
+			let fullPrice = totalPriceCount(counter, priceNumber)
+			console.log(fullPrice);
 
-			cartProductsList.querySelector('.simplebar-content').insertAdjacentHTML('afterbegin', generateCartProduct(img, title, priceString, id));
+			// cartProductsList.querySelector('.simplebar-content').insertAdjacentHTML('afterbegin', generateCartProduct(img, title, priceString, id, counter));
 			printQuantity();
 
-			updateStorage();
+			// updateStorage();
 
 			
 			self.disabled = true;
+
+			$.ajax({
+				url: '/basket',
+				method: 'post',
+				dataType: 'json',
+				data: {
+					id: id,
+					img: img,
+					title: title,
+					price: priceNumber,
+					count: counter
+				},
+				success: function (response) {
+					console.log(response);
+				},
+				error: function (error) {
+					console.log(error);
+				}
+			});
+
 		});
 	});
 
-	const countSumm = () => {
-		document.querySelectorAll('.cart-content__item').forEach(el => {
-			price += parseInt(priceWithoutSpaces(el.querySelector('.cart-product__price').textContent));
-		});
-	};
+	// cartProductsList.addEventListener('click', (e) => {
+	// 	if (e.target.classList.contains('cart-product__delete')) {
+	// 		deleteProducts(e.target.closest('.cart-content__item'));
+	// 	}
+	// });
 
-	const initialState = () => {
-		if (localStorage.getItem('products') !== null) {
-			cartProductsList.querySelector('.simplebar-content').innerHTML = localStorage.getItem('products');
-			printQuantity();
 
-			countSumm();
-			printFullPrice();
+	// Добавляем прослушку на всем окне
+	window.addEventListener('click', function (event) {
 
-			document.querySelectorAll('.cart-content__product').forEach(el => {
-				let id = el.dataset.id;
-				console.log(id)
-				document.querySelector(`.product[data-id="${id}"]`).querySelector('.product__btn').disabled = true;
-			});
+		let counter;
+
+		if (event.target.dataset.action === 'plus' || event.target.dataset.action === 'minus') {
+
+			const counterWrapper = event.target.closest('.counter-wrapper');
+			counter = counterWrapper.querySelector('[data-counter]');
 		}
-	};
 
-	initialState();
-
-	const updateStorage = () => {
-		let parent = cartProductsList.querySelector('.simplebar-content');
-		let html = parent.innerHTML;
-		html = html.trim();
-		console.log(html);
-
-		if (html.length) {
-			localStorage.setItem('products', html);
+		if (event.target.dataset.action === 'plus') {
+			if (counter.innerText < 10){
+				counter.innerText = ++counter.innerText;
+			}
 		}
-		else {
-			localStorage.removeItem('products');
-		}
-		
-	};
 
-	cartProductsList.addEventListener('click', (e) => {
-		if (e.target.classList.contains('cart-product__delete')) {
-			deleteProducts(e.target.closest('.cart-content__item'));
+		if (event.target.dataset.action === 'minus') {
+
+			if (parseInt(counter.innerText) > 1) {
+				counter.innerText = --counter.innerText;
+			} 
 		}
 	});
 });
+

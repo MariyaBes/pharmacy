@@ -1242,7 +1242,7 @@ h1:hover {
   display: block;
   border: 1px solid var(--salmon-pink);
   transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
-
+  margin-left: 20px;
 }
 
 .showcase-content button:hover {
@@ -2136,7 +2136,9 @@ footer {
 }
 
 .cart-product__delete {
-  margin-left: auto;
+  margin-left: 300px;
+  display: flex;
+  transform: translateY(-155%);
   width: 20px;
   height: 20px;
   border: none;
@@ -2192,6 +2194,10 @@ footer {
   text-align: center;
 } 
 
+.counter_item {
+  font-size: 12px;
+  color: #ed8888;
+}
 
 
 
@@ -3258,7 +3264,7 @@ input::-webkit-inner-spin-button {
 .col-2 {
   flex-basis: 50%;
   line-height: 60px;
-  margin: 25px 0;
+  margin: 5px 0;
 }
 
 .epUzFS {
@@ -3466,4 +3472,34 @@ input::-webkit-inner-spin-button {
   display: contents;
   flex-direction: none;
   color: var(--salmon-pink);
+}
+
+.items_coun {
+  border: 1px solid var(--davys-gray);
+	background: #fbfbfb;
+	border-radius: 8px;
+	width: 120px;
+	display: flex;
+	font-size: 18px;
+	height: 30px;
+	overflow: hidden;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+
+.items_control {
+	width: 40px;
+	cursor: pointer;
+	transition: 0.2s ease-in;
+	text-align: center;
+}
+
+.items_control:hover {
+    background: var(--salmon-pink);
+    color: #FFF;
+}
+
+.items_current {
+	width: 40px;
+  margin-left: 17px;
 }

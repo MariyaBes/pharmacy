@@ -10,12 +10,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">  
-    <link rel="stylesheet" href="../libs/modal.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <title>{% block title %} Eltaina — интернет-аптека {% endblock %}</title>
     {% endblock %}
   </head>
   <body class="light">
-
     <div class="overlay" data-overlay></div>
 
     <!--Уведомления о приеме (всплывашка)-->
@@ -110,36 +109,49 @@
               <span class="count">4</span>
             </button>
 
+            {% if session.logged_in %}
+            
             <div class="header__cart cart" tabindex="0">
+              
               <div class="cart__text">
-                <button class="action-btn">
-                  <ion-icon name="bag-handle-outline"></ion-icon>
-                  <span class="count">0</span>
-                </button>
-
+                  <button class="action-btn" onclick="printQuantity();">
+                    <ion-icon name="bag-handle-outline"></ion-icon>
+                    {% for order_cart in cart_count %}
+                    <span class="count">{{ order_cart.count_cart }}</span>
+                    {% endfor %}
+                  </button>
                 
+            
                 <div class="cart-content">
-                  
                   <ul class="cart-content__list" data-simplebar>
-                    <!-- <li class="cart-content__item">
-                      <article class="cart-content__product cart-product">
-                        <img src="..//static/icon/azit.png" alt="" class="cart-product__img">
+                    {% for order_cart in basket %}
+                    <li class="cart-content__item">
+                      
+                      <article class="cart-content__product cart-product" data-id="{{ order_cart.ID_Medication }}">
+                        <img src="{{ order_cart.image }}" alt="" class="cart-product__img">
                         <div class="cart-product__text">
-                          <h3 class="cart-product__title">Азитромицин Таблетки Плен. 125мг 6шт</h3>
-                          <span class="cart-product__price">177 ₽</span>
-                        </div>
-                        <button class="cart-product__delete" aria-label="Удалить товар">
-                          
-                        </button>
-                      </article>
+                        <a href="/cart/{{ order_cart.ID_Medication }}">
+                          <p class="counter_item">{{ order_cart.Count }} позиция(ии)</p>
+                          <h3 class="cart-product__title">{{ order_cart.title }}</h3>
+                        </a>
+                        
+                          <span class="cart-product__price">{{ order_cart.Cost }} ₽</span>
 
-                    </li> -->
-                    
+                        <form action="/" method="POST">
+                          <input class="del_id_item" type="hidden" id="{{ order_cart.ID_Order }}">
+                          <button class="cart-product__delete" aria-label="Удалить товар" onclick="del_item();"></button>
+                        </form>
+                        
+                      </article>
+                    </li>
+                    {% endfor %}
                   </ul>
                   <div class="cart-content__bottom">
                     <div class="cart-content__fullprice">
-                      <span>Итого:</span>
-                      <span class="fullprice">568 789 ₽</span>
+                      <span>Итого:</span> 
+                      {% for order_cart in total_cost_count %}
+                      <span class="fullprice">{{order_cart.total_cost_count}} ₽</span>
+                      {% endfor %}
                     </div>
                     <div class="cart-content__btn baton">Оформить</div>
                   </div>
@@ -148,7 +160,39 @@
               </div>
 
             </div>
- 
+            
+            {% endif %}
+            
+            <script>
+              	function printQuantity () {
+                  let btn_cart = document.querySelector('.action-btn');
+                  let cart = document.querySelector('.header__cart');
+                  let cartQuantity = cart.querySelector('.count');
+                  if (cartQuantity.textContent > 0){
+                    cart.classList.add('active');
+                  }
+                };
+            </script>
+
+            <script>
+              function del_item (){
+                let id_item = document.querySelector('.del_id_item').getAttribute('id');
+                $.ajax({
+                  url: '/del_item',
+                  method: 'post',
+                  dataType: 'json',
+                  data: {
+                    id_del: id_item,
+                  },
+                  success: function (response) {
+                    console.log(response);
+                  },
+                  error: function (error) {
+                    console.log(error);
+                  }
+                });
+              };
+            </script>
 
             <button class="action-btn">
               <ion-icon name="clipboard-outline"></ion-icon>
@@ -1105,600 +1149,112 @@
           <div class="product-main">
             <h2 class="title">Товары Дня</h2>
 
+            <form action="/basket" method="POST">
             <div class="product-grid">
-              {% for medication in card_drug %} 
-              <article class="product" data-id="{{medication.ID_Medication}}">
-                <div class="showcase">
-
-                  <div class="showcase-banner">
-                    <div class="image-switch__img">
-                      <img src="{{ medication.image_1 }}" alt="azit" width="300" class="product-img default">
-                      <img src="{{ medication.image_2 }}" alt="azit-1" width="300" class="product-img hover">
+              
+                {% for medication in card_drug %} 
+                <article class="product" data-id="{{medication.ID_Medication}}">
+                  <div class="showcase">
+  
+                    <div class="showcase-banner">
+                      <div class="image-switch__img">
+                        <img src="{{ medication.image_1 }}" alt="{{medication.Name}}" width="300" class="product-img default">
+                        <img src="{{ medication.image_2 }}" alt="{{medication.Name}}" width="300" class="product-img hover">
+    
+                      </div>
+                      
+                      
+                      {% if medication.Billet == 'Бонус' %}
+                      <p class="showcase-badge angle pink">Бонус</p>
+                      {% elif  medication.Billet == 'Хранить в холоде' %}
+                      <p class="showcase-badge angel black">
+                        <img src="../static/icon/frozen 1.svg" alt="">
+                      </p>
+                      {% else %}
+                      <p class="showcase-badge">{{ medication.Billet }}</p>
+                      {% endif %}
+  
+  
+                      <div class="showcase-actions">
+  
+                        <button class="btn-action">
+                          <ion-icon name="heart-outline"></ion-icon>
+                        </button>
+  
+                      </div>
   
                     </div>
-                    
-                    
-                    {% if medication.Billet == 'Бонус' %}
-                    <p class="showcase-badge angle pink">Бонус</p>
-                    {% elif  medication.Billet == 'Хранить в холоде' %}
-                    <p class="showcase-badge angel black">
-                      <img src="../static/icon/frozen 1.svg" alt="">
-                    </p>
-                    {% else %}
-                    <p class="showcase-badge">{{ medication.Billet }}</p>
-                    {% endif %}
-
-
-                    <div class="showcase-actions">
-
-                      <button class="btn-action">
-                        <ion-icon name="heart-outline"></ion-icon>
-                      </button>
-
-                    </div>
-
-                  </div>
-
-                  <div class="showcase-content">
-
-                    <a href="#" class="showcase-category">{{ medication.Status }}</a>
-
-                    <a href="/cart/{{medication.ID_Medication}}">
-
-                      <h3 class="showcase-title">{{medication.Name}}</h3>
-                    </a>
-                    
-                    <div class="showcase-rating">
-                      <p>Срок годности: {{medication.Date_of_storage}}</p>
+  
+                    <div class="showcase-content" id="content">
+  
+                      <a href="#" class="showcase-category">{{ medication.Status }}</a>
+  
+                      <a href="/cart/{{medication.ID_Medication}}">
+  
+                        <h3 class="showcase-title">{{medication.Name}}</h3>
+                      </a>
                       
-
-                      <div class="delivery">
-                        <i class="fi fi-rr-home"></i>
-                        <p>Доставка сегодня</p>
+                      <div class="showcase-rating">
+                        <p>Срок годности: {{medication.Date_of_storage}}</p>
+                        
+  
+                        <div class="delivery">
+                          <i class="fi fi-rr-home"></i>
+                          <p>Доставка сегодня</p>
+                        </div>
+            
                       </div>
-          
-                    </div>
+  
+                      <div class="price-box">
+                        <p class="price">{{medication.Price}}₽/шт.</p>
+                        <!-- <p class="price_string">₽/шт.</p> -->
+                        {% if medication.Del_Price > 0 %}
+                        <del>{{medication.Del_Price}}₽/шт.</del>
+                        {% endif %}
+                      </div>
+  
+                      {%if session.logged_in == true %}
+                      <div class="btn_count" id="btn_count">
 
-                    <div class="price-box">
-                      <p class="price">{{medication.Price}}₽/шт.</p>
-                      <!-- <p class="price_string">₽/шт.</p> -->
-                      {% if medication.Del_Price > 0 %}
-                      <del>{{medication.Del_Price}}₽/шт.</del>
+                        <div class="items_coun counter-wrapper count_btn_change" id="count_wrapper">
+                          <div class="items_control" data-action="minus">-</div>
+                          <div class="items_current" data-counter>1</div>
+                          <div class="items_control" data-action="plus">+</div>
+                        </div>
+
+                        <div class="count_btn_change">
+                          <button type="button" class="product__btn btn" id="btn_wrapper" onclick="alerted();">
+                            Добавить в корзину
+                          </button>
+                        </div>
+                        
+                        
+
+                      </div>
+                        
+                      <script>
+                        function alerted() {
+                          alert('Вы добавили товар в корзину!');
+                        }
+                      </script>
+                        
+                      {% else %}
+                      <div class="login-not">
+                          <h3>
+                            <a href="/login">Войдите</a>, чтобы добавить товар в корзину
+                          </h3>
+                      </div>
                       {% endif %}
                     </div>
-
-                    <!-- <form action="/basket" method="post">
-                      <input type="hidden" name="product_id" value="{{ medication.ID_Medication }}"> -->
-                    <!-- {%if session.logged_in == true %} -->
-                      <button class="product__btn btn">
-                        Добавить в корзину
-                      </button>
-                    <!-- </form> -->
-                    <!-- {% else %}
-                    <div class="login-not">
-                        <h3>
-                          <a href="/login">Войдите</a>, чтобы добавить товар в корзину
-                        </h3>
-                    </div>
-                    {% endif %} -->
+  
                   </div>
-
-                </div>
-
-              </article>
-              
-              {% endfor %}
-
-              <!-- {% for medication in card_drug %} 
-              <div class="showcase">
-              
-                <div class="showcase-banner">
-                  <img src="{{ medication.image_1 }}" alt="magne" class="product-img default"
-                    width="300">
-                  <img src="{{ medication.image_2 }}" alt="magne" class="product-img hover"
-                    width="300">
-              
-                  <p class="showcase-badge angel black">
-                    <img src="{{ medication.Billet }}" alt="">
-                  </p>
-              
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-              
-                <div class="showcase-content">
-                  <a href="#" class="showcase-category">{{ medication.Status }}</a>
-              
-                  <h3>
-                    <a href="/card/{{medication.ID_Medication}}" class="showcase-title">{{ medication.Name }}</a>
-                  </h3>
-              
-                  <div class="showcase-rating">
-                    <p>Срок годности: {{medication.Date_of_storage}}</p>
-                    
-                    <div class="delivery">
-                      <i class="fi fi-rr-home"></i>
-                      <p>Доставка сегодня</p>
-
-                  </div>
-              
-                  <div class="price-box">
-                    <p class="price">{{medication.Price}}₽/шт.</p>
-
-                  </div>
-
-                  <button>
-                    Добавить в корзину
-                  </button>
-              
-                </div>
-              
-                </div>
-
-              </div>
-              {% endfor %} -->
-
-              <!-- <div class="showcase">
-              
-                <div class="showcase-banner">
-                  <img src="../static/icon/volt.png" alt="MEN Yarn Fleece Full-Zip Jacket" class="product-img default"
-                    width="300">
-                  <img src="../static/icon/volt-1.jpg" alt="MEN Yarn Fleece Full-Zip Jacket" class="product-img hover"
-                    width="300">
-              
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-              
-                <div class="showcase-content">
-                  <a href="#" class="showcase-category">Нет в наличии</a>
-              
-                  <h3>
-                    <a href="#" class="showcase-title">Вольтарен Эмульгель гель д/нар. прим. 2%</a>
-                  </h3>
-              
-                  <div class="showcase-rating">
-                    <p>Срок годности: 30.09.2024</p>
-                    
-                    <div class="delivery">
-                      <i class="fi fi-rr-home"></i>
-                      <p>Самовывоз</p>
-
-                    </div>
-              
-                  <div class="price-box">
-                    <p class="price">669₽/шт.</p>
-                  </div>
-
-                  <button>
-                    Добавить в корзину
-                  </button>
-              
-                </div>
-              
-                </div>
-
-              </div>
-
-              <div class="showcase">
-              
-                <div class="showcase-banner">
-                  <img src="../static/icon/20712343.png" alt="Black Floral Wrap Midi Skirt" class="product-img default"
-                    width="300">
-                  <img src="../static/icon/20712343-1.jpg" alt="Black Floral Wrap Midi Skirt" class="product-img hover"
-                    width="300">
-              
-                  <p class="showcase-badge angle black"><img src="../static/icon/frozen 1.svg" alt=""></p>
-              
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-              
-                <div class="showcase-content">
-                  <a href="#" class="showcase-category">В наличии</a>
-              
-                  <h3>
-                    <a href="#" class="showcase-title">Herb Сироп раст. происхождения, 150 мл</a>
-                  </h3>
-              
-                  <div class="showcase-rating">
-                    <p>Срок годности: 11.02.2025</p>
-                    
-                    <div class="delivery">
-                      <i class="fi fi-rr-home"></i>
-                      <p>Самовывоз</p>
-
-                    </div>
-              
-                  <div class="price-box">
-                    <p class="price">209₽/шт.</p>
-                    <del>299₽</del>
-                  </div>
-
-                  <button>
-                    Добавить в корзину
-                  </button>
-              
-                </div>
-              
-                </div>
-              
-              </div>
-
-              <div class="showcase">
-              
-                <div class="showcase-banner">
-                  <img src="../static/icon/photo_es_93E34398-81F0-D8C3-1E05-3E40A030AAF1.jpg" alt="Casual Men's Brown shoes" class="product-img default"
-                    width="300">
-                  <img src="../static/icon/photo_es_93E34398-81F0-D8C3-1E05-3E40A030AAF1-1.jpg" alt="Casual Men's Brown shoes" class="product-img hover"
-                    width="300">
-
-                    <p class="showcase-badge angle pink">бонус</p>
-              
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-              
-                <div class="showcase-content">
-                  <a href="#" class="showcase-category">На складе</a>
-              
-                  <h3>
-                    <a href="#" class="showcase-title">Таустин, капли глазные 4 % 10 мл 1 шт</a>
-                  </h3>
-              
-                  <div class="showcase-rating">
-                    <p>Срок годности: 29.12.2022</p>
-                    
-                    <div class="delivery">
-                      <i class="fi fi-rr-home"></i>
-                      <p>Доставка завтра</p>
-
-                  </div>
-              
-                  <div class="price-box">
-                    <p class="price">100₽/шт.</p>
-
-                  </div>
-              
-                  <button>
-                    Добавить в корзину
-                  </button>
-                </div>
-              
-                </div>
-              
-              </div>
-
-              <div class="showcase">
-              
-                <div class="showcase-banner">
-                  <img src="../static/icon/photo_es_E3555598-8FB5-B485-9E05-30100007FFFA.jpg" alt="Pocket Watch Leather Pouch" class="product-img default"
-                    width="300">
-                  <img src="../static/icon/photo_es_E3555598-8FB5-B485-9E05-30100007FFFA-1.jpg" alt="Pocket Watch Leather Pouch" class="product-img hover"
-                    width="300">
-              
-              
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-
-                  </div>
-                </div>
-              
-                <div class="showcase-content">
-                  <a href="#" class="showcase-category">В наличии</a>
-              
-                  <h3>
-                    <a href="#" class="showcase-title">Прометионин капсулы по 350 мг, 90 шт.</a>
-                  </h3>
-              
-                  <div class="showcase-rating">
-                    <p>Срок годности: 25.11.2025</p>
-                    
-                    <div class="delivery">
-                      <i class="fi fi-rr-home"></i>
-                      <p>Самовывоз</p>
-                    </div>
-              
-                  <div class="price-box">
-                    <p class="price">766₽/шт.</p>
-                    <del>809₽</del>
-                  </div>
-                  <button>
-                    Добавить в корзину
-                  </button>
-              
-                  </div>
-                </div>
-              
-              </div>
-
-              <div class="showcase">
-              
-                <div class="showcase-banner">
-                  <img src="../static/icon/1547102137683.jpg" alt="Smart watche Vital Plus" class="product-img default"
-                    width="300">
-                  <img src="../static/icon/Vesanod.png" alt="Smart watche Vital Plus" class="product-img hover" width="300">
-              
-                  <p class="showcase-badge">По рецепту</p>
-
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-              
-                  </div>
-                </div>
-              
-                <div class="showcase-content">
-                  <a href="#" class="showcase-category">Нет в наличии</a>
-              
-                  <h3>
-                    <a href="#" class="showcase-title">Весаноид, капсулы 10 мг 100 шт</a>
-                  </h3>
-              
-                  <div class="showcase-rating">
-                    <p>Срок годности: 13.03.2027</p>
-                    
-                    <div class="delivery">
-                      <i class="fi fi-rr-home"></i>
-                      <p>Забрать из аптеки</p>
-                    </div>
-              
-                  <div class="price-box">
-                    <p class="price">11 748₽/шт.</p>
-                  </div>
-                  <button>
-                    Добавить в корзину
-                  </button>
-              
-                  </div>
-                </div>
-              
-              </div>
-
-              <div class="showcase">
-              
-                <div class="showcase-banner">
-                  <img src="../static/icon/no-shpa.jpg" alt="Womens Party Wear Shoes" class="product-img default"
-                    width="300">
-                  <img src="../static/icon/no-shpa-1.jpg" alt="Womens Party Wear Shoes" class="product-img hover"
-                    width="300">
-              
-                  <p class="showcase-badge angle pink">бонус</p>
-              
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-              
-                <div class="showcase-content">
-                  <a href="#" class="showcase-category">В наличии</a>
-              
-                  <h3>
-                    <a href="#" class="showcase-title">Но-шпа, таблетки 40 мг 64 шт</a>
-                  </h3>
-              
-                  <div class="showcase-rating">
-                    <p>Срок годности: 24.10.2027</p>
-                    
-                    <div class="delivery">
-                      <i class="fi fi-rr-home"></i>
-                      <p>Доставка завтра</p>
-                    </div>
-              
-                  <div class="price-box">
-                    <p class="price">207₽/шт.</p>
-                    <del>240₽</del>
-                  </div>
-                  <button>
-                    Добавить в корзину
-                  </button>
-              
-                  </div>
-                </div>
-              
-              </div>
-
-              <div class="showcase">
-              
-                <div class="showcase-banner">
-                  <img src="../static/icon/terra.jpg" alt="Mens Winter Leathers Jackets" class="product-img default"
-                    width="300">
-                  <img src="../static/icon/terra-1.jpg" alt="Mens Winter Leathers Jackets" class="product-img hover"
-                    width="300">
-              
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-            
-                  </div>
-                </div>
-              
-                <div class="showcase-content">
-                  <a href="#" class="showcase-category">Ожидается</a>
-              
-                  <h3>
-                    <a href="#" class="showcase-title">ТераФлю от гриппа и простуды, 14 шт</a>
-                  </h3>
-              
-                  <div class="showcase-rating">
-                    <p>Срок годности: 17.02.2024</p>
-                    
-                    <div class="delivery">
-                      <i class="fi fi-rr-home"></i>
-                      <p>Доставка завтра</p>
-                    </div>
-              
-                  <div class="price-box">
-                    <p class="price">669₽/шт.</p>
-                    <del>704₽</del>
-                  </div>
-                  <button>
-                    Добавить в корзину
-                  </button>
-              
-                  </div>
-                </div>
-              
-              </div>
-
-              <div class="showcase">
-              
-                <div class="showcase-banner">
-                  <img src="../static/icon/nuro.jpg" alt="Trekking & Running Shoes - black" class="product-img default"
-                    width="300">
-                  <img src="../static/icon/nuro-1.jpg" alt="Trekking & Running Shoes - black" class="product-img hover"
-                    width="300">
-              
-                  <p class="showcase-badge angle pink">бонус</p>
-              
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-              
-                <div class="showcase-content">
-                  <a href="#" class="showcase-category">В наличии</a>
-              
-                  <h3>
-                    <a href="#" class="showcase-title">Нурофен, таблетки, 200 мг 20 шт</a>
-                  </h3>
-              
-                  <div class="showcase-rating">
-                    <p>Срок годности: 09.07.2025</p>
-                    
-                    <div class="delivery">
-                      <i class="fi fi-rr-home"></i>
-                      <p>Самовывоз</p>
-                    </div>
-              
-                  <div class="price-box">
-                    <p class="price">156₽/шт.</p>
-                    <del>176₽</del>
-                  </div>
-                  <button>
-                    Добавить в корзину
-                  </button>
-              
-                  </div>
-                </div>
-              
-              </div>
-
-              <div class="showcase">
-              
-                <div class="showcase-banner">
-                  <img src="../static/icon/fos.jpg" alt="Men's Leather Formal Wear shoes" class="product-img default"
-                    width="300">
-                  <img src="../static/icon/fos-1.jpg" alt="Men's Leather Formal Wear shoes" class="product-img hover"
-                    width="300">
-              
-                    <p class="showcase-badge angel black">
-                      <img src="../static/icon/frozen 1.svg" alt="">
-                    </p>
-
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-              
-                <div class="showcase-content">
-                  <a href="#" class="showcase-category">В наличии</a>
-              
-                  <h3>
-                    <a href="#" class="showcase-title">Фосфалюгель, гель для приема внутрь 20 шт</a>
-                  </h3>
-              
-                  <div class="showcase-rating">
-                    <p>Срок годности: 22.10.2022</p>
-                    
-                    <div class="delivery">
-                      <i class="fi fi-rr-home"></i>
-                      <p>Доставка завтра</p>
-                    </div>
-              
-                  <div class="price-box">
-                    <p class="price">514₽/шт.</p>
-                    <del>578₽</del>
-                  </div>
-                  <button>
-                    Добавить в корзину
-                  </button>
-              
-                  </div>
-                </div>
-              
-              </div>
-
-              <div class="showcase">
-              
-                <div class="showcase-banner">
-                  <img src="../static/icon/ess.png" alt="Better Basics French Terry Sweatshorts"
-                    class="product-img default" width="300">
-                  <img src="../static/icon/ess-1.jpg" alt="Better Basics French Terry Sweatshorts"
-                    class="product-img hover" width="300">
-              
-                  <p class="showcase-badge">С рецептом</p>
-              
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-              
-                <div class="showcase-content">
-                  <a href="#" class="showcase-category">Ожидается</a>
-              
-                  <h3>
-                    <a href="#" class="showcase-title">Эссенциале форте Н, капсулы 300 мг 90 шт</a>
-                  </h3>
-              
-                  <div class="showcase-rating">
-                    <p>Срок годности: 10.10.2025</p>
-                    
-                    <div class="delivery">
-                      <i class="fi fi-rr-home"></i>
-                      <p>Доставка сегодня</p>
-                    </div>
-              
-                  <div class="price-box">
-                    <p class="price">1676₽/шт.</p>
-                    <del>1874₽</del>
-                  </div>
-                  <button>
-                    Добавить в корзину
-                  </button>
-              
-                  </div>
-                </div>
-              
-              </div> -->
-
-              
+  
+                </article>
+                
+                {% endfor %}
 
             </div>
+          </form>
 
           </div>
 
@@ -1710,221 +1266,6 @@
 
 
   
-
-          <!--Карточка продуктов-->
-<!--         <div class="product-container">
-            <h1>Товары дня</h1>
-            <div class="product-card">
-              <div class="badge">
-                <img src="./icon/frozen 1.svg" alt="">
-              </div>
-              <div class="product-tumb">
-                <img src="./icon/img.png" alt="">
-              </div>
-              <div class="product-details">
-                <span class="product-catagory">Производитель: Хиноин Завод Фармацевтических, Венгрия</span>
-                <h4><a href="">Магне-В6 таблетки п/о 60шт</a></h4>
-                <p>Срок годности 30.11.2023</p>
-                <i class="fi fi-rr-home"></i>
-                <p class="delivery">Доставка сегодня</p>
-                <div class="product-bottom-details">
-                  <div class="product-price">
-                    <small>731₽</small>653₽/шт</div>
-  
-                    <button>
-                      Добавить в корзину
-                    </button>
-                  <div class="product-links">
-                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="product-card">
-              <div class="badge">
-                <p>По реценту</p>
-              </div>
-              <div class="product-tumb">
-                <img src="./icon/azit.png" alt="">
-              </div>
-              <div class="product-details">
-                <span class="product-catagory">Оболенское ФП АО, Россия</span>
-                <h4><a href="">Азитромицин таблетки п/о плен. 125мг 6 шт</a></h4>
-                <p>Срок годности 01.01.2024</p>
-                <i class="fi fi-rr-home"></i>
-                <p class="delivery">Доставка сегодня</p>
-                <div class="product-bottom-details">
-                  <div class="product-price">
-                    174₽/шт.</div>
-  
-                    <button>
-                      Добавить в корзину
-                    </button>
-                  <div class="product-links">
-                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="product-card">
-              <div class="badge">
-                <img src="./icon/frozen 1.svg" alt="">
-              </div>
-              <div class="product-tumb">
-                <img src="./icon/volt.png" alt="">
-              </div>
-              <div class="product-details">
-                <span class="product-catagory"> Консьюмер Хелскер, Швейцария</span>
-                <h4><a href="">Вольтарен Эмульгель гель д/нар. прим. 2%</a></h4>
-                <p>Срок годности 30.09.2024</p>
-                <i class="fi fi-rr-home"></i>
-                <p class="delivery">Самовывоз через час</p>
-                <div class="product-bottom-details">
-                  <div class="product-price">
-                    669₽/шт.</div>
-  
-                    <button>
-                      Добавить в корзину
-                    </button>
-                  <div class="product-links">
-                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="product-card">
-              <div class="product-tumb">
-                <img src="./icon/solgar-l-arginin-1000-mg-90-tabletok.jpg" alt="">
-              </div>
-              <div class="product-details">
-                <span class="product-catagory">Solgar Vitamin and Herb, США</span>
-                <h4><a href="">Солгар L-Аргинина, 1000 мг таблетки 90 шт.</a></h4>
-                <p>Срок годности 09.04.2023</p>
-                <i class="fi fi-rr-home"></i>
-                <p class="delivery">Самовывоз через час</p>
-                <div class="product-bottom-details">
-                  <div class="product-price">
-                    <small>2 428₽</small>2 128₽/шт.</div>
-  
-                    <button>
-                      Добавить в корзину
-                    </button>
-                  <div class="product-links">
-                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="product-card">
-              <div class="badge">
-                <img src="./icon/frozen 1.svg" alt="">
-              </div>
-              <div class="product-tumb">
-                <img src="./icon/20712343.jpg" alt="">
-              </div>
-              <div class="product-details">
-                <span class="product-catagory">Кок Рош Фарм ООО, Россия</span>
-                <h4><a href="">Herb Сироп первоцвета средство раст. происхождения, 150 мл</a></h4>
-                <p>Срок годности Длинный срок</p>
-                <i class="fi fi-rr-home"></i>
-                <p class="delivery">Самовывоз через час</p>
-                <div class="product-bottom-details">
-                  <div class="product-price">
-                    <small>299₽</small>209₽/шт.</div>
-  
-                    <button>
-                      Добавить в корзину
-                    </button>
-                  <div class="product-links">
-                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="product-card">
-              <div class="product-tumb">
-                <img src="./icon/photo_es_93E34398-81F0-D8C3-1E05-3E40A030AAF1.jpg" alt="">
-              </div>
-              <div class="product-details">
-                <span class="product-catagory">Гротекс ООО, Россия</span>
-                <h4><a href="">Таустин, капли глазные 4 % 10 мл 1 шт</a></h4>
-                <p>Срок годности 29.12.2022</p>
-                <i class="fi fi-rr-home"></i>
-                <p class="delivery">Доставка завтра</p>
-                <div class="product-bottom-details">
-                  <div class="product-price">
-                    100₽/шт.</div>
-  
-                    <button>
-                      Добавить в корзину
-                    </button>
-                  <div class="product-links">
-                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="product-card">
-              <div class="product-tumb">
-                <img src="./icon/photo_es_E3555598-8FB5-B485-9E05-30100007FFFA.jpg" alt="">
-              </div>
-              <div class="product-details">
-                <span class="product-catagory">Глобал Хэлфкеар ООО, Россия</span>
-                <h4><a href="">Прометионин капсулы по 350 мг, 90 шт.</a></h4>
-                <p>Срок годности 25.11.2025</p>
-                <i class="fi fi-rr-home"></i>
-                <p class="delivery">Самовывоз через час</p>
-                <div class="product-bottom-details">
-                  <div class="product-price">
-                    766₽/шт.</div>
-  
-                    <button>
-                      Добавить в корзину
-                    </button>
-                  <div class="product-links">
-                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="product-card">
-              <div class="badge">
-                <p>По реценту</p>
-              </div>
-              <div class="product-tumb">
-                <img src="./icon/1547102137683.jpg" alt="">
-              </div>
-              <div class="product-details">
-                <span class="product-catagory">Каталент Германи Шорндорф ГмбХ, Германия</span>
-                <h4><a href="">Весаноид, капсулы 10 мг 100 шт</a></h4>
-                <p>Срок годности 13.03.2027</p>
-                <i class="fi fi-rr-home"></i>
-                <p class="delivery">Забрать из аптеки сегодня</p>
-                <div class="product-bottom-details">
-                  <div class="product-price">
-                    11 748₽/шт.</div>
-  
-                    <button>
-                      Добавить в корзину
-                    </button>
-                  <div class="product-links">
-                    <a href="#"><i class="fi fi-rr-heart"></i></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-  -->         
-
-
-
 
   <!--КАК ЭТО РАБОТАЕТ-->
 
@@ -2213,7 +1554,6 @@
     ></script>
     <script src="../static/simplebar.js"></script>
     <script src="../static/basket.js"></script>
-    <script src="../libs/modal.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     

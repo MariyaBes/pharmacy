@@ -1,5 +1,5 @@
 import flask
-from flask import Flask, render_template, request, redirect, url_for, session, flash, make_response
+from flask import Flask, render_template, request, redirect, url_for, session, flash, json
 from flask_mysqldb import MySQL, MySQLdb
 from flask_login import LoginManager
 import re
@@ -16,7 +16,7 @@ pattern = r"^[-\w\.]+@([-\w]+\.)+[-\w]{2,4}$"
 app = Flask(__name__)
 
 app.secret_key = 'YV_JNFVJW&*+96+_ETRBO_HOIQ+!FS'
-app.permanent_session_lifetime = datetime.timedelta(seconds=300)
+app.permanent_session_lifetime = datetime.timedelta(seconds=900)
 
 # app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=10)
 # global COOKIE_TIME_OUT
@@ -115,21 +115,33 @@ def sign_up():
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    cursor = mysql.connection.cursor()
+    user_id = session.get('id');
+    print(user_id)
+
     request_sql = f'''SELECT ID_Medication, Name, Date_of_storage, Price, Status, Billet, Del_Price, image_1, image_2
     from image, medication
     where medication.ID_Medication = image.id_image
     and ID_Medication = Image_id_image'''
     card_drug = execute_read_query(connect_db, request_sql)
 
-    # binary = base64.b64decode(images).decode('ascii')
-    # # img = Image.open(io.BytesIO(binary))
-    # print(binary)
-    # # img.show()
-    # file = request.files['file']
-    # extension = os.path.splitext(file.filename)[1]
-    # f_name = str(uuid.uuid4()) + extension
-    return render_template('index.html', log_in = session.get('logged_in'), card_drug = card_drug)
+    basket_sql = f'''SELECT ID_Medication, Cost, title, image, Count, ID_Order
+    from order_cart
+    where ID_User = "{user_id}"
+    group by ID_Order'''
+    basket = execute_read_query(connect_db, basket_sql)
+    
+    cart_count_sql = f'''SELECT count(ID_Order) as count_cart
+    from order_cart
+    where ID_Medication > 0
+    and ID_User = "{user_id}"'''
+    cart_count = execute_read_query(connect_db, cart_count_sql)
+
+    total_cost_count_sql = f'''SELECT sum(Cost*Count) as total_cost_count
+    from order_cart
+    where ID_User = "{user_id}"'''
+    total_cost_count = execute_read_query(connect_db, total_cost_count_sql)
+
+    return render_template('index.html', log_in = session.get('logged_in'), card_drug = card_drug, basket = basket, cart_count = cart_count, total_cost_count = total_cost_count)
 
 
 @app.route('/cart/<int:ID_Medication>', methods=['GET', 'POST'])
@@ -139,58 +151,39 @@ def cart(ID_Medication):
     where ID_Medication = "{ID_Medication}"
     and medication.ID_Medication = image.id_image
     and ID_Medication = Image_id_image
-    and ID_Medication = marking.ID_Marking
+    and ID_Medication = marking.ID_Markingx
     and medication.ID_Medication = provider.ID_Provider
     '''
     card_product = execute_read_query(connect_db, cart_sql)
-
+   
 
     return render_template('card.html', card_product = card_product)
 
-@app.route('/basket', methods=['GET', 'POST'])
+@app.route('/basket', methods=['POST'])
 def basket ():
-    cursor = None
-    if request.method == "POST":
-        
-        id = request.form['product_id']
-        cursor = mysql.connection.cursor()
-        cursor.execute("SELECT ID_Medication FROM medication WHERE ID_Medication=%s", id)
-        row = cursor.fetchone()
+    id_product = request.form['id'];
+    title_product = request.form['title'];
+    price = request.form['price'];
+    image = request.form['img'];
+    count = request.form['count'];
 
+    print (json.dumps({'id': id_product,
+    'title': title_product,
+    'price': price,
+    'image': image,
+    'count': count}))
 
-        # id_sql = (f'''SELECT ID_Medication from medication where ID_Medication=%s''', id)
-        # id_product = execute_read_query(connect_db, id_sql)
-        print(row)
-        print(id)
-        backet_sql = f'''SELECT ID_Medication, Name, Price, image_1
-        from medication, image
-        where medication.ID_Medication = image.id_image
-        and ID_Medication = Image_id_image
-        and ID_Medication = {id}
-        '''
-        basket_product = execute_read_query(connect_db, backet_sql)
+    cart_sql = f'''INSERT INTO `order_cart` (`Cost`, `title`, `ID_Medication`, `image`, `Count`, `ID_User`) VALUES ('{price}', '{title_product}', '{id_product}', '{image}', '{count}', '{session.get('id')}')'''
+    return execute_query(connect_db, cart_sql)
 
-        delivery_sql = f'''SELECT Cost
-        from delivery
-        where ID_Delivery = Order_ID_Order'''
-        delivery = execute_read_query(connect_db, delivery_sql)
+@app.route('/del_item', methods=['POST'])
+def del_item ():
+    id_del = request.form['id_del']
+    print (id_del)
+    print (json.dumps({'id': id_del}))
+    del_sql = f'''DELETE FROM `pharmacy`.`order_cart` WHERE (`ID_Order` = '{id_del}')'''
+    return execute_query(connect_db, del_sql)
 
-        cost_sql = f'''SELECT Price
-        from medication'''
-        cost = execute_read_query(connect_db, cost_sql)
-
-
-        if basket_product == tuple():
-            flash('Корзина пуста', category='error')
-
-    return render_template('basket.html', basket=basket_product, dv=delivery)
-
-
-# @app.route('/basket_clear')
-# def basket_clear():
-#     pass
-#     flash('Добавьте товары в корзину', category='error')
-#     return render_template('basket.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
