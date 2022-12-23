@@ -151,13 +151,33 @@ def cart(ID_Medication):
     where ID_Medication = "{ID_Medication}"
     and medication.ID_Medication = image.id_image
     and ID_Medication = Image_id_image
-    and ID_Medication = marking.ID_Markingx
+    and ID_Medication = marking.ID_Marking
     and medication.ID_Medication = provider.ID_Provider
     '''
     card_product = execute_read_query(connect_db, cart_sql)
+
+    user_id = session.get('id');
+    print(user_id)
+
+    basket_sql = f'''SELECT ID_Medication, Cost, title, image, Count, ID_Order
+    from order_cart
+    where ID_User = "{user_id}"
+    group by ID_Order'''
+    basket = execute_read_query(connect_db, basket_sql)
+    
+    cart_count_sql = f'''SELECT count(ID_Order) as count_cart
+    from order_cart
+    where ID_Medication > 0
+    and ID_User = "{user_id}"'''
+    cart_count = execute_read_query(connect_db, cart_count_sql)
+
+    total_cost_count_sql = f'''SELECT sum(Cost*Count) as total_cost_count
+    from order_cart
+    where ID_User = "{user_id}"'''
+    total_cost_count = execute_read_query(connect_db, total_cost_count_sql)
    
 
-    return render_template('card.html', card_product = card_product)
+    return render_template('card.html', card_product = card_product, basket = basket, cart_count = cart_count, total_cost_count = total_cost_count)
 
 @app.route('/basket', methods=['POST'])
 def basket ():
@@ -184,6 +204,39 @@ def del_item ():
     del_sql = f'''DELETE FROM `pharmacy`.`order_cart` WHERE (`ID_Order` = '{id_del}')'''
     return execute_query(connect_db, del_sql)
 
+@app.route('/add_cart', methods=['POST'])
+def add_cart():
+    id_cart = request.form['id_cart'];
+    title_cart = request.form['title_cart'];
+    price_cart = request.form['price_cart'];
+    img_cart = request.form['img_cart'];
+    count_cart = request.form['count_cart'];
+
+    print (json.dumps({'id': id_cart,
+    'title': title_cart,
+    'price': price_cart,
+    'image': img_cart,
+    'count': count_cart}))
+
+    add_sql = f'''INSERT INTO `order_cart` (`Cost`, `title`, `ID_Medication`, `image`, `Count`, `ID_User`) VALUES ('{price_cart}', '{title_cart}', '{id_cart}', '{img_cart}', '{count_cart}', '{session.get('id')}')'''
+    return execute_query(connect_db, add_sql)
+
+@app.route('/pay', methods=['GET', 'POST'])
+def pay():
+    name_id_user = session.get('id')
+
+    order_pay = f'''SELECT ID_Order, sum(Cost*Count) as total_cost_count
+    from order_cart
+    where ID_User = "{name_id_user}"'''
+    order = execute_read_query(connect_db, order_pay)
+
+    get_user_sql = f'''SELECT name
+    from user
+    where id = "{name_id_user}"'''
+    get_user = execute_read_query(connect_db, get_user_sql)
+
+
+    return render_template('pay.html', order=order, get_user=get_user)
 
 if __name__ == '__main__':
     app.run(debug=True)

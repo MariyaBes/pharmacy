@@ -146,15 +146,22 @@
                     </li>
                     {% endfor %}
                   </ul>
-                  <div class="cart-content__bottom">
-                    <div class="cart-content__fullprice">
-                      <span>Итого:</span> 
-                      {% for order_cart in total_cost_count %}
-                      <span class="fullprice">{{order_cart.total_cost_count}} ₽</span>
-                      {% endfor %}
+
+                    <div class="cart-content__bottom">
+                      
+                        <div class="cart-content__fullprice">
+                          <span>Итого:</span> 
+                          {% for order_cart in total_cost_count %}
+                          <span class="fullprice">{{order_cart.total_cost_count}} ₽</span>
+                          {% endfor %}
+                        </div>
+                        <form action="/pay" method="POST">
+                          <div class="cart-content__btn baton">
+                              <button type="submit" class="oformit">Оформить</button>
+                          </div>
+                      </form>
                     </div>
-                    <div class="cart-content__btn baton">Оформить</div>
-                  </div>
+                  
                 </div>
 
               </div>
@@ -163,6 +170,26 @@
             
             {% endif %}
             
+            <!-- <script>
+              function delivery (){
+                let id_order = document.querySelector('.id_order').getAttribute('id');
+                $.ajax({
+                  url: '/pay',
+                  method: 'post',
+                  dataType: 'json',
+                  data: {
+                    id_order: id_order,
+                  },
+                  success: function (response) {
+                    console.log(response);
+                  },
+                  error: function (error) {
+                    console.log(error);
+                  }
+                });
+              };
+            </script> -->
+
             <script>
               	function printQuantity () {
                   let btn_cart = document.querySelector('.action-btn');

@@ -1,44 +1,63 @@
-{% extends 'base.html' %}
-{% block head %} 
-<link rel="stylesheet" href="../static/pay.css">
-{% block title %}Оплата{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../static/pay.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 
-{% block body %}
-<div class="container-fluid">
-	<div class="row d-flex justify-content-center">
-		<div class="col-sm-12">
-			<div class="card mx-auto">
-				<p class="heading">PAYMENT DETAILS</p>
-					<form class="card-details ">
-						<div class="form-group mb-0">
-								<p class="text-warning mb-0">Card Number</p> 
-                          		<input type="text" name="card-num" placeholder="1234 5678 9012 3457" size="17" id="cno" minlength="19" maxlength="19">
-								<img src="https://img.icons8.com/color/48/000000/visa.png" width="64px" height="60px" />
-                        </div>
-
-                        <div class="form-group">
-                            <p class="text-warning mb-0">Cardholder's Name</p> <input type="text" name="name" placeholder="Name" size="17">
-                        </div>
-                        <div class="form-group pt-2">
-                        	<div class="row d-flex">
-                        		<div class="col-sm-4">
-                        			<p class="text-warning mb-0">Expiration</p>
-                        			<input type="text" name="exp" placeholder="MM/YYYY" size="7" id="exp" minlength="7" maxlength="7">
-                        		</div>
-                        		<div class="col-sm-3">
-                        			<p class="text-warning mb-0">Cvv</p>
-                        			<input type="password" name="cvv" placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3">
-                        		</div>
-                        		<div class="col-sm-5 pt-0">
-                        			<button type="button" class="btn btn-primary"><i class="fas fa-arrow-right px-3 py-2"></i></button>
-                        		</div>
-                        	</div>
-                        </div>		
-					</form>
+	<title>Оплата</title>
+</head>
+<body>
+	
+	<div class="container mt-5 d-flex justify-content-center">
+		<div class="card p-4 mt-3">
+		<div class="first d-flex justify-content-between align-items-center mb-3">
+			
+			<div class="info">
+				{% for user in get_user %}
+				<span class="d-block name">Спасибо за покупку, {{ user.name }}</span>
+				{% endfor %}
+				{% for order_cart in order %}
+				<span class="order">Заказ - #{{ order_cart.ID_Order }}</span>
+				{% endfor %}
 			</div>
+			
+			<img src="https://i.imgur.com/NiAVkEw.png" width="40"/>
+			
+		{% for user in get_user %}
+		</div>
+			<div class="detail">
+		<span class="d-block summery">Ваш заказ был оформлен. Вам отправлено письмо на почту {{session.get('email')}}.</span>
+			</div>
+		<hr>
+		<div class="text">
+		
+		<span class="d-block new mb-1">{{ user.name }}</span>
+		{% endfor %}
+		</div>
+		<span class="d-block address mb-3">Севастопольская ул., 62ТРК Центрум, этаж 1</span>
+		<div class="  money d-flex flex-row mt-2 align-items-center">
+			<img src="https://i.imgur.com/ppwgjMU.png" width="20" />
+			{% for order_cart in order %}
+			<span class="ml-2">Покупка в сумме {{ order_cart.total_cost_count }} ₽</span> 
+			{% endfor %}
+				</div>
+				<div class="last d-flex align-items-center mt-3">
+					<span class="address-line">
+						<a href="/" style="text-decoration: none;">Вернуться на главную страницу</a>
+					</span>
+
+				</div>
 		</div>
 	</div>
-</div>
 
-{% endblock %}
+
+
+
+</body>
+</html>
 

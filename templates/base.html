@@ -84,45 +84,93 @@
                 <span class="count">4</span>
               </button>
   
+              {% if session.logged_in %}
+            
               <div class="header__cart cart" tabindex="0">
-                <div class="cart__text">
-                  <button class="action-btn">
-                    <ion-icon name="bag-handle-outline"></ion-icon>
-                    <span class="count">0</span>
+
+              <div class="cart__text">
+                  <button class="action-btn" onclick="printQuantity();">
+                      <ion-icon name="bag-handle-outline"></ion-icon>
+                      {% for order_cart in cart_count %}
+                      <span class="count">{{ order_cart.count_cart }}</span>
+                      {% endfor %}
                   </button>
-  
                   
+
                   <div class="cart-content">
-                    
-                    <ul class="cart-content__list" data-simplebar>
-                      <!-- <li class="cart-content__item">
-                        <article class="cart-content__product cart-product">
-                          <img src="..//static/icon/azit.png" alt="" class="cart-product__img">
-                          <div class="cart-product__text">
-                            <h3 class="cart-product__title">Азитромицин Таблетки Плен. 125мг 6шт</h3>
-                            <span class="cart-product__price">177 ₽</span>
-                          </div>
-                          <button class="cart-product__delete" aria-label="Удалить товар">
-                            
-                          </button>
-                        </article>
-  
-                      </li> -->
+                  <ul class="cart-content__list" data-simplebar>
+                      {% for order_cart in basket %}
+                      <li class="cart-content__item">
                       
-                    </ul>
-                    <div class="cart-content__bottom">
+                      <article class="cart-content__product cart-product" data-id="{{ order_cart.ID_Medication }}">
+                          <img src="{{ order_cart.image }}" alt="" class="cart-product__img">
+                          <div class="cart-product__text">
+                          <a href="/cart/{{ order_cart.ID_Medication }}">
+                          <p class="counter_item">{{ order_cart.Count }} позиция(ии)</p>
+                          <h3 class="cart-product__title">{{ order_cart.title }}</h3>
+                          </a>
+                          
+                          <span class="cart-product__price">{{ order_cart.Cost }} ₽</span>
+
+                          <form action="/" method="POST">
+                          <input class="del_id_item" type="hidden" id="{{ order_cart.ID_Order }}">
+                          <button class="cart-product__delete" aria-label="Удалить товар" onclick="del_item();"></button>
+                          </form>
+                          
+                      </article>
+                      </li>
+                      {% endfor %}
+                  </ul>
+                  <div class="cart-content__bottom">
                       <div class="cart-content__fullprice">
-                        <span>Итого:</span>
-                        <span class="fullprice">568 789 ₽</span>
+                      <span>Итого:</span> 
+                      {% for order_cart in total_cost_count %}
+                      <span class="fullprice">{{order_cart.total_cost_count}} ₽</span>
+                      {% endfor %}
                       </div>
                       <div class="cart-content__btn baton">Оформить</div>
-                    </div>
                   </div>
-  
-                </div>
-  
+                  </div>
+
               </div>
-              
+
+              </div>
+
+              {% endif %}
+
+              <script>
+                  function printQuantity () {
+                  let btn_cart = document.querySelector('.action-btn');
+                  let cart = document.querySelector('.header__cart');
+                  let cartQuantity = cart.querySelector('.count');
+                  if (cartQuantity.textContent > 0){
+                      cart.classList.add('active');
+                  }
+                  };
+              </script>
+
+              <script>
+              function del_item (){
+                  let id_item = document.querySelector('.del_id_item').getAttribute('id');
+                  $.ajax({
+                  url: '/del_item',
+                  method: 'post',
+                  dataType: 'json',
+                  data: {
+                      id_del: id_item,
+                  },
+                  success: function (response) {
+                      console.log(response);
+                  },
+                  error: function (error) {
+                      console.log(error);
+                  }
+                  });
+              };
+              </script>
+
+
+          
               <button class="action-btn">
                 <ion-icon name="clipboard-outline"></ion-icon>
                 <span class="count">2</span>

@@ -3263,7 +3263,7 @@ input::-webkit-inner-spin-button {
 
 .col-2 {
   flex-basis: 50%;
-  line-height: 60px;
+  line-height: 40px;
   margin: 5px 0;
 }
 
@@ -3373,7 +3373,7 @@ input::-webkit-inner-spin-button {
 }
 
 .dvlSbs .Button_button__4em_S {
-  min-height: 60px;
+  min-height: 50px;
   font-size: 14px;
   line-height: 20px;
   height: 40px;
@@ -3502,4 +3502,31 @@ input::-webkit-inner-spin-button {
 .items_current {
 	width: 40px;
   margin-left: 17px;
+}
+
+.count_product_cart {
+  width: 120px;
+	display: flex;
+  background: #fbfbfb;
+  min-height: min-content;
+  justify-content: center;
+  align-items: center;
+}
+
+.items_plus_minus{
+  width: 40px;
+  border: 1px solid var(--davys-gray);
+  cursor: pointer;
+  transition: 0.2s ease-in;
+  text-align: center;
+  border-radius: var(--border-radius-md);
+}
+
+.items_plus_minus:hover {
+  background: var(--salmon-pink);
+  color: #FFF;
+}
+
+.oformit {
+  color: #FFF;
 }
