@@ -204,26 +204,15 @@ def del_item ():
     del_sql = f'''DELETE FROM `pharmacy`.`order_cart` WHERE (`ID_Order` = '{id_del}')'''
     return execute_query(connect_db, del_sql)
 
-@app.route('/add_cart', methods=['POST'])
-def add_cart():
-    id_cart = request.form['id_cart'];
-    title_cart = request.form['title_cart'];
-    price_cart = request.form['price_cart'];
-    img_cart = request.form['img_cart'];
-    count_cart = request.form['count_cart'];
-
-    print (json.dumps({'id': id_cart,
-    'title': title_cart,
-    'price': price_cart,
-    'image': img_cart,
-    'count': count_cart}))
-
-    add_sql = f'''INSERT INTO `order_cart` (`Cost`, `title`, `ID_Medication`, `image`, `Count`, `ID_User`) VALUES ('{price_cart}', '{title_cart}', '{id_cart}', '{img_cart}', '{count_cart}', '{session.get('id')}')'''
-    return execute_query(connect_db, add_sql)
-
 @app.route('/pay', methods=['GET', 'POST'])
 def pay():
     name_id_user = session.get('id')
+
+    basket_sql = f'''SELECT ID_Medication, Cost, title, image, Count, ID_Order
+    from order_cart
+    where ID_User = "{name_id_user}"
+    group by ID_Order'''
+    basket = execute_read_query(connect_db, basket_sql)
 
     order_pay = f'''SELECT ID_Order, sum(Cost*Count) as total_cost_count
     from order_cart
@@ -235,8 +224,45 @@ def pay():
     where id = "{name_id_user}"'''
     get_user = execute_read_query(connect_db, get_user_sql)
 
+    adr_sql = f'''SELECT distinct Address
+    from delivery
+    where User_id = "{name_id_user}"'''
+    adr = execute_read_query(connect_db, adr_sql)
 
-    return render_template('pay.html', order=order, get_user=get_user)
+    if request.form.get('clear_order'):
+        
+        del_order = f'''DELETE FROM `order_cart` WHERE `ID_Order` IN ('{request.form.get('clear_order')}')'''
+        execute_query(connect_db, del_order)
+        return redirect('/')
+
+    return render_template('pay.html', order=order, get_user=get_user, adr=adr, basket=basket)
+
+@app.route('/order-form', methods=['GET', 'POST'])
+def order_modal():
+    order_pay = f'''SELECT ID_Order, sum(Cost*Count) as total_cost_count
+    from order_cart
+    where ID_User = "{session.get('id')}"'''
+
+    cart_count_sql = f'''SELECT count(ID_Order) as count_cart
+    from order_cart
+    where ID_Medication > 0
+    and ID_User = "{session.get('id')}"'''
+    cart_count = execute_read_query(connect_db, cart_count_sql)
+
+    order = execute_read_query(connect_db, order_pay)
+
+    if request.method == "POST":
+        address = request.form.get('address')
+        id_order = request.form.get('id_order')
+        order_type = request.form.get('order-type')
+        paymant = request.form.get('payment-method')
+
+        write_sql = f'''INSERT INTO `delivery` (`Delivery`, `Order_ID_Order`, `Pl_cost`, `User_id`, `Address`, `Methods_payment`) 
+        VALUES ('{order_type}', '{id_order}', '149', '{session.get('id')}', '{address}', '{paymant}')'''
+        execute_query(connect_db, write_sql)
+        return redirect('/pay')
+
+    return render_template ('modal.html', order = order, count = cart_count)
 
 if __name__ == '__main__':
     app.run(debug=True)

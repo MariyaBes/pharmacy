@@ -4,7 +4,7 @@
     {% block head %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
     <link rel="shortcut icon" href="../static/icon/hygieia.png" type="image/png">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -121,48 +121,48 @@
                     {% endfor %}
                   </button>
                 
-            
-                <div class="cart-content">
-                  <ul class="cart-content__list" data-simplebar>
-                    {% for order_cart in basket %}
-                    <li class="cart-content__item">
-                      
-                      <article class="cart-content__product cart-product" data-id="{{ order_cart.ID_Medication }}">
-                        <img src="{{ order_cart.image }}" alt="" class="cart-product__img">
-                        <div class="cart-product__text">
-                        <a href="/cart/{{ order_cart.ID_Medication }}">
-                          <p class="counter_item">{{ order_cart.Count }} позиция(ии)</p>
-                          <h3 class="cart-product__title">{{ order_cart.title }}</h3>
-                        </a>
+                <form action="/order-form">
+                  <div class="cart-content">
+                    <ul class="cart-content__list" data-simplebar>
+                      {% for order_cart in basket %}
+                      <li class="cart-content__item">
                         
-                          <span class="cart-product__price">{{ order_cart.Cost }} ₽</span>
+                          <article class="cart-content__product cart-product" data-id="{{ order_cart.ID_Medication }}">
+                            <img src="{{ order_cart.image }}" alt="" class="cart-product__img">
+                            <div class="cart-product__text">
+                            <a href="/cart/{{ order_cart.ID_Medication }}">
+                              <p class="counter_item">{{ order_cart.Count }} позиция(ии)</p>
+                              <h3 class="cart-product__title">{{ order_cart.title }}</h3>
+                            </a>
+                            
+                              <span class="cart-product__price">{{ order_cart.Cost }} ₽</span>
 
-                        <form action="/" method="POST">
-                          <input class="del_id_item" type="hidden" id="{{ order_cart.ID_Order }}">
-                          <button class="cart-product__delete" aria-label="Удалить товар" onclick="del_item();"></button>
-                        </form>
+                            <form action="/del_cart" method="POST">
+                              <input class="del_id_item" type="hidden" id="{{ order_cart.ID_Order }}">
+                              <button class="cart-product__delete" aria-label="Удалить товар" onclick="del_item();"></button>
+                          
+                            
+                          </article>
+                      </li>
+                      {% endfor %}
+                    </ul>
+
+                      <div class="cart-content__bottom">
                         
-                      </article>
-                    </li>
-                    {% endfor %}
-                  </ul>
-
-                    <div class="cart-content__bottom">
-                      
-                        <div class="cart-content__fullprice">
-                          <span>Итого:</span> 
-                          {% for order_cart in total_cost_count %}
-                          <span class="fullprice">{{order_cart.total_cost_count}} ₽</span>
-                          {% endfor %}
-                        </div>
-                        <form action="/pay" method="POST">
-                          <div class="cart-content__btn baton">
-                              <button type="submit" class="oformit">Оформить</button>
+                          <div class="cart-content__fullprice">
+                            <span>Итого:</span> 
+                            {% for order_cart in total_cost_count %}
+                            <span class="fullprice">{{order_cart.total_cost_count}} ₽</span>
+                            {% endfor %}
                           </div>
-                      </form>
-                    </div>
-                  
-                </div>
+                          
+                            <button class="cart-content__btn baton">Оформить</button>
+
+                      </div>
+                    
+                    
+                  </div>
+                </form>
 
               </div>
 
@@ -1400,8 +1400,7 @@
     </main>
 
 
-
-
+    <!-- ФУТЕР -->
     <footer>
 
       <div class="footer-category">
@@ -1575,12 +1574,10 @@
 
     <!-- <script type="module" src="../static/script.js"></script> -->
 
-    <script
-      type="text/javascript"
-      src="{{url_for('static', filename='script.js') }}"
-    ></script>
-    <script src="../static/simplebar.js"></script>
-    <script src="../static/basket.js"></script>
+    <script src="../static/js/script.js"></script>
+    <script src="../static/js/simplebar.js"></script> 
+    <script src="../static/js/basket.js"></script>
+
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     

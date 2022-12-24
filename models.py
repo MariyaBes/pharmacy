@@ -28,6 +28,7 @@ def execute_query(connection, query):
     cursor = mysql.connection.cursor()
     try:
         cursor.execute(query)
+        cursor.fetchall()
         mysql.connection.commit()
 
         ID = cursor.lastrowid

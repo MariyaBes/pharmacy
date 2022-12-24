@@ -86,7 +86,7 @@ html{
 
 input {
   display: block;
-  width: 100%;
+  /* width: 100%; */
   font: inherit;
   overflow: visible;
 }
@@ -314,6 +314,7 @@ body::-webkit-scrollbar-thumb:hover{
   font-size: var(--fs-10);
   color: var(--onyx);
   padding: 10px 15px;
+  width: 100%;
   padding-left: 34px;
   border: 1px solid var(--cultured);
   border-radius: var(--border-radius-md);
@@ -2129,7 +2130,7 @@ footer {
 .cart-product__title {
   max-width: 280px;
   margin-bottom: 15px;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 16px;
   line-height: 20px;
   color: var(--davys-gray);
@@ -2144,7 +2145,7 @@ footer {
   border: none;
   background-color: transparent;
   padding: 0;
-  background-image: url('../static/public/trash.svg');
+  background-image: url('/static/public/trash.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -2195,7 +2196,7 @@ footer {
 } 
 
 .counter_item {
-  font-size: 12px;
+  font-size: 14px;
   color: #ed8888;
 }
 
@@ -3524,9 +3525,5 @@ input::-webkit-inner-spin-button {
 
 .items_plus_minus:hover {
   background: var(--salmon-pink);
-  color: #FFF;
-}
-
-.oformit {
   color: #FFF;
 }

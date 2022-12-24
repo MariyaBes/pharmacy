@@ -8,8 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	const count = document.querySelector('.items_current');
 	let price = 0;
-	let id_item = document.querySelector('.del_id_item').getAttribute('id');
-	console.log(id_item);
 
 	const priceWithoutSpaces = (str) => {
 		return str.replace(/\s/g, '');
@@ -41,21 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const printFullPrice = () => {
 		fullPrice.textContent = `${normalPrice(price)} ₽`;
 	};
-
-	// const deleteProducts = (productParent) => {
-	// 	let id = productParent.querySelector('.cart-product').dataset.id;
-	// 	document.querySelector(`.product[data-id="${id}"]`).querySelector('.product__btn').disabled = false;
-		
-	// 	let currentPrice = parseInt(productParent.querySelector('.cart-product__price').textContent);
-	// 	console.log(currentPrice)
-	// 	minusFullPrice(currentPrice);
-	// 	printFullPrice();
-	// 	productParent.remove();
-
-	// 	printQuantity();
-
-	// 	// updateStorage();
-	// };
 
 	productsBtn.forEach(el => {
 
@@ -144,5 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			} 
 		}
 	});
+	
 });
+
 

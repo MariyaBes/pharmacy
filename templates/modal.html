@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/modal.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="shortcut icon" href="../static/icon/hygieia.png" type="image/png">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">  
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>Оформление заказ</title>
+</head>
+<body>
+
+    <!--Хедер-->
+    <header>
+        <div class="header-top">
+            <div class="container">
+    
+            <ul class="header-top-list">
+                <div class="select-mate">
+                <a href="#" class="header-top-gps">
+                    <i class="fi fi-rr-marker"></i>
+                    <select name="currency">
+                        <option value="Республика Крым">Республика Крым</option>
+                        <option value="Москва и область">Москва и область</option>
+                        <option value="Краснодар">Краснодар</option>
+                    </select>
+    
+                </a>
+                </div>
+    
+    
+                <li>
+                <a href="#" class="header-top-link">Как сделать заказ?</a>
+                </li>
+    
+                <li>
+                <a href="#" class="header-top-link">Доставка и оплата</a>
+                </li>
+    
+                <li>
+                <a href="#" class="header-top-link">Что с моим заказом?</a>
+                </li>
+            </ul>
+    
+            <div class="header-alert-news">
+                <p>
+                <b>Служба поддержки</b>
+                8 (800) 800-80-80
+                </p>
+            </div>
+    
+            </div>
+        </div>
+    
+        <div class="header-main">
+    
+            <div class="container">
+    
+            <a href="/" class="header-logo-form-order">
+                <img src="../static/icon/ELtaina.png" alt="ELtaina's logo">
+            </a>
+
+            {% if not session.logged_in %}
+            <a href="{{ url_for('login') }}">
+                <button class="action-btn">
+                <ion-icon name="person-outline"></ion-icon>
+                </button>
+            </a>
+            {% else %}
+            <a href="{{ url_for('logout') }}">
+                <button class="action-btn">
+                <ion-icon name="log-out-outline"></ion-icon>
+                </button>
+            </a>
+            {% endif %}
+                
+            </div>
+        </div>
+    
+    </header>
+
+    <main class="main_cart">
+        <div class="modal">
+            <div class="modal-content order-modal__content">
+
+                <div class="back_page">
+                    <span class="back-rol">
+                        <a href="/"><i class="fi fi-rr-arrow-small-left"></i></a>
+                    </span>
+                </div>
+                <form action="#" class="order-modal__form order" method="post">
+                        {% for order_cart in order %}
+                    <div class="order-modal__top">
+                        <input type="hidden" name="id_order" id="id_order" value="{{ order_cart.ID_Order }}">
+                        <h2 class="order-modal__title">Оформление заказа</h2>
+                        <span class="order-modal__number">Заказ № {{ order_cart.ID_Order }}</span>
+                    </div>
+                    
+                    <div class="order-modal__info">
+                            {% for order_cart in count %}
+                            <div class="order-modal__quantity order-modal__info-item">Товаров в заказе: <span>{{order_cart.count_cart}} шт</span></div>
+                            {% endfor %}
+                        <div class="order-modal__summ order-modal__info-item">Общая сумма заказа: <span>{{ order_cart.total_cost_count }} ₽</span></div>
+                        {% endfor %}
+                        <fieldset class="delivery">
+                            <legend>Способ доставки</legend>
+                    
+                            <div class="form__radios">
+                            <div class="form__check">
+                                <input type="radio" name="order-type" id="order" class="receive-type" value="Курьером" autocomplete="off" checked>
+                                <label for="courier" class="courier">
+                                    <img src="../static/public/truck-side.svg" class="icon"></img>
+                                    Курьером +149₽
+                                </label>
+                            </div>
+                    
+                            <div class="form__check">
+                                <label for="local">
+                                    <input type="radio" name="order-type" id="order" class="receive-type" value="Самовывоз" autocomplete="off" checked>
+                                    <img src="../static/public/location-alt.svg" class="icon"></img>
+                                    Самовывоз
+                                </label>
+                            </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Способ оплаты</legend>
+                    
+                            <div class="form__radios">
+                            <div class="form__radio">
+                                <label for="visa">
+                                    <img src="../static/public/294654_visa_icon.svg" class="icon"></img>
+                                    Visa
+                                </label>
+                                <input class="inp_paymant" checked id="visa" name="payment-method" type="radio" value="Visa"/>
+                            </div>
+                    
+                            <div class="form__radio">
+                                <label for="mir">
+                                    <img src="../static/public/national-payment-system-mir.svg" class="icon"></img>
+                                    Мир
+                                </label>
+                                <input class="inp_paymant" id="mir" name="payment-method" type="radio" value="Мир"/>
+                            </div>
+                    
+                            <div class="form__radio">
+                                <label for="mastercard">
+                                    <img src="../static/public/icons8-mastercard-logo.svg" class="icon"></img>
+                                    Master Card
+                                </label>
+                                <input class="inp_paymant" id="mastercard" name="payment-method" type="radio" value="Master Card"/>
+                            </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    
+                        <label class="order__label">
+                        <span class="order__text">Ваш адрес</span>
+                        <input type="text" id="address" name="address" class="order__input" required>
+                        </label>
+                        <label class="order__label">
+                        <span class="order__text">Номер телефона</span>
+                        <input type="tel" name="telephon" class="order__input" placeholder="+7 (___)___-__-__">
+                        </label>
+                        <button class="order__btn baton">Оформить заказ</button>
+                </form>
+            </div>
+          </div>
+        </div>
+    </main>
+    
+
+
+    <!-- ФУТЕР -->
+    <footer>
+    
+        <div class="footer-nav">
+    
+            <div class="container">
+    
+            <ul class="footer-nav-list">
+            
+                <li class="footer-nav-item">
+                <h2 class="nav-title">Продукты</h2>
+                </li>
+            
+                <li class="footer-nav-item">
+                <a href="#" class="footer-nav-link">Акции</a>
+                </li>
+            
+                <li class="footer-nav-item">
+                <a href="#" class="footer-nav-link">Самовывоз из аптек</a>
+                </li>
+            
+                <li class="footer-nav-item">
+                <a href="#" class="footer-nav-link">Скидки</a>
+                </li>
+            
+                <li class="footer-nav-item">
+                <a href="#" class="footer-nav-link">Обратная связь</a>
+                </li>
+            
+            </ul>
+    
+            <ul class="footer-nav-list">
+            
+                <li class="footer-nav-item">
+                <h2 class="nav-title">О компании</h2>
+                </li>
+            
+                <li class="footer-nav-item">
+                <a href="#" class="footer-nav-link">Доставка</a>
+                </li>
+            
+                <li class="footer-nav-item">
+                <a href="#" class="footer-nav-link">Сертификат</a>
+                </li>
+            
+                <li class="footer-nav-item">
+                <a href="#" class="footer-nav-link">О нас</a>
+                </li>
+            
+                <li class="footer-nav-item">
+                <a href="#" class="footer-nav-link">Системы оплаты</a>
+                </li>
+            
+            </ul>
+    
+    
+            <ul class="footer-nav-list">
+    
+                <li class="footer-nav-item">
+                <h2 class="nav-title">Контакты</h2>
+                </li>
+    
+                <li class="footer-nav-item flex">
+                <div class="icon-box">
+                    <ion-icon name="location-outline"></ion-icon>
+                </div>
+    
+                <address class="content">
+                    Республика Крым, Симферополь, Киевская ул., 77/4
+                </address>
+                </li>
+    
+                <li class="footer-nav-item flex">
+                <div class="icon-box">
+                    <ion-icon name="call-outline"></ion-icon>
+                </div>
+    
+                <a href="tel:+607936-8058" class="footer-nav-link">(800) 888-8888</a>
+                </li>
+    
+                <li class="footer-nav-item flex">
+                <div class="icon-box">
+                    <ion-icon name="mail-outline"></ion-icon>
+                </div>
+    
+                <a href="mailto:example@gmail.com" class="footer-nav-link">bessarabenko.m.i20@gmail.com</a>
+                </li>
+    
+            </ul>
+    
+            </div>
+    
+        </div>
+    
+        <div class="footer-bottom">
+    
+            <div class="container">
+    
+            <img src="../static/icon/payment.png" alt="payment method" class="payment-img">
+    
+            <p class="copyright">
+                Copyright &copy; <a href="#">ELtaina</a> all rights reserved.
+            </p>
+    
+            </div>
+    
+        </div>
+    
+        </footer>
+
+    <!-- <script>
+        function get_info(){
+            let address = document.querySelector('.order__input').textContent;
+            console.log(address);
+            $.ajax ({
+                url: '/order-form',
+                method: 'post',
+                dataType: 'json',
+                data: {
+                    address: address,
+                },
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        };
+    </script> -->
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  
+</body>
+</html>
+
+

@@ -4,7 +4,8 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../static/pay.css">
+	<link rel="stylesheet" href="../static/css/pay.css">
+	<link rel="shortcut icon" href="../static/icon/hygieia.png" type="image/png">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
@@ -16,16 +17,16 @@
 	<div class="container mt-5 d-flex justify-content-center">
 		<div class="card p-4 mt-3">
 		<div class="first d-flex justify-content-between align-items-center mb-3">
-			
+			{% for order_cart in order %}
 			<div class="info">
 				{% for user in get_user %}
 				<span class="d-block name">Спасибо за покупку, {{ user.name }}</span>
 				{% endfor %}
-				{% for order_cart in order %}
+				
 				<span class="order">Заказ - #{{ order_cart.ID_Order }}</span>
-				{% endfor %}
+				
 			</div>
-			
+			{% endfor %}
 			<img src="https://i.imgur.com/NiAVkEw.png" width="40"/>
 			
 		{% for user in get_user %}
@@ -39,23 +40,31 @@
 		<span class="d-block new mb-1">{{ user.name }}</span>
 		{% endfor %}
 		</div>
-		<span class="d-block address mb-3">Севастопольская ул., 62ТРК Центрум, этаж 1</span>
+		{% for delivery in adr %}
+		<span class="d-block address mb-3">{{ delivery.Address }}</span>
+		{% endfor %}
 		<div class="  money d-flex flex-row mt-2 align-items-center">
 			<img src="https://i.imgur.com/ppwgjMU.png" width="20" />
 			{% for order_cart in order %}
 			<span class="ml-2">Покупка в сумме {{ order_cart.total_cost_count }} ₽</span> 
 			{% endfor %}
 				</div>
-				<div class="last d-flex align-items-center mt-3">
-					<span class="address-line">
-						<a href="/" style="text-decoration: none;">Вернуться на главную страницу</a>
-					</span>
+				<form action="#" method="post">
+		
+					<div class="last d-flex align-items-center mt-3">
+						{% for order_cart in basket %}
+						<input type="hidden" name="clear_order" id="{{ order_cart.ID_Order }}" value="{{ order_cart.ID_Order }}">
+						{% endfor %}
+						<button class="address-line" style="text-decoration: none; border: none; background-color: transparent;">
+							Вернуться на главную страницу
+						</button>
+						
+					</div>
+					
+				</form>
 
-				</div>
 		</div>
 	</div>
-
-
 
 
 </body>
