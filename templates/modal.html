@@ -99,12 +99,14 @@
                     <div class="order-modal__top">
                         <input type="hidden" name="id_order" id="id_order" value="{{ order_cart.ID_Order }}">
                         <h2 class="order-modal__title">Оформление заказа</h2>
-                        <span class="order-modal__number">Заказ № {{ order_cart.ID_Order }}</span>
+                        
+                        <span class="order-modal__number">Заказ № {{ order_cart.ID_Order }} </span>
+                        
                     </div>
                     
                     <div class="order-modal__info">
                             {% for order_cart in count %}
-                            <div class="order-modal__quantity order-modal__info-item">Товаров в заказе: <span>{{order_cart.count_cart}} шт</span></div>
+                            <div class="order-modal__quantity order-modal__info-item">Товаров в заказе: <span> {{order_cart.count_cart}} шт</span></div>
                             {% endfor %}
                         <div class="order-modal__summ order-modal__info-item">Общая сумма заказа: <span>{{ order_cart.total_cost_count }} ₽</span></div>
                         {% endfor %}

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %} Ваша аптечка {% endblock %}
+
+{% block body %}
+
+<div class="container_med profile-page">
+    <div class="row">
+        {% for pharmacist in farm %}
+        <div class="col-xl-6 col-lg-7 col-md-12" value="{{ pharmacist.ID_Pharmacist }}">
+            <div class="card_medkit profile-header">
+                <div class="body_med">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="profile-image float-md-right"> <img src="{{ pharmacist.Avatar }}" alt=""> </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-12">
+                            <h4 class="title-header m-t-0 m-b-0"><strong>{{ pharmacist.FIO }}</strong></h4>
+                            <span class="job_post">{{ pharmacist.Pharm_speciality }}</span>
+                            <p class="pharm_info">Фармацевтическое высшее образование. Есть сертификат и медицинская книжка. Опыт работы {{ pharmacist.Data_hiring }}. Возраст {{ pharmacist.Age }} лет.</p>
+                            <div>
+                                <button class="btn_med btn-primary btn-round">Записаться на прием</button>
+                                <button class="btn_med btn-primary btn-round btn-simple">Сообщение</button>
+                            </div>
+                            <p class="social-icon m-t-5 m-b-0">
+                                <a class="logo_social" title="Twitter" href="#">
+                                    <ion-icon name="logo-twitter"></ion-icon>
+                                </a>
+                                <a class="logo_social" title="Google-plus" href="#">
+                                    <ion-icon name="logo-google"></ion-icon>
+                                <a class="logo_social" title="VK" href="#">
+                                    <ion-icon name="logo-vk"></ion-icon>
+                                </a>
+                                <a class="logo_social" title="Instagram" href="#">
+                                    <ion-icon name="logo-instagram"></ion-icon>
+                                </a>
+                            </p>
+                        </div>                
+                    </div>
+                </div>                    
+            </div>
+        </div>
+        {% endfor %}
+        
+    </div>
+        
+    
+</div>
+<main class="main-page-v2 js-main-page">
+    <div class="Container_container__svE5X">
+        <div class="sc-a7e1354a-0 gAGuNZ">
+            {% for recipe in pecept %}
+            <h2 class="sc-a7e1354a-2 jNDOfH">Рецепт серия: {{ recipe.ID_Recipe }} №</h2>
+            <div class="sc-a7e1354a-3 dBSSXs">
+                <!-- Краткое описание -->
+                <div class="Collapse_border__7JMMe ProductInstructions_collapse__c_ctK">
+                    <h3 class="Collapse_title-position__UrbHL Collapse_title-hover__z_9eO Collapse_title__f9Qpb ProductInstructions_collapse-title__WKzA3">
+                        Ф.И.О. врача
+                    </h3>
+                    <div class="sc-4cb4a553-0 hCfcHx" style="max-height: 136px;">
+                        <div class="sc-a7e1354a-1 cRkKFL">Сергеев Иван Платонович</div>
+                    </div>
+                </div>
+                <!-- Показания -->
+                <div class="Collapse_border__7JMMe ProductInstructions_collapse__c_ctK">
+                    <h3 class="Collapse_title-position__UrbHL Collapse_title-hover__z_9eO Collapse_title__f9Qpb ProductInstructions_collapse-title__WKzA3">
+                        Ф.И.О. больного
+                    </h3>
+                    <div class="sc-4cb4a553-0 hCfcHx" style="max-height: 136px;">
+                        <div class="sc-a7e1354a-1 cRkKFL">{% for user in get_user %} {{ user.name }} {% endfor %}</div>
+                    </div>
+                </div>
+                <!-- Отпуск из аптеки -->
+                <div class="Collapse_border__7JMMe ProductInstructions_collapse__c_ctK">
+                    <h3 class="Collapse_title-position__UrbHL Collapse_title-hover__z_9eO Collapse_title__f9Qpb ProductInstructions_collapse-title__WKzA3">
+                        Назначение
+                    </h3>
+                    <div class="sc-4cb4a553-0 hCfcHx" style="max-height: 136px;">
+                        <div class="sc-a7e1354a-1 cRkKFL">Нобазит таблетки п/о плен. 
+                            Форма выпуска: Таблетки 
+                            Дозировка: 250 мг 
+                            Максимальная разовая доза - 1000 мг, суточная - 2000 мг. 
+                            Взрослым по 500 мг 3 раза в сутки. 
+                            Рекомендованный курс лечения от 5 до 7 дней. 
+                            Детям с 12 лет по 250 мг 3 раза в сутки на протяжении 7 дней.
+                            </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+{% endblock %}

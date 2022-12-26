@@ -104,12 +104,19 @@
 
           <div class="header-user-actions">
 
-            <button class="action-btn">
-              <ion-icon name="medkit-outline"></ion-icon>
-              <span class="count">4</span>
-            </button>
-
             {% if session.logged_in %}
+
+            <div class="medkit__cart cart">
+              <form action="/medkit" method="post">
+                <button class="action-btn">
+                  <ion-icon name="medkit-outline"></ion-icon>
+                  <!-- <span class="count">4</span> -->
+                </button>
+              </form>
+              
+            </div>
+
+           
             
             <div class="header__cart cart" tabindex="0">
               
@@ -121,7 +128,7 @@
                     {% endfor %}
                   </button>
                 
-                <form action="/order-form">
+                
                   <div class="cart-content">
                     <ul class="cart-content__list" data-simplebar>
                       {% for order_cart in basket %}
@@ -137,16 +144,16 @@
                             
                               <span class="cart-product__price">{{ order_cart.Cost }} ₽</span>
 
-                            <form action="/del_cart" method="POST">
+                            <form method="POST">
                               <input class="del_id_item" type="hidden" id="{{ order_cart.ID_Order }}">
                               <button class="cart-product__delete" aria-label="Удалить товар" onclick="del_item();"></button>
-                          
+                            </form>
                             
                           </article>
                       </li>
                       {% endfor %}
                     </ul>
-
+                    <form action="/order-form">
                       <div class="cart-content__bottom">
                         
                           <div class="cart-content__fullprice">
@@ -159,41 +166,26 @@
                             <button class="cart-content__btn baton">Оформить</button>
 
                       </div>
-                    
-                    
+                    </form>
                   </div>
-                </form>
 
               </div>
 
             </div>
             
-            {% endif %}
-            
-            <!-- <script>
-              function delivery (){
-                let id_order = document.querySelector('.id_order').getAttribute('id');
-                $.ajax({
-                  url: '/pay',
-                  method: 'post',
-                  dataType: 'json',
-                  data: {
-                    id_order: id_order,
-                  },
-                  success: function (response) {
-                    console.log(response);
-                  },
-                  error: function (error) {
-                    console.log(error);
-                  }
-                });
-              };
-            </script> -->
-
             <script>
               	function printQuantity () {
                   let btn_cart = document.querySelector('.action-btn');
                   let cart = document.querySelector('.header__cart');
+                  let cartQuantity = cart.querySelector('.count');
+                  if (cartQuantity.textContent > 0){
+                    cart.classList.add('active');
+                  }
+                };
+
+                function printQuantity_heart() {
+                  let btn_cart = document.querySelector('.action-btn');
+                  let cart = document.querySelector('.heart__cart');
                   let cartQuantity = cart.querySelector('.count');
                   if (cartQuantity.textContent > 0){
                     cart.classList.add('active');
@@ -221,9 +213,18 @@
               };
             </script>
 
-            <button class="action-btn">
-              <ion-icon name="clipboard-outline"></ion-icon>
-            </button>
+            <div class="heart__cart cart" >
+              <form action="/favourite-list" method="post">
+                <button class="action-btn" onclick="printQuantity_heart();">
+                  <ion-icon name="heart-outline"></ion-icon>
+                  {% for favourite in fav %}
+                  <span class="count">{{ favourite.count_cart }}</span>
+                  {% endfor %}
+                </button>
+              </form>
+            </div>
+            
+            {% endif %}
 
             {% if not session.logged_in %}
               <a href="{{ url_for('login') }}">
@@ -1175,12 +1176,10 @@
           
           <div class="product-main">
             <h2 class="title">Товары Дня</h2>
-
-            <form action="/basket" method="POST">
             <div class="product-grid">
               
                 {% for medication in card_drug %} 
-                <article class="product" data-id="{{medication.ID_Medication}}">
+                <article class="product" value="{{medication.ID_Medication}}" data-id="{{medication.ID_Medication}}">
                   <div class="showcase">
   
                     <div class="showcase-banner">
@@ -1201,18 +1200,25 @@
                       <p class="showcase-badge">{{ medication.Billet }}</p>
                       {% endif %}
   
-  
-                      <div class="showcase-actions">
-  
-                        <button class="btn-action">
-                          <ion-icon name="heart-outline"></ion-icon>
-                        </button>
-  
-                      </div>
+                      <form action="/add_item" method="post">
+                        {%if session.logged_in == true %}
+                        <div class="showcase-actions">
+                          <input type="hidden" name="status" value="{{ medication.Status }}">
+                          <input type="hidden" name="storage" value="{{medication.Date_of_storage}}">
+                          <input type="hidden" name="title" value="{{medication.Name}}">
+                          <input type="hidden" name="price" value="{{medication.Price}}">
+                          <input type="hidden" name="image" value="{{medication.image_2}}">
+                          <button class="btn-action" name="heart" value="{{ medication.ID_Medication }}">
+                            <ion-icon name="heart-outline"></ion-icon>
+                          </button>
+    
+                        </div>
+                        {% endif %}
+                      </form>
   
                     </div>
   
-                    <div class="showcase-content" id="content">
+                    <div class="showcase-content" id="content" >
   
                       <a href="#" class="showcase-category">{{ medication.Status }}</a>
   
@@ -1223,7 +1229,6 @@
                       
                       <div class="showcase-rating">
                         <p>Срок годности: {{medication.Date_of_storage}}</p>
-                        
   
                         <div class="delivery">
                           <i class="fi fi-rr-home"></i>
@@ -1233,32 +1238,32 @@
                       </div>
   
                       <div class="price-box">
-                        <p class="price">{{medication.Price}}₽/шт.</p>
+                        <p class="price">{{medication.Price}} ₽/шт.</p>
                         <!-- <p class="price_string">₽/шт.</p> -->
                         {% if medication.Del_Price > 0 %}
                         <del>{{medication.Del_Price}}₽/шт.</del>
                         {% endif %}
                       </div>
-  
-                      {%if session.logged_in == true %}
-                      <div class="btn_count" id="btn_count">
+                      <form action="/basket" method="POST">
+                        {%if session.logged_in == true %}
+                        <div class="btn_count" id="btn_count">
 
-                        <div class="items_coun counter-wrapper count_btn_change" id="count_wrapper">
-                          <div class="items_control" data-action="minus">-</div>
-                          <div class="items_current" data-counter>1</div>
-                          <div class="items_control" data-action="plus">+</div>
+                          <div class="items_coun counter-wrapper count_btn_change" id="count_wrapper">
+                            <div class="items_control" data-action="minus">-</div>
+                            <div class="items_current" data-counter>1</div>
+                            <div class="items_control" data-action="plus">+</div>
+                          </div>
+
+                          <div class="count_btn_change">
+                            <button type="button" class="product__btn btn" id="btn_wrapper" onclick="alerted();">
+                              Добавить в корзину
+                            </button>
+                          </div>
+                        
+                          
+
                         </div>
-
-                        <div class="count_btn_change">
-                          <button type="button" class="product__btn btn" id="btn_wrapper" onclick="alerted();">
-                            Добавить в корзину
-                          </button>
-                        </div>
-                        
-                        
-
-                      </div>
-                        
+                      </form>
                       <script>
                         function alerted() {
                           alert('Вы добавили товар в корзину!');
@@ -1281,7 +1286,6 @@
                 {% endfor %}
 
             </div>
-          </form>
 
           </div>
 

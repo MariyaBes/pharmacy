@@ -30,12 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		return price -= currentPrice;
 	};
 
-	const totalPriceMinusCount = (counter, currentPrice) => {
-		totalCount = counter / currentPrice;
-		return minusFullPrice (totalCount);
-	}
-
-
 	const printFullPrice = () => {
 		fullPrice.textContent = `${normalPrice(price)} ₽`;
 	};
@@ -46,31 +40,19 @@ document.addEventListener('DOMContentLoaded', () => {
 			let self = e.currentTarget;
 			let parent = self.closest('.product');
 			let id = parent.dataset.id;
-			console.log(id);
 
 			let img = parent.querySelector('.image-switch__img img').getAttribute('src');
-			console.log(img);
 			let title = parent.querySelector('.showcase-title').textContent;
-			console.log(title);
 			let counter = parent.querySelector('[data-counter]').textContent;
-			console.log(counter);
-			
+
 			let priceString = priceWithoutSpaces(parent.querySelector('.price-box .price').textContent);
-			console.log(priceString);
 			let priceNumber = parseInt(priceWithoutSpaces(parent.querySelector('.price-box .price').textContent));
-			console.log(priceNumber);
 
 			totalPriceCount(counter, priceNumber);
-			// plusFullPrice(priceNumber);
 			printFullPrice();
 			let fullPrice = totalPriceCount(counter, priceNumber)
-			console.log(fullPrice);
 
-			// cartProductsList.querySelector('.simplebar-content').insertAdjacentHTML('afterbegin', generateCartProduct(img, title, priceString, id, counter));
 			printQuantity();
-
-			// updateStorage();
-
 			
 			self.disabled = true;
 
@@ -95,13 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		});
 	});
-
-	// cartProductsList.addEventListener('click', (e) => {
-	// 	if (e.target.classList.contains('cart-product__delete')) {
-	// 		deleteProducts(e.target.closest('.cart-content__item'));
-	// 	}
-	// });
-
 
 	// Добавляем прослушку на всем окне
 	window.addEventListener('click', function (event) {

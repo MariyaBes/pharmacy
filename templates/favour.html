@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    {% block head %}
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/fav.css">
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="shortcut icon" href="../static/icon/hygieia.png" type="image/png">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <title>{% block title %} Eltaina — интернет-аптека {% endblock %}</title>
-    {% endblock %}
-  </head>
-  <body class="light">
-
-    {% block header %}
-    <!--Хедер-->
+    
+    <title>Избранное</title>
+</head>
+<body>
     <header>
         <div class="header-top">
           <div class="container">
@@ -83,10 +79,9 @@
 
               {% if session.logged_in %}
   
-              <div class="header__cart cart" tabindex="0">
-                <button class="action-btn" onclick="printQuantity();">
+              <div class="medkit__cart cart">
+                <button class="action-btn">
                   <ion-icon name="medkit-outline"></ion-icon>
-                  
                   <!-- <span class="count">4</span> -->
                 </button>
               </div>
@@ -148,11 +143,19 @@
   
               </div>
               
-  
               <script>
                   function printQuantity () {
                     let btn_cart = document.querySelector('.action-btn');
                     let cart = document.querySelector('.header__cart');
+                    let cartQuantity = cart.querySelector('.count');
+                    if (cartQuantity.textContent > 0){
+                      cart.classList.add('active');
+                    }
+                  };
+  
+                  function printQuantity_heart() {
+                    let btn_cart = document.querySelector('.action-btn');
+                    let cart = document.querySelector('.heart__cart');
                     let cartQuantity = cart.querySelector('.count');
                     if (cartQuantity.textContent > 0){
                       cart.classList.add('active');
@@ -180,18 +183,17 @@
                 };
               </script>
   
-              <div class="header__cart cart" tabindex="0">
+              <div class="heart__cart cart" >
                 <form action="/favourite-list" method="post">
-                  <button class="action-btn" onclick="printQuantity();">
+                  <button class="action-btn" onclick="printQuantity_heart();">
                     <ion-icon name="heart-outline"></ion-icon>
-                    {% for favourite in count %}
+                    {% for favourite in fav %}
                     <span class="count">{{ favourite.count_cart }}</span>
                     {% endfor %}
                   </button>
                 </form>
               </div>
-              
-              {% endif %}
+            {% endif %}
   
               {% if not session.logged_in %}
                 <a href="{{ url_for('login') }}">
@@ -210,7 +212,6 @@
             </div>
           </div>
         </div>
-              
   
         <nav class="desktop-navigation-menu">
   
@@ -800,195 +801,319 @@
         </nav>
   
       </header>
-    {% endblock %}
 
+    <div name="favourite" class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
 
-    {% block body %}{% endblock %}
-
-
-
-    {% block footer %}
-    <footer>
-
-        <div class="footer-category">
-    
-          <div class="container">
-    
-            <h2 class="footer-category-title">Каталог брендов</h2>
-    
-            <div class="footer-category-box">
-    
-              <h3 class="category-box-title">Здоровье :</h3>
-    
-              <a href="#" class="footer-category-link">Диабет</a>
-              <a href="#" class="footer-category-link">Избыточный вес</a>
-              <a href="#" class="footer-category-link">Аллергия</a>
-              <a href="#" class="footer-category-link">Аптеки</a>
-              <a href="#" class="footer-category-link">Болезни суставов</a>
-              <a href="#" class="footer-category-link">Цистит</a>
-              <a href="#" class="footer-category-link">Гайморит</a>
-    
-            </div>
-    
-            <div class="footer-category-box">
-              <h3 class="category-box-title">Красота :</h3>
-            
-              <a href="#" class="footer-category-link">Бальзамы и кондиционеры</a>
-              <a href="#" class="footer-category-link">Депиляция и бритье</a>
-              <a href="#" class="footer-category-link">Средства после загара</a>
-              <a href="#" class="footer-category-link">Шампуни</a>
-              <a href="#" class="footer-category-link">Уход за телом</a>
-              <a href="#" class="footer-category-link">Уход за лицом</a>
-              <a href="#" class="footer-category-link">Антицеллюлитный уход</a>
-            </div>
-    
-            <div class="footer-category-box">
-              <h3 class="category-box-title">Витамины :</h3>
-            
-              <a href="#" class="footer-category-link">Биологически активные добавки</a>
-              <a href="#" class="footer-category-link">Аминокислоты</a>
-              <a href="#" class="footer-category-link">Антиоксиданты</a>
-              <a href="#" class="footer-category-link">Кальций и магний</a>
-              <a href="#" class="footer-category-link">Железо</a>
-              <a href="#" class="footer-category-link">БАДы</a>
-              <a href="#" class="footer-category-link">Лечебное питание</a>
-            </div>
-    
-            <div class="footer-category-box">
-              <h3 class="category-box-title">Медтовары :</h3>
-            
-              <a href="#" class="footer-category-link">Диагностические тесты</a>
-              <a href="#" class="footer-category-link">Здоровое питание</a>
-              <a href="#" class="footer-category-link">Кислородные балоны</a>
-              <a href="#" class="footer-category-link">Компрессионное и корректирующее белье</a>
-              <a href="#" class="footer-category-link">Ортопедия</a>
-              <a href="#" class="footer-category-link">Пластыри</a>
-              <a href="#" class="footer-category-link">Солевые лампы, грелки</a>
-            </div>
-    
-          </div>
-    
-        </div>
-    
-        <div class="footer-nav">
-    
-          <div class="container">
-    
-            <ul class="footer-nav-list">
-            
-              <li class="footer-nav-item">
-                <h2 class="nav-title">Продукты</h2>
-              </li>
-            
-              <li class="footer-nav-item">
-                <a href="#" class="footer-nav-link">Акции</a>
-              </li>
-            
-              <li class="footer-nav-item">
-                <a href="#" class="footer-nav-link">Самовывоз из аптек</a>
-              </li>
-            
-              <li class="footer-nav-item">
-                <a href="#" class="footer-nav-link">Скидки</a>
-              </li>
-            
-              <li class="footer-nav-item">
-                <a href="#" class="footer-nav-link">Обратная связь</a>
-              </li>
-            
-            </ul>
-    
-            <ul class="footer-nav-list">
-            
-              <li class="footer-nav-item">
-                <h2 class="nav-title">О компании</h2>
-              </li>
-            
-              <li class="footer-nav-item">
-                <a href="#" class="footer-nav-link">Доставка</a>
-              </li>
-            
-              <li class="footer-nav-item">
-                <a href="#" class="footer-nav-link">Сертификат</a>
-              </li>
-            
-              <li class="footer-nav-item">
-                <a href="#" class="footer-nav-link">О нас</a>
-              </li>
-            
-              <li class="footer-nav-item">
-                <a href="#" class="footer-nav-link">Системы оплаты</a>
-              </li>
-            
-            </ul>
-    
-    
-            <ul class="footer-nav-list">
-    
-              <li class="footer-nav-item">
-                <h2 class="nav-title">Контакты</h2>
-              </li>
-    
-              <li class="footer-nav-item flex">
-                <div class="icon-box">
-                  <ion-icon name="location-outline"></ion-icon>
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">Избранное</h2>
                 </div>
-    
-                <address class="content">
-                  Республика Крым, Симферополь, Киевская ул., 77/4
-                </address>
-              </li>
-    
-              <li class="footer-nav-item flex">
-                <div class="icon-box">
-                  <ion-icon name="call-outline"></ion-icon>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-wrap">
+
+                        <table class="table table-responsive-xl">
+                            <thead>
+                                <tr>
+                                    <th>Лекарство</th>
+                                    <th>Стоимость</th>
+                                    <th>Статус</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            {% for favourite in item %}
+                            <tbody>
+                                <tr class="alert" role="alert">
+
+                                    <td class="d-flex align-items-center">
+                                      <div class="img" style="background-image: url('{{ favourite.Image }}');"></div>
+                                      <div class="pl-3 email">
+                                        <span>{{ favourite.title }}</span>
+                                        <span>Срок годности: {{ favourite.Data_of_storage }}</span>
+                                      </div>
+                                    </td>
+
+                                    <td>{{ favourite.Cost }} ₽</td>
+
+                                    <td class="status">
+                                      {% if favourite.Status == 'В наличии' %}
+                                      <span class="active">
+                                        {{ favourite.Status }}
+                                      </span>
+                                      {% elif favourite.Status == 'Нет в наличии' %}
+                                      <span class="not">
+                                        {{ favourite.Status }}
+                                      </span>
+                                      {% else %}
+                                      <span class="waiting">
+                                        {{ favourite.Status }}
+                                      </span>
+                                      {% endif %}
+                                    </td>
+                                  
+                                    <td>
+                                      <!-- <form method="post"> -->
+                                        <input type="hidden" class="id" id="{{favourite.ID_Medication}}">
+                                        <input type="hidden" class="title" id="{{favourite.title}}">
+                                        <input type="hidden" class="price" id="{{favourite.Cost}}">
+                                        <input type="hidden" class="image" id="{{favourite.Image}}">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Buy" onclick="address_cart();">
+                                          Добавть в корзину
+                                        </button>
+                                      <!-- </form> -->
+                                    </td>
+                                  
+                                      <script>
+                                        function address_cart() {
+                                          let id = document.querySelector('.id').getAttribute('id');
+                                          let img = document.querySelector('.image').getAttribute('id');
+                                          let title = document.querySelector('.title').getAttribute('id');
+                                          let priceNumber = document.querySelector('.price').getAttribute('id');
+                                          let counter = 1;
+                                          $.ajax({
+                                            url: '/basket',
+                                            method: 'post',
+                                            dataType: 'json',
+                                            data: {
+                                              id: id,
+                                              img: img,
+                                              title: title,
+                                              price: priceNumber,
+                                              count: counter
+                                            },
+                                            success: function (response) {
+                                              console.log(response);
+                                            },
+                                            error: function (error) {
+                                              console.log(error);
+                                            }
+                                          });
+                                        }
+                                      </script>
+
+                                      <td>
+                                        <form action="/del_favourite" method="post">
+                                          <input type="hidden" class="id_fav" id="{{favourite.ID_favourite}}">
+                                          <button type="button" class="close-x" onclick="del_item();">
+                                            <span>
+                                              <ion-icon name="close-outline"></ion-icon>
+                                            </span>
+                                          </button>
+                                        </form>
+                                      </td>
+                                    
+                                    <script>
+                                      function del_item() {
+                                        let id_fav = document.querySelector('.id_fav').getAttribute('id');
+                                        $.ajax({
+                                          url: '/del_favourite',
+                                          method: 'post',
+                                          dataType: 'json',
+                                          data: {
+                                            id_fav_del: id_fav,
+                                          },
+                                          success: function (response) {
+                                            console.log(response);
+                                          },
+                                          error: function (error) {
+                                            console.log(error);
+                                          }
+                                        });
+                                      };
+                                    </script>
+
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+                        </table>
+
+                    </div>
                 </div>
-    
-                <a href="tel:+607936-8058" class="footer-nav-link">(800) 888-8888</a>
-              </li>
-    
-              <li class="footer-nav-item flex">
-                <div class="icon-box">
-                  <ion-icon name="mail-outline"></ion-icon>
+            </div>
+        </div>
+    </div>
+
+        <!-- ФУТЕР -->
+        <footer>
+
+            <div class="footer-category">
+        
+              <div class="container">
+        
+                <h2 class="footer-category-title">Каталог брендов</h2>
+        
+                <div class="footer-category-box">
+        
+                  <h3 class="category-box-title">Здоровье :</h3>
+        
+                  <a href="#" class="footer-category-link">Диабет</a>
+                  <a href="#" class="footer-category-link">Избыточный вес</a>
+                  <a href="#" class="footer-category-link">Аллергия</a>
+                  <a href="#" class="footer-category-link">Аптеки</a>
+                  <a href="#" class="footer-category-link">Болезни суставов</a>
+                  <a href="#" class="footer-category-link">Цистит</a>
+                  <a href="#" class="footer-category-link">Гайморит</a>
+        
                 </div>
-    
-                <a href="mailto:example@gmail.com" class="footer-nav-link">bessarabenko.m.i20@gmail.com</a>
-              </li>
-    
-            </ul>
-    
-          </div>
-    
-        </div>
-    
-        <div class="footer-bottom">
-    
-          <div class="container">
-    
-            <img src="../static/icon/payment.png" alt="payment method" class="payment-img">
-    
-            <p class="copyright">
-              Copyright &copy; <a href="#">ELtaina</a> all rights reserved.
-            </p>
-    
-          </div>
-    
-        </div>
-    
-      </footer>
-    {% endblock %}
-  
-      
-  
-      <!-- <script type="module" src="../static/script.js"></script> -->
-  
-      <!-- <script
-        type="text/javascript"
-        src="{{url_for('static', filename='script.js') }}"
-      ></script>-->
-  
-      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> 
-      
-    </body>
-  </html>
+        
+                <div class="footer-category-box">
+                  <h3 class="category-box-title">Красота :</h3>
+                
+                  <a href="#" class="footer-category-link">Бальзамы и кондиционеры</a>
+                  <a href="#" class="footer-category-link">Депиляция и бритье</a>
+                  <a href="#" class="footer-category-link">Средства после загара</a>
+                  <a href="#" class="footer-category-link">Шампуни</a>
+                  <a href="#" class="footer-category-link">Уход за телом</a>
+                  <a href="#" class="footer-category-link">Уход за лицом</a>
+                  <a href="#" class="footer-category-link">Антицеллюлитный уход</a>
+                </div>
+        
+                <div class="footer-category-box">
+                  <h3 class="category-box-title">Витамины :</h3>
+                
+                  <a href="#" class="footer-category-link">Биологически активные добавки</a>
+                  <a href="#" class="footer-category-link">Аминокислоты</a>
+                  <a href="#" class="footer-category-link">Антиоксиданты</a>
+                  <a href="#" class="footer-category-link">Кальций и магний</a>
+                  <a href="#" class="footer-category-link">Железо</a>
+                  <a href="#" class="footer-category-link">БАДы</a>
+                  <a href="#" class="footer-category-link">Лечебное питание</a>
+                </div>
+        
+                <div class="footer-category-box">
+                  <h3 class="category-box-title">Медтовары :</h3>
+                
+                  <a href="#" class="footer-category-link">Диагностические тесты</a>
+                  <a href="#" class="footer-category-link">Здоровое питание</a>
+                  <a href="#" class="footer-category-link">Кислородные балоны</a>
+                  <a href="#" class="footer-category-link">Компрессионное и корректирующее белье</a>
+                  <a href="#" class="footer-category-link">Ортопедия</a>
+                  <a href="#" class="footer-category-link">Пластыри</a>
+                  <a href="#" class="footer-category-link">Солевые лампы, грелки</a>
+                </div>
+        
+              </div>
+        
+            </div>
+        
+            <div class="footer-nav">
+        
+              <div class="container">
+        
+                <ul class="footer-nav-list">
+                
+                  <li class="footer-nav-item">
+                    <h2 class="nav-title">Продукты</h2>
+                  </li>
+                
+                  <li class="footer-nav-item">
+                    <a href="#" class="footer-nav-link">Акции</a>
+                  </li>
+                
+                  <li class="footer-nav-item">
+                    <a href="#" class="footer-nav-link">Самовывоз из аптек</a>
+                  </li>
+                
+                  <li class="footer-nav-item">
+                    <a href="#" class="footer-nav-link">Скидки</a>
+                  </li>
+                
+                  <li class="footer-nav-item">
+                    <a href="#" class="footer-nav-link">Обратная связь</a>
+                  </li>
+                
+                </ul>
+        
+                <ul class="footer-nav-list">
+                
+                  <li class="footer-nav-item">
+                    <h2 class="nav-title">О компании</h2>
+                  </li>
+                
+                  <li class="footer-nav-item">
+                    <a href="#" class="footer-nav-link">Доставка</a>
+                  </li>
+                
+                  <li class="footer-nav-item">
+                    <a href="#" class="footer-nav-link">Сертификат</a>
+                  </li>
+                
+                  <li class="footer-nav-item">
+                    <a href="#" class="footer-nav-link">О нас</a>
+                  </li>
+                
+                  <li class="footer-nav-item">
+                    <a href="#" class="footer-nav-link">Системы оплаты</a>
+                  </li>
+                
+                </ul>
+        
+        
+                <ul class="footer-nav-list">
+        
+                  <li class="footer-nav-item">
+                    <h2 class="nav-title">Контакты</h2>
+                  </li>
+        
+                  <li class="footer-nav-item flex">
+                    <div class="icon-box">
+                      <ion-icon name="location-outline"></ion-icon>
+                    </div>
+        
+                    <address class="content">
+                      Республика Крым, Симферополь, Киевская ул., 77/4
+                    </address>
+                  </li>
+        
+                  <li class="footer-nav-item flex">
+                    <div class="icon-box">
+                      <ion-icon name="call-outline"></ion-icon>
+                    </div>
+        
+                    <a href="tel:+607936-8058" class="footer-nav-link">(800) 888-8888</a>
+                  </li>
+        
+                  <li class="footer-nav-item flex">
+                    <div class="icon-box">
+                      <ion-icon name="mail-outline"></ion-icon>
+                    </div>
+        
+                    <a href="mailto:example@gmail.com" class="footer-nav-link">bessarabenko.m.i20@gmail.com</a>
+                  </li>
+        
+                </ul>
+        
+              </div>
+        
+            </div>
+        
+            <div class="footer-bottom">
+        
+              <div class="container">
+        
+                <img src="../static/icon/payment.png" alt="payment method" class="payment-img">
+        
+                <p class="copyright">
+                  Copyright &copy; <a href="#">ELtaina</a> all rights reserved.
+                </p>
+        
+              </div>
+        
+            </div>
+        
+          </footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
+
+
+
+
+

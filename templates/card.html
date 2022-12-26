@@ -54,18 +54,52 @@
                                                 </button>
                                         </div> -->
                                     
-
-                                        <div class="sc-a6cd743c-10 dvlSbs">
-                                            <button class="Button_button__4em_S Button_button--orange__lc846" aria-label>
-                                                <span>Добавть в аптечку</span>
-                                            </button>
-                                        </div>
+                                        <!-- <form action="/basket" method="post"> -->
+                                            <input type="hidden" class="id" id="{{medication.ID_Medication}}">
+                                            <input type="hidden" class="title" id="{{medication.Name}}">
+                                            <input type="hidden" class="price" id="{{medication.Price}}">
+                                            <input type="hidden" class="image" id="{{medication.image_1}}">
+                                            <div class="sc-a6cd743c-10 dvlSbs">
+                                                <button class="Button_button__4em_S Button_button--orange__lc846" onclick="address_cart();alerted();">
+                                                    <span>Добавть в корзину</span>
+                                                </button>
+                                            </div>
+                                        <!-- </form>
+                                    -->
                                     </div>
                                     {% endif %}
 
                                     <script>
                                         function alerted() {
                                         alert('Вы добавили товар в корзину!');
+                                        }
+                                    </script>
+
+                                    <script>
+                                        function address_cart() {
+                                            let id = document.querySelector('.id').getAttribute('id');
+                                            let img = document.querySelector('.image').getAttribute('id');
+                                            let title = document.querySelector('.title').getAttribute('id');
+                                            let priceNumber = document.querySelector('.price').getAttribute('id');
+                                            let counter = 1;
+                                            $.ajax({
+                                                url: '/basket',
+                                                method: 'post',
+                                                dataType: 'json',
+                                                data: {
+                                                id: id,
+                                                img: img,
+                                                title: title,
+                                                price: priceNumber,
+                                                count: counter
+                                                },
+                                                success: function (response) {
+                                                    console.log(response);
+                                                },
+                                                error: function (error) {
+                                                    console.log(error);
+                                                }
+                                            });
                                         }
                                     </script>
                                         

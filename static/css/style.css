@@ -11,6 +11,7 @@
   --ocean-green: hsl(152, 51%, 52%);
   --davys-gray: hsl(0, 0%, 33%);
   --cultured: hsl(0, 0%, 93%);
+  --cultured_dark: hsl(0, 0%, 80%);
   --white: hsl(0, 0%, 100%);
   --onyx: hsl(0, 0%, 27%);
 
@@ -1080,7 +1081,7 @@ h1:hover {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
-
+  margin-left: -15px;
 }
 
 .product-grid .showcase {
@@ -1291,6 +1292,8 @@ h1:hover {
   margin-right: auto;
   margin-left: auto;
   padding: 0 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .fDZCZg .Title_title__dY6uS {
@@ -3526,4 +3529,218 @@ input::-webkit-inner-spin-button {
 .items_plus_minus:hover {
   background: var(--salmon-pink);
   color: #FFF;
+}
+
+
+
+
+
+.container_med {
+  max-width: 1300px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  /* flex-wrap: wrap; */
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.col-xl-6 {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  flex: 0 0 50%;
+  max-width: 50%;
+  border: 1px solid var(--cultured_dark);
+  border-radius: 15px;
+  margin: 15px;
+}
+
+.m-t-5{
+  margin-top: 5px;   
+}
+
+.job_post {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card_medkit {
+  background: #fff;
+  margin-bottom: 10px;
+  transition: .5s;
+  border: 0;
+  border-radius: .1875rem;
+  display: inline-block;
+  position: relative;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+  box-shadow: none;
+}
+.card_medkit .body_med {
+  font-size: 14px;
+  color: #424242;
+  padding: 20px;
+  font-weight: 400;
+}
+.profile-page .profile-header {
+  position: relative
+}
+
+.col-lg-4 {
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+
+.col-lg-8 {
+  flex: 0 0 66.666667%;
+  max-width: 66.666667%;
+}
+
+/* .float-md-right {
+  float: right!important;
+} */
+
+.profile-page .profile-header .profile-image img {
+  border-radius: 50%;
+  width: 140px;
+  border: 3px solid #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+}
+
+.title-header {
+  font-size: 1.5rem;
+  margin-bottom: .5rem;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.pharm_info {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: var(--bittersweet);
+  border-color: var(--bittersweet);
+}
+
+.btn_med {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .5rem .75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  border-radius: .25rem;
+  transition: all .15s ease-in-out;
+}
+
+.btn-simple {
+  margin-left: 20px;
+}
+
+.btn-primary:hover {
+  background-color: #ed8888;
+  transition: all .15s ease-in-out;
+}
+
+.social-icon {
+  display: flex;
+  padding-top: 10px;
+}
+
+.logo_social {
+  margin: 0 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: var(--salmon-pink);
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.profile-page .profile-header .social-icon a {
+  margin: 0 5px
+}
+
+.profile-page .profile-sub-header {
+  min-height: 60px;
+  width: 100%
+}
+
+.profile-page .profile-sub-header ul.box-list {
+  display: inline-table;
+  table-layout: fixed;
+  width: 100%;
+  background: #eee
+}
+
+.profile-page .profile-sub-header ul.box-list li {
+  border-right: 1px solid #e0e0e0;
+  display: table-cell;
+  list-style: none
+}
+
+.profile-page .profile-sub-header ul.box-list li:last-child {
+  border-right: none
+}
+
+.profile-page .profile-sub-header ul.box-list li a {
+  display: block;
+  padding: 15px 0;
+  color: #424242
+}
+
+.faq-page__accordions {
+  width: 100%;
+}
+
+.faq-page__accordions, .faq-page__aside {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.rules-accordions {
+  display: block;
+  width: 100%;
+}
+
+.rules-accordions__wrap {
+  max-width: 0 0 72px;
+  padding: 32px 0 0;
+  display: block;
+  position: relative;
+  overflow: visible;
+  box-shadow: 0 3px 16px rgba(0,0,0,.08);
+  border-radius: 10px;
+}
+
+.faq-page {
+  position: relative;
+  font-size: 0;
+}
+
+.container_medkit {
+  max-width: 1300px;
+  padding-right: 15px;
+  padding-left: 15px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
