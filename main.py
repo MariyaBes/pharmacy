@@ -7,9 +7,6 @@ import datetime
 import MySQLdb.cursors
 from passlib.hash import sha256_crypt
 from models import execute_read_query, execute_query
-import base64
-from PIL import Image
-
 
 pattern = r"^[-\w\.]+@([-\w]+\.)+[-\w]{2,4}$"
 
@@ -25,7 +22,6 @@ app.permanent_session_lifetime = datetime.timedelta(seconds=900)
 login_manager = LoginManager()
 
 mysql = MySQL(app)
-
 
 def create_connection(host, user, password, db):
     connection = False
@@ -187,9 +183,15 @@ def cart(ID_Medication):
     from order_cart
     where ID_User = "{user_id}"'''
     total_cost_count = execute_read_query(connect_db, total_cost_count_sql)
+
+    fav_count_sql = f'''SELECT count(ID_favourite) as count_cart
+    from favourite
+    where ID_Medication > 0
+    and ID_User = "{session.get('id')}"'''
+    fav_count = execute_read_query(connect_db, fav_count_sql)
    
 
-    return render_template('card.html', card_product = card_product, basket = basket, cart_count = cart_count, total_cost_count = total_cost_count)
+    return render_template('card.html', card_product = card_product, basket = basket, cart_count = cart_count, total_cost_count = total_cost_count, fav = fav_count)
 
 
 # КОРЗИНА
@@ -311,6 +313,24 @@ def order_modal():
 # СТРАНИЦА ИЗБРАННОЕ
 @app.route('/favourite-list', methods=['GET', 'POST'])
 def favourite():
+
+    basket_sql = f'''SELECT ID_Medication, Cost, title, image, Count, ID_Order
+    from order_cart
+    where ID_User = "{session.get('id')}"
+    group by ID_Order'''
+    basket = execute_read_query(connect_db, basket_sql)
+    
+    cart_count_sql = f'''SELECT count(ID_Order) as count_cart
+    from order_cart
+    where ID_Medication > 0
+    and ID_User = "{session.get('id')}"'''
+    cart_count = execute_read_query(connect_db, cart_count_sql)
+
+    total_cost_count_sql = f'''SELECT sum(Cost*Count) as total_cost_count
+    from order_cart
+    where ID_User = "{session.get('id')}"'''
+    total_cost_count = execute_read_query(connect_db, total_cost_count_sql)
+
     fav_count_sql = f'''SELECT count(ID_favourite) as count_cart
     from favourite
     where ID_Medication > 0
@@ -328,7 +348,13 @@ def favourite():
     where ID_User = "{session.get('id')}"'''
     item_fav = execute_read_query(connect_db, item_fav_sql)
 
-    return render_template ('favour.html', count = fav_count, cart_count = cart_count, item = item_fav)
+    fav_count_sql = f'''SELECT count(ID_favourite) as count_cart
+    from favourite
+    where ID_Medication > 0
+    and ID_User = "{session.get('id')}"'''
+    fav_count = execute_read_query(connect_db, fav_count_sql)
+
+    return render_template ('favour.html', count = fav_count, cart_count = cart_count, item = item_fav, fav = fav_count, basket = basket, total_cost_count = total_cost_count)
 
 
 @app.route('/add_item', methods=['GET', 'POST'])
@@ -364,7 +390,6 @@ def medkit():
     get_user = execute_read_query(connect_db, get_user_sql)
 
     return render_template('medkit.html', farm = farm_spec, pecept = pecept, get_user = get_user)
-
 
 if __name__ == '__main__':
     app.run(debug=True)
